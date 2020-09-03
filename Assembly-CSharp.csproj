@@ -64,9 +64,11 @@
   <ItemGroup>
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\Scripts\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\FormationHelper.cs" />
     <Compile Include="Assets\Scripts\SelectionManager.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
-    <Compile Include="Assets\Scripts\Starship.cs" />
+    <Compile Include="Assets\Scripts\StarshipAI.cs" />
+    <Compile Include="Assets\Scripts\StarshipSteering.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\SyntyStudios_Asteroid.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\POLYGON_Triplanar.shader" />

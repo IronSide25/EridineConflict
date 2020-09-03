@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SelectionManager : MonoBehaviour, IBeginDragHandler
+public class SelectionManager : MonoBehaviour
 {
     public List<Transform> selectedStarships;
     public List<Transform> allStarships; // rename and move this somewhere else XD
@@ -18,8 +18,8 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler
     {
         selectedStarships = new List<Transform>();
 
-        Starship[] starships = FindObjectsOfType<Starship>();
-        foreach (Starship starship in starships)
+        StarshipSteering[] starships = FindObjectsOfType<StarshipSteering>();
+        foreach (StarshipSteering starship in starships)
             allStarships.Add(starship.transform);
 
     }
@@ -39,12 +39,12 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler
             if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, 1 << 8))
             {
                 Transform objectHit = hit.transform;
-                Outline outline = objectHit.GetComponent<Outline>();
-                if (outline)
-                {
-                    outline.enabled = true;
-                    selectedStarships.Add(objectHit);
-                }
+                    Outline outline = objectHit.GetComponent<Outline>();
+                    if (outline)
+                    {
+                        outline.enabled = true;
+                        selectedStarships.Add(objectHit);
+                    }
             }
         }
         else if (Input.GetMouseButton(0))
@@ -69,7 +69,7 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler
                 {
                     Vector3 screenSpace = Camera.main.WorldToScreenPoint(tr.position);
                     screenSpace.z = 0;
-                    if (selectionBox.Contains(screenSpace))
+                    if (selectionBox.Contains(screenSpace) && tr.tag == "Player")
                     {
                         Outline outline = tr.GetComponent<Outline>();
                         if (outline)
@@ -92,7 +92,7 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler
             {
                 foreach (Transform starshipTr in selectedStarships)
                 {
-                    Starship starshipScript = starshipTr.GetComponent<Starship>();
+                    StarshipSteering starshipScript = starshipTr.GetComponent<StarshipSteering>();
                     //starshipScript.SetDestination(hit.point);
                     starshipScript.SetDestinationFormation(hit.point, selectedStarships.ToArray());
                 }
@@ -107,10 +107,5 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler
             tr.GetComponent<Outline>().enabled = false;
         }
         selectedStarships.Clear();
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        Debug.Log("gfhfjgdyrseayrsgfgb");
     }
 }
