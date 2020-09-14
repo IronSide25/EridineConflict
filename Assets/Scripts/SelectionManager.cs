@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class SelectionManager : MonoBehaviour
 {
+    public static SelectionManager globalAccess;
+
     public List<Transform> selectedStarships;
     public List<Transform> allStarships; // rename and move this somewhere else XD
     private Vector3 dragStartPosition;
@@ -16,12 +18,13 @@ public class SelectionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        globalAccess = this;
         selectedStarships = new List<Transform>();
 
         StarshipSteering[] starships = FindObjectsOfType<StarshipSteering>();
         foreach (StarshipSteering starship in starships)
+            if(starship.gameObject.tag == "Player")
             allStarships.Add(starship.transform);
-
     }
 
     // Update is called once per frame
@@ -39,12 +42,16 @@ public class SelectionManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, 1 << 8))
             {
                 Transform objectHit = hit.transform;
-                    Outline outline = objectHit.GetComponent<Outline>();
-                    if (outline)
-                    {
-                        outline.enabled = true;
-                        selectedStarships.Add(objectHit);
-                    }
+                Outline outline = objectHit.GetComponent<Outline>();
+                if (outline)
+                {
+                    outline.enabled = true;
+                    selectedStarships.Add(objectHit);
+                    HealthManager healthManager = objectHit.GetComponent<HealthManager>();
+                    if (healthManager)
+                        healthManager.AddHealthBar();
+
+                }
             }
         }
         else if (Input.GetMouseButton(0))
@@ -76,6 +83,9 @@ public class SelectionManager : MonoBehaviour
                         {
                             outline.enabled = true;
                             selectedStarships.Add(tr);
+                            HealthManager healthManager = tr.GetComponent<HealthManager>();
+                            if (healthManager)
+                                healthManager.AddHealthBar();
                         }
                     }
                 }
@@ -105,6 +115,9 @@ public class SelectionManager : MonoBehaviour
         foreach(Transform tr in selectedStarships)
         {
             tr.GetComponent<Outline>().enabled = false;
+            HealthManager healthManager = tr.GetComponent<HealthManager>();
+            if (healthManager)
+                healthManager.RemoveHealthBar();
         }
         selectedStarships.Clear();
     }

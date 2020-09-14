@@ -97,6 +97,12 @@ public class StarshipSteering : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(transformTarget == null)
+        {
+            useTransformTarget = false;
+            pursuing = false;
+        }
+
         if (isMoving)
         {
             //check angle and apply preturn

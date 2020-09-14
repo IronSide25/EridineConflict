@@ -62,9 +62,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Example.cs" />
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\Scripts\CameraManager.cs" />
     <Compile Include="Assets\Scripts\FormationHelper.cs" />
+    <Compile Include="Assets\Scripts\GridSpawner.cs" />
+    <Compile Include="Assets\Scripts\HealthBar.cs" />
+    <Compile Include="Assets\Scripts\HealthBarManager.cs" />
+    <Compile Include="Assets\Scripts\HealthManager.cs" />
+    <Compile Include="Assets\Scripts\IWeapon.cs" />
+    <Compile Include="Assets\Scripts\LaserWeapon.cs" />
     <Compile Include="Assets\Scripts\SelectionManager.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\StarshipAI.cs" />

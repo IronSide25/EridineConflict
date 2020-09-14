@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1065056564}
   - component: {fileID: 1065056570}
   - component: {fileID: 3907493566813407217}
+  - component: {fileID: 4094065355591478688}
   m_Layer: 8
   m_Name: SM_Ship_Fighter_01
   m_TagString: Untagged
@@ -10811,6 +10812,21 @@ MonoBehaviour:
   laser: {fileID: 1888488842883171897}
   target: {fileID: 0}
   isEvading: 0
+--- !u!114 &4094065355591478688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122383940670264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcac584d1bb62fa4abb9ea77d6c2a67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  explosionPrefab: {fileID: 1290715649332758, guid: 587eaecaa621be74486f351c78b4f0a8,
+    type: 3}
 --- !u!1001 &1799051526722935055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10895,6 +10911,16 @@ PrefabInstance:
       propertyPath: ShapeModule.alignToDirection
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198933866736967478, guid: 2c0c6b8c780ef4c49bad541f8512530d,
+        type: 3}
+      propertyPath: cullingMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198933866736967478, guid: 2c0c6b8c780ef4c49bad541f8512530d,
+        type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 198944468147258806, guid: 2c0c6b8c780ef4c49bad541f8512530d,
         type: 3}
       propertyPath: moveWithTransform
@@ -10909,6 +10935,16 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198944468147258806, guid: 2c0c6b8c780ef4c49bad541f8512530d,
+        type: 3}
+      propertyPath: scalingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198944468147258806, guid: 2c0c6b8c780ef4c49bad541f8512530d,
+        type: 3}
+      propertyPath: cullingMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 199534686226788406, guid: 2c0c6b8c780ef4c49bad541f8512530d,
         type: 3}

@@ -33,45 +33,49 @@ public class StarshipAI : MonoBehaviour
         starshipSteering.pursuing = true;
         starshipSteering.rotateToTarget = true;
 
-        starshipSteering.maxDesiredPursuitForce = 10;
-        starshipSteering.maxDesiredSeekForce = 10;
+        /*starshipSteering.maxDesiredPursuitForce = 10;
+        starshipSteering.maxDesiredSeekForce = 10;*/
     }
     // Update is called once per frame
     void Update()
-    {       
-        if(starshipSteering.rotateToTarget && starshipSteering.isTargeting && starshipSteering.distToTarget < 50)//change to 100
-        {
-            float angleDiff = Quaternion.Angle(transform.rotation, starshipSteering.desiredRotation);
-            if (angleDiff < 5 && Time.time - lastShootTime > shootingSpeed)
-            {
-                lastShootTime = Time.time;
-                laser.Emit(1);
-            }
-        }        
+    {
+       // Quaternion lookRotation = Quaternion.LookRotation(target.position - transform.position);
 
-        if(!isEvading)
+        if (target != null)
         {
-            if (Vector3.SqrMagnitude(transform.position - target.position) < 300)
+            if (starshipSteering.rotateToTarget && starshipSteering.isTargeting && starshipSteering.distToTarget < 100)
             {
-                Vector3 dir = transform.position - starshipSteering.target;
-                starshipSteering.SetDestinationFormation((transform.position + (dir.normalized * 150)), starshipSteering.shipsInFormation, false);
-                isEvading = true;
-                starshipSteering.rotateToTarget = false;
-                //starshipSteering.SetStop();
-                //starshipSteering.evade = true;
+                float angleDiff = Quaternion.Angle(transform.rotation, starshipSteering.desiredRotation);
+                if (angleDiff < 5 && Time.time - lastShootTime > shootingSpeed)
+                {
+                    lastShootTime = Time.time;
+                    laser.Emit(1);
+                }
             }
-        }
-        else
-        {
-            if (Vector3.SqrMagnitude(transform.position - target.position) > 7000)
-            {
-                starshipSteering.SetDestinationFormation(target, starshipSteering.shipsInFormation, false);
-                isEvading = false;
-                starshipSteering.rotateToTarget = true;
-                starshipSteering.pursuing = true;
-            }
-        }
 
+            if (!isEvading)
+            {
+                if (Vector3.SqrMagnitude(transform.position - target.position) < 250)
+                {
+                    Vector3 dir = transform.position - starshipSteering.target;
+                    starshipSteering.SetDestinationFormation((transform.position + (dir.normalized * 150)), starshipSteering.shipsInFormation, false);
+                    isEvading = true;
+                    starshipSteering.rotateToTarget = false;
+                    //starshipSteering.SetStop();
+                    //starshipSteering.evade = true;
+                }
+            }
+            else
+            {
+                if (Vector3.SqrMagnitude(transform.position - target.position) > 7000)
+                {
+                    starshipSteering.SetDestinationFormation(target, starshipSteering.shipsInFormation, false);
+                    isEvading = false;
+                    starshipSteering.rotateToTarget = true;
+                    starshipSteering.pursuing = true;
+                }
+            }
+        }       
     }
 }
 
