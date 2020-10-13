@@ -8,4 +8,6 @@ public interface IWeapon
     void Deactivate();
     void Destroy();
     float GetDamage();
+    float GetRange();
+    float GetProjectileSpeed();
 }

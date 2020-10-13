@@ -3,19 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StarshipClass {Small, Medium, Large};
-
 public class StarshipSteering : MonoBehaviour
 {
     Rigidbody rigidbody;
     public Vector3 target;
     public Transform transformTarget;
-    public bool useTransformTarget;
+    public bool useTransformTarget;   
 
     public bool isMoving;
     public bool rotateToTarget;
     public bool isTargeting;
     public bool pursuing;
+    public bool compensateMass;
+    public bool calculatePrediction;
+
+    public bool allowStopOnDistance;
+    public bool allowTransitiveBumping;
+
     public float maxSpeed = 1;
     public float accelerationRate;
     float currentMaxSpeed;
@@ -35,6 +39,7 @@ public class StarshipSteering : MonoBehaviour
     public float maxDesiredPursuitForce;
     public float maxPursuitForce;
     public float pursuitMult = 1;
+    public float projectileSpeed;
 
     [Header("Look behavior")]
     public float maxAngularAcc = 1;
@@ -66,18 +71,28 @@ public class StarshipSteering : MonoBehaviour
 
     [Header("INFO")]
     public Vector3 calculatedVelocity;
-    public float distToTarget;
+    public float distToTarget { get; private set; }
+    public Vector3 desiredVelocity { get; private set; }
+    public Vector3 attackPredictedTarget { get; private set; }
+    public Vector3 predictedTargetPos { get; private set; }
 
     public Quaternion desiredRotation;
     public bool evade = false;
 
+    private delegate Vector3 MoveBehavior();
+    private MoveBehavior[] currentMoveBehavior;
+    private delegate Quaternion RotateBehavior();
+    private RotateBehavior currentRotateBehavior;
+
     private void Awake()
     {
         rigidbody = transform.GetComponent<Rigidbody>();
-        StarshipSteering[] starships = FindObjectsOfType<StarshipSteering>();
         SetStop();//delete that later
         isTargeting = false;
         rotateToTarget = false;
+        allowStopOnDistance = true;
+        allowTransitiveBumping = true;
+        SetMoveBehaviorInFormation();
     }
 
     // Start is called before the first frame update
@@ -91,9 +106,9 @@ public class StarshipSteering : MonoBehaviour
     private void Update()
     {
         //check for stuck here!!!
-
     }
 
+    // W FIXED TIME DELTA JEST NIEPOTRZEBNE
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -111,14 +126,11 @@ public class StarshipSteering : MonoBehaviour
                 targetPlane = new Plane(transform.position - target, target);//not optimal as f
                 target = transformTarget.position;
             }            
-
-            Vector3 desiredVelocity = target - transform.position;
+            desiredVelocity = target - transform.position;
             distToTarget = Vector3.Magnitude(desiredVelocity);
 
             if (distToTarget < slowingRadius)
-            {
                 target = targetPlane.ClosestPointOnPlane(transform.position);
-            }
           
             if (distToTarget < slowingRadius)
                 currentMaxSpeed = Mathf.Clamp(maxSpeed * (distToTarget / slowingRadius), 0, currentMaxSpeed);
@@ -127,16 +139,19 @@ public class StarshipSteering : MonoBehaviour
             else
                 currentMaxSpeed = maxSpeed;
 
-            Vector3 calculatedVelocity = rigidbody.velocity;
-            if(pursuing)
-                calculatedVelocity += Pursuit(desiredVelocity, distToTarget) * seekMult;
-            else
-                calculatedVelocity += Seek(desiredVelocity, distToTarget) * seekMult;
+            if(calculatePrediction)
+            {
+                float prediction;
+                if (projectileSpeed <= (distToTarget / maxPrediction))
+                    prediction = maxPrediction;
+                else
+                    prediction = distToTarget / projectileSpeed;
+                predictedTargetPos = transformTarget.position + (transformTarget.GetComponent<Rigidbody>().velocity * prediction);//cache rigid
+            }
 
-            calculatedVelocity += Separation() * separationForceMultiplier;
-            calculatedVelocity += Cohesion() * cohesionForceMultiplier;
-            calculatedVelocity += Alignment(desiredVelocity, distToTarget) * alignmentMultiplier;
-            calculatedVelocity += CollisionAvoidance() * collisionAvoidanceMult;
+            calculatedVelocity = rigidbody.velocity;
+            foreach (MoveBehavior behavior in currentMoveBehavior)
+                calculatedVelocity += compensateMass ? (behavior() / rigidbody.mass) : behavior();
 
             /*Vector3 collisionAvoidanceVec = CollisionAvoidance();
             calculatedVelocity += collisionAvoidanceVec;*/
@@ -151,11 +166,12 @@ public class StarshipSteering : MonoBehaviour
 
             if (calculatedVelocity.magnitude >= moveEpsilon)//rotation
                 if (rotateToTarget)
-                    transform.rotation = LookTarget();
+                    //transform.rotation = LookTarget();
+                    transform.rotation = LookPursueTarget();
                 else
                     transform.rotation = LookVelocity();
 
-            if (Vector3.SqrMagnitude(transform.position - target) < distanceToStop* distanceToStop)
+            if (Vector3.SqrMagnitude(transform.position - target) < distanceToStop* distanceToStop && allowStopOnDistance)//maybe move this to starshipai
             {
                 SetStop();
             }
@@ -168,44 +184,51 @@ public class StarshipSteering : MonoBehaviour
         }
     }
 
-    private Vector3 Seek(Vector3 desiredVelocity, float distanceToTarget)
+    private Vector3 SeekPursuitAuto()
+    {
+        if (pursuing)
+            return Pursuit();
+        else
+            return Seek();
+    }
+
+    private Vector3 Seek()
     {
         desiredVelocity = target - transform.position;
         /*if (dist < slowingRadius)//moved to fixedupdate
             desiredVelocity = Vector3.Normalize(desiredVelocity) * maxDesiredSeekForce * (dist / slowingRadius);
         else*/
-        desiredVelocity = Vector3.Normalize(desiredVelocity) * maxDesiredSeekForce;
+        desiredVelocity = Vector3.Normalize(desiredVelocity) * maxDesiredSeekForce;      
+        Vector3 steering = desiredVelocity;//Vector3 steering = desiredVelocity - rigidbody.velocity;//which is better
 
-        //Vector3 steering = desiredVelocity - rigidbody.velocity;//which is better
-        Vector3 steering = desiredVelocity;
-
-        if (distanceToTarget > slowingRadius)
-            steering = steering / rigidbody.mass;
+        if (distToTarget > slowingRadius)
+            steering = compensateMass ? steering : (steering / rigidbody.mass);
         if (steering.magnitude < moveEpsilon)
             steering = Vector3.zero;
 
-        return Vector3.ClampMagnitude(steering, maxSeekForce);
+        return Vector3.ClampMagnitude(steering, maxSeekForce) * seekMult;
     }
 
-    private Vector3 Pursuit(Vector3 desiredVelocity, float distanceToTarget)
+    private Vector3 Pursuit()
     {
         Vector3 steering = Vector3.zero;
-        float speed = rigidbody.velocity.magnitude;
+        //float speed = rigidbody.velocity.magnitude;//this is enemy speed
+
         float prediction;
-        if (speed <= (distanceToTarget / maxPrediction))
+        if (projectileSpeed <= (distToTarget / maxPrediction))
             prediction = maxPrediction;
         else
-            prediction = distanceToTarget / speed;
+            prediction = distToTarget / projectileSpeed;
         Vector3 predictedTarget = transformTarget.position + (transformTarget.GetComponent<Rigidbody>().velocity * prediction);
         steering = predictedTarget - transform.position;
         steering = Vector3.Normalize(steering) * maxDesiredPursuitForce;
 
-        if (distanceToTarget > slowingRadius)
+        if (distToTarget > slowingRadius)
             steering = steering / rigidbody.mass;
         if (steering.magnitude < moveEpsilon)
             steering = Vector3.zero;
 
-        return evade ? -Vector3.ClampMagnitude(steering, maxPursuitForce) : Vector3.ClampMagnitude(steering, maxPursuitForce);
+        return (evade ? -Vector3.ClampMagnitude(steering, maxPursuitForce) : Vector3.ClampMagnitude(steering, maxPursuitForce)) * pursuitMult;
     }
 
     private Vector3 Separation()
@@ -225,7 +248,7 @@ public class StarshipSteering : MonoBehaviour
                 }
             }
         }      
-        return steering;
+        return steering * separationForceMultiplier;
     }
 
     private Vector3 Cohesion()
@@ -247,11 +270,12 @@ public class StarshipSteering : MonoBehaviour
             centerOfMass = centerOfMass / count;
             steering = centerOfMass - transform.position;
             steering.Normalize();
+            Debug.DrawRay(transform.position, steering * cohesionForceMultiplier);
         }
-        return steering;
+        return steering * cohesionForceMultiplier;
     }
 
-    private Vector3 Alignment(Vector3 desiredVelocity, float distanceToTarget)
+    private Vector3 Alignment()
     {
         Vector3 steering = Vector3.zero;
         int count = 0;
@@ -271,11 +295,11 @@ public class StarshipSteering : MonoBehaviour
                 steering = steering.normalized * maxAlingmentForce;
         }
         desiredVelocity = target - transform.position;
-        distanceToTarget = Vector3.Magnitude(desiredVelocity);
-        if (distanceToTarget < slowingRadius)
-            steering *= distanceToTarget / slowingRadius;
+        distToTarget = Vector3.Magnitude(desiredVelocity);
+        if (distToTarget < slowingRadius)
+            steering *= distToTarget / slowingRadius;
 
-        return steering;
+        return steering * alignmentMultiplier;
     }
 
 
@@ -303,7 +327,7 @@ public class StarshipSteering : MonoBehaviour
         avoidanceForce = avoidanceForce / rigidbody.mass;
         if (avoidanceForce.sqrMagnitude < moveEpsilon * moveEpsilon)
             avoidanceForce = Vector3.zero;
-        return avoidanceForce;
+        return avoidanceForce * collisionAvoidanceMult;
     }
 
     private Quaternion LookVelocity()
@@ -322,10 +346,27 @@ public class StarshipSteering : MonoBehaviour
             lookRotation = Quaternion.LookRotation(rigidbody.velocity);
         else
         {
-            isTargeting = true;
             lookRotation = Quaternion.LookRotation(target - transform.position);
             desiredRotation = lookRotation;
         }                  
+        return Quaternion.Lerp(transform.rotation, lookRotation, maxAngularAcc * Time.deltaTime);
+    }
+
+    private Quaternion LookPursueTarget()
+    {
+        isTargeting = false;
+        Quaternion lookRotation;
+        if (evade || !transformTarget)
+            lookRotation = Quaternion.LookRotation(rigidbody.velocity);
+        else
+        {
+            float prediction = distToTarget / projectileSpeed;
+            attackPredictedTarget = transformTarget.position + (transformTarget.GetComponent<Rigidbody>().velocity * prediction);
+
+            isTargeting = true;
+            lookRotation = Quaternion.LookRotation(attackPredictedTarget - transform.position);
+            desiredRotation = lookRotation;
+        }
         return Quaternion.Lerp(transform.rotation, lookRotation, maxAngularAcc * Time.deltaTime);
     }
 
@@ -350,47 +391,59 @@ public class StarshipSteering : MonoBehaviour
         rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
-    public void SetDestinationFormation(Vector3 _target, Transform[] _shipsInFormation, bool deleteThisFromFormation = true)
+    public void SetDestinationFormation(Vector3 _target, Transform[] _shipsInFormation)
     {
+        shipsInFormation = _shipsInFormation;
         useTransformTarget = false;
         target = _target;
         targetPlane = new Plane(transform.position - target, target);
         isMoving = true;
         pursuing = false;
-        rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        if(deleteThisFromFormation)
-        {
-            shipsInFormation = new Transform[_shipsInFormation.Length - 1];
-            int count = 0;
-            foreach (Transform ship in _shipsInFormation)
-                if (ship != transform)
-                {
-                    shipsInFormation[count] = ship;
-                    count++;
-                }
-        }      
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotation;    
     }
 
-    public void SetDestinationFormation(Transform _targetTransform, Transform[] _shipsInFormation, bool deleteThisFromFormation = true)
+    public void SetDestinationFormation(Transform _targetTransform, Transform[] _shipsInFormation)
     {
+        shipsInFormation = _shipsInFormation;
         useTransformTarget = true;
         transformTarget = _targetTransform;
         target = transformTarget.position;
         targetPlane = new Plane(transform.position - target, target);
         isMoving = true;
         pursuing = false;
-        rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        if(deleteThisFromFormation)
-        {
-            shipsInFormation = new Transform[_shipsInFormation.Length - 1];
-            int count = 0;
-            foreach (Transform ship in _shipsInFormation)
-                if (ship != transform)
-                {
-                    shipsInFormation[count] = ship;
-                    count++;
-                }
-        }       
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotation;      
+    }
+
+    public void SetMoveBehaviorInFormation()
+    {
+        currentMoveBehavior = new MoveBehavior[5];
+        currentMoveBehavior[0] = new MoveBehavior(SeekPursuitAuto);
+        currentMoveBehavior[1] = new MoveBehavior(Separation);
+        currentMoveBehavior[2] = new MoveBehavior(Cohesion);
+        currentMoveBehavior[3] = new MoveBehavior(Alignment);
+        currentMoveBehavior[4] = new MoveBehavior(CollisionAvoidance);
+    }
+
+    public void SetMoveBehaviorIgnoreFormation()
+    {
+        currentMoveBehavior = new MoveBehavior[2];
+        currentMoveBehavior[0] = new MoveBehavior(SeekPursuitAuto);
+        currentMoveBehavior[1] = new MoveBehavior(CollisionAvoidance);
+    }
+
+    public void SetRotationBehaviorLookPursueTarget()
+    {
+        currentRotateBehavior = new RotateBehavior(LookPursueTarget);
+    }
+
+    public void SetRotationBehaviorLookVelocity()
+    {
+        currentRotateBehavior = new RotateBehavior(LookVelocity);
+    }
+
+    public void SetRotationBehaviorLookTarget()
+    {
+        currentRotateBehavior = new RotateBehavior(LookTarget);
     }
 
     public void SetStop()
@@ -402,11 +455,23 @@ public class StarshipSteering : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (shipsInFormation.Length > 0 && isMoving)//transitive bumping
+        if (allowTransitiveBumping && shipsInFormation.Length > 0 && isMoving)//transitive bumping
             if (Array.Exists(shipsInFormation, t => t == collision.transform))
                 if (!collision.transform.GetComponent<StarshipSteering>().isMoving)
                 {
                     SetStop();
+                    Debug.Log("Transitive bumping");
+                }
+    }
+
+    public void OnCollisionStay(Collision collision)//test this|| performance !!!
+    {
+        if (allowTransitiveBumping && shipsInFormation.Length > 0 && isMoving)//transitive bumping
+            if (Array.Exists(shipsInFormation, t => t == collision.transform))
+                if (!collision.transform.GetComponent<StarshipSteering>().isMoving)
+                {
+                    SetStop();
+                    Debug.Log("Transitive bumping");
                 }
     }
 }

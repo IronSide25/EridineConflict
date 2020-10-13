@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FormationHelper : MonoBehaviour
+public class FormationHelper
 {
-    public Transform[] shipsInFormation;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<Transform> shipsInFormation;//change to private later, with setter and getter
 
-    // Update is called once per frame
-    void Update()
+    public List<Transform> GetShipsInFormation()
     {
-        
+        shipsInFormation.RemoveAll(item => item == null);
+        return shipsInFormation;
     }
 }

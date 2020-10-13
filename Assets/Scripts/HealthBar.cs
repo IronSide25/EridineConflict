@@ -10,6 +10,14 @@ public class HealthBar : MonoBehaviour
 
     private HealthManager healthManager;
 
+    public void Start()
+    {
+        if (healthManager.gameObject.layer == 10)
+            healthImage.color = Color.red;
+        else if (healthManager.gameObject.layer == 8)
+            healthImage.color = Color.green;
+    }
+
     public void SetHealth(HealthManager healthManager)
     {
         this.healthManager = healthManager;

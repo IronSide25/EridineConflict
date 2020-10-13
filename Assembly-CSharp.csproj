@@ -76,7 +76,9 @@
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\StarshipAI.cs" />
     <Compile Include="Assets\Scripts\StarshipSteering.cs" />
+    <Compile Include="Assets\Scripts\TurretWeapon.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\UILineRenderer.cs" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\SyntyStudios_Asteroid.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\POLYGON_Triplanar.shader" />
     <None Include="Assets\QuickOutline\Resources\Shaders\OutlineMask.shader" />

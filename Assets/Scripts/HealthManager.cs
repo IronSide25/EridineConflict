@@ -8,6 +8,8 @@ public class HealthManager : MonoBehaviour
     public static event Action<HealthManager> OnHealthManagerAdded = delegate { };
     public static event Action<HealthManager> OnHealthManagerRemoved = delegate { };
 
+    public static event Action<Transform> OnStarshipAdded = delegate { };
+    public static event Action<Transform> OnStarshipRemoved = delegate { };
 
     public float maxHealth;
     float currentHealth;
@@ -15,17 +17,20 @@ public class HealthManager : MonoBehaviour
 
     public event Action<float> OnHealthChanged = delegate { };
 
-    
-    // Start is called before the first frame update
-    void OnEnable()
+    private void Start()
     {
         currentHealth = maxHealth;
-        OnHealthManagerAdded(this);
+        //OnHealthManagerAdded(this);
+        if (gameObject.tag == "Player" || gameObject.tag == "Enemy")
+        {
+            OnStarshipAdded(transform);
+        }
     }
 
     public void AddHealthBar()
     {
         OnHealthManagerAdded(this);
+        OnHealthChanged(currentHealth / maxHealth);
     }
 
     public void RemoveHealthBar()
@@ -37,26 +42,33 @@ public class HealthManager : MonoBehaviour
     void Update()
     {
         if (currentHealth < 0)
-        {
-            Destroy(gameObject);
+        {            
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 
     public void OnParticleCollision(GameObject other)
     {
-
-        ModifyHealth(-2);
+        IWeapon weapon = other.GetComponent<IWeapon>();
+        if(weapon != null)
+        {
+            ModifyHealth(-weapon.GetDamage());
+        }        
     }
 
-    public void ModifyHealth(int value)
+    public void ModifyHealth(float value)
     {
         currentHealth += value;
         OnHealthChanged(currentHealth / maxHealth);
     }
 
-    private void OnDisable()
+    private void OnDestroy()//OnDisable
     {
         OnHealthManagerRemoved(this);
+        if (gameObject.tag == "Player" || gameObject.tag == "Enemy")
+        {
+            OnStarshipRemoved(transform);
+        }
     }
 }

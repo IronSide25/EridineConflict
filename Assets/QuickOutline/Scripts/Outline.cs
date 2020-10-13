@@ -75,7 +75,7 @@ public class Outline : MonoBehaviour
     [SerializeField, HideInInspector]
     private List<ListVector3> bakeValues = new List<ListVector3>();
 
-    private Renderer[] renderers;
+    public Renderer[] renderers;
     public Material outlineMaskMaterial;
     public Material outlineFillMaterial;
 
@@ -83,7 +83,7 @@ public class Outline : MonoBehaviour
 
     void Awake()
     {
-        renderers = GetComponentsInChildren<Renderer>();
+        //renderers = GetComponentsInChildren<Renderer>();
         // Retrieve or generate smooth normals
         LoadSmoothNormals();
         // Apply material properties immediately
