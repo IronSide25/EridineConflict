@@ -14,6 +14,8 @@ public class GridSpawner : MonoBehaviour
     public bool setMoveAtStart;
     public Transform setMoveDestination;
 
+    public UnitBehavior unitBehavior;
+
 
     void Start()
     {
@@ -33,7 +35,8 @@ public class GridSpawner : MonoBehaviour
         foreach (Transform tr in ships)
         {
             StarshipAI starshipAI = tr.GetComponent<StarshipAI>();
-            starshipAI.formationHelper = formationHelper;                   
+            starshipAI.formationHelper = formationHelper;
+            starshipAI.unitBehavior = unitBehavior;
         }
     }
     

@@ -261,5 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48fc7e36fe0b47944832adeee81e1a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthImage: {fileID: 8612722495898977314}
+  healthImageForeground: {fileID: 8612722495898977314}
+  healthImageBackground: {fileID: 3533334027890388060}
   positionOffset: 1

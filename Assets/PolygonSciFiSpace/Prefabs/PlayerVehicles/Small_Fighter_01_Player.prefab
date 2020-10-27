@@ -10763,10 +10763,10 @@ MonoBehaviour:
   transformTarget: {fileID: 0}
   useTransformTarget: 0
   isMoving: 0
-  rotateToTarget: 0
   isTargeting: 0
   pursuing: 0
   compensateMass: 0
+  calculatePrediction: 0
   allowStopOnDistance: 0
   allowTransitiveBumping: 0
   maxSpeed: 20
@@ -10782,11 +10782,13 @@ MonoBehaviour:
   maxDesiredPursuitForce: 50
   maxPursuitForce: 20
   pursuitMult: 1
-  maxAngularAcc: 6
+  projectileSpeed: 100
+  maxAngularAcc: 10
   maxAvoidForce: 25
   sphereCastRadius: 8
   sphereCastDistance: 45
   collisionAvoidanceMult: 1
+  collideWithFormationUnits: 0
   threshold: 5
   decayCoefficient: -5
   separationForceMultiplier: 2
@@ -10813,6 +10815,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starshipClass: 0
+  unitBehavior: 0
+  aMove: 0
   isAttacking: 0
   isShooting: 0
   isPlayer: 1
@@ -10845,8 +10849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  explosionPrefab: {fileID: 1290715649332758, guid: 7f724d7d719514445a00bba123e18807,
-    type: 3}
+  explosionScale: 0.2
 --- !u!120 &-5366451330378046836
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -10961,8 +10964,6 @@ MonoBehaviour:
   damagePerShot: 2
   range: 100
   projectileSpeed: 100
-  isActive: 0
-  isWeaponAlive: 0
 --- !u!1001 &1799051526722935055
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -17,8 +17,6 @@ MonoBehaviour:
   damagePerShot: 2
   range: 100
   projectileSpeed: 100
-  isActive: 0
-  isWeaponAlive: 0
 --- !u!114 &8386931206381356678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36,8 +34,6 @@ MonoBehaviour:
   damagePerShot: 2
   range: 100
   projectileSpeed: 100
-  isActive: 0
-  isWeaponAlive: 0
 --- !u!114 &2526719389151027623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,8 +51,6 @@ MonoBehaviour:
   damagePerShot: 2
   range: 100
   projectileSpeed: 100
-  isActive: 0
-  isWeaponAlive: 0
 --- !u!114 &344739012648372853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,8 +68,6 @@ MonoBehaviour:
   damagePerShot: 2
   range: 100
   projectileSpeed: 100
-  isActive: 0
-  isWeaponAlive: 0
 --- !u!114 &6813481885927343766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,9 +90,6 @@ MonoBehaviour:
   damagePerShot: 2
   range: 100
   projectileSpeed: 100
-  isActive: 0
-  isWeaponAlive: 0
-  tr: {fileID: 0}
 --- !u!1 &6892940493220047012
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +189,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 100
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -19945,10 +19934,10 @@ MonoBehaviour:
   transformTarget: {fileID: 0}
   useTransformTarget: 0
   isMoving: 0
-  rotateToTarget: 0
   isTargeting: 0
   pursuing: 0
   compensateMass: 0
+  calculatePrediction: 0
   allowStopOnDistance: 0
   allowTransitiveBumping: 0
   maxSpeed: 5
@@ -19967,7 +19956,7 @@ MonoBehaviour:
   projectileSpeed: 0
   maxAngularAcc: 1
   maxAvoidForce: 6.25
-  sphereCastRadius: 20
+  sphereCastRadius: 12
   sphereCastDistance: 45
   collisionAvoidanceMult: 1
   threshold: 15
@@ -19996,6 +19985,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starshipClass: 2
+  unitBehavior: 0
+  aMove: 0
   isAttacking: 0
   isShooting: 0
   isPlayer: 1
@@ -20028,8 +20019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  explosionPrefab: {fileID: 1290715649332758, guid: 7f724d7d719514445a00bba123e18807,
-    type: 3}
+  explosionScale: 1
 --- !u!120 &1091521960259088842
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -20149,9 +20139,6 @@ MonoBehaviour:
   damagePerShot: 2
   range: 100
   projectileSpeed: 100
-  isActive: 0
-  isWeaponAlive: 0
-  tr: {fileID: 0}
 --- !u!1001 &769902526913838443
 PrefabInstance:
   m_ObjectHideFlags: 0

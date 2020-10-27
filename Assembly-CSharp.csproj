@@ -72,6 +72,8 @@
     <Compile Include="Assets\Scripts\HealthManager.cs" />
     <Compile Include="Assets\Scripts\IWeapon.cs" />
     <Compile Include="Assets\Scripts\LaserWeapon.cs" />
+    <Compile Include="Assets\Scripts\PooledObject.cs" />
+    <Compile Include="Assets\Scripts\PoolingManager.cs" />
     <Compile Include="Assets\Scripts\SelectionManager.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\StarshipAI.cs" />

@@ -13,7 +13,7 @@ public class HealthManager : MonoBehaviour
 
     public float maxHealth;
     float currentHealth;
-    public GameObject explosionPrefab;
+    public float explosionScale = 0.2f;
 
     public event Action<float> OnHealthChanged = delegate { };
 
@@ -42,8 +42,13 @@ public class HealthManager : MonoBehaviour
     void Update()
     {
         if (currentHealth < 0)
-        {            
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        {
+            GameObject go = PoolingManager.instance.Spawn();
+            go.transform.position = transform.position;
+            go.transform.rotation = Quaternion.identity;
+            go.transform.localScale = new Vector3(explosionScale, explosionScale, explosionScale);
+            foreach (Transform tr in go.GetComponentsInChildren<Transform>())
+                tr.localScale = new Vector3(explosionScale, explosionScale, explosionScale);
             Destroy(gameObject);
         }
     }
@@ -54,6 +59,7 @@ public class HealthManager : MonoBehaviour
         if(weapon != null)
         {
             ModifyHealth(-weapon.GetDamage());
+            gameObject.SendMessage("OnDamageReceived", other.transform.root);
         }        
     }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StarshipSteering : MonoBehaviour
@@ -11,7 +12,6 @@ public class StarshipSteering : MonoBehaviour
     public bool useTransformTarget;   
 
     public bool isMoving;
-    public bool rotateToTarget;
     public bool isTargeting;
     public bool pursuing;
     public bool compensateMass;
@@ -44,11 +44,12 @@ public class StarshipSteering : MonoBehaviour
     [Header("Look behavior")]
     public float maxAngularAcc = 1;
 
-    [Header("Collision voidance behavior")]
+    [Header("Collision avoidance behavior")]
     public float maxAvoidForce;
     public float sphereCastRadius;
     public float sphereCastDistance;
     public float collisionAvoidanceMult = 1;
+    public bool collideWithFormationUnits = true;
 
     [Header("Separation behavior")]
     public float threshold = 2f;
@@ -89,10 +90,10 @@ public class StarshipSteering : MonoBehaviour
         rigidbody = transform.GetComponent<Rigidbody>();
         SetStop();//delete that later
         isTargeting = false;
-        rotateToTarget = false;
         allowStopOnDistance = true;
         allowTransitiveBumping = true;
         SetMoveBehaviorInFormation();
+        SetRotationBehaviorLookVelocity();
     }
 
     // Start is called before the first frame update
@@ -165,11 +166,7 @@ public class StarshipSteering : MonoBehaviour
             rigidbody.velocity = calculatedVelocity;
 
             if (calculatedVelocity.magnitude >= moveEpsilon)//rotation
-                if (rotateToTarget)
-                    //transform.rotation = LookTarget();
-                    transform.rotation = LookPursueTarget();
-                else
-                    transform.rotation = LookVelocity();
+                transform.rotation = currentRotateBehavior();
 
             if (Vector3.SqrMagnitude(transform.position - target) < distanceToStop* distanceToStop && allowStopOnDistance)//maybe move this to starshipai
             {
@@ -308,21 +305,26 @@ public class StarshipSteering : MonoBehaviour
         RaycastHit hit;
         Vector3 avoidanceForce = Vector3.zero;
         Vector3 ahead = transform.position + (rigidbody.velocity.normalized * (sphereCastDistance + sphereCastRadius));
-        if (Physics.SphereCast(transform.position, sphereCastRadius, rigidbody.velocity.normalized, out hit, sphereCastDistance, (1 << 8) | (1 << 10)))
+        //RaycastHit[] hits = Physics.SphereCastAll(transform.position, sphereCastRadius, rigidbody.velocity.normalized, sphereCastDistance, (1 << 8) | (1 << 10));
+        //if(hits.Length > 0)
+        //if (Physics.SphereCast(transform.position, sphereCastRadius, rigidbody.velocity.normalized, out hit, sphereCastDistance, (1 << 8) | (1 << 10)))
+        //if (rigidbody.SweepTest(rigidbody.velocity.normalized, out hit, sphereCastDistance))      
+        if (Physics.SphereCast(transform.position - (transform.forward * sphereCastRadius), sphereCastRadius, rigidbody.velocity.normalized, out hit, sphereCastDistance, (1 << 8) | (1 << 10)))
         {
             if (hit.transform != transform)
-            {                
-                avoidanceForce = ahead - hit.transform.position;
-                avoidanceForce = Vector3.Normalize(avoidanceForce) * maxAvoidForce;
-                if (avoidanceForce.y > 0)
-                    avoidanceForce.y = 1;
-                else
-                    avoidanceForce.y = -1;
-                avoidanceForce.y *= maxAvoidForce;//disable this to lower the quality of collision evasion
-                //avoidanceForce.x = 0;
-                //avoidanceForce.z = 0;
-                //Debug.Break();
-            }
+                if (collideWithFormationUnits || !shipsInFormation.Contains(hit.transform))
+                {
+                    avoidanceForce = ahead - hit.transform.position;
+                    avoidanceForce = Vector3.Normalize(avoidanceForce) * maxAvoidForce;
+                    if (avoidanceForce.y > 0)
+                        avoidanceForce.y = 1;
+                    else
+                        avoidanceForce.y = -1;
+                    avoidanceForce.y *= maxAvoidForce;//disable this to lower the quality of collision evasion
+                                                      //avoidanceForce.x = 0;
+                                                      //avoidanceForce.z = 0;
+                                                      //Debug.Break();
+                }
         }
         avoidanceForce = avoidanceForce / rigidbody.mass;
         if (avoidanceForce.sqrMagnitude < moveEpsilon * moveEpsilon)
@@ -391,18 +393,18 @@ public class StarshipSteering : MonoBehaviour
         rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
-    public void SetDestinationFormation(Vector3 _target, Transform[] _shipsInFormation)
+    public void SetDestinationFormation(Vector3 _target, Transform[] _shipsInFormation, bool _pursuing = false)
     {
         shipsInFormation = _shipsInFormation;
         useTransformTarget = false;
         target = _target;
         targetPlane = new Plane(transform.position - target, target);
         isMoving = true;
-        pursuing = false;
+        pursuing = _pursuing;
         rigidbody.constraints = RigidbodyConstraints.FreezeRotation;    
     }
 
-    public void SetDestinationFormation(Transform _targetTransform, Transform[] _shipsInFormation)
+    public void SetDestinationFormation(Transform _targetTransform, Transform[] _shipsInFormation, bool _pursuing = false)
     {
         shipsInFormation = _shipsInFormation;
         useTransformTarget = true;
@@ -410,7 +412,7 @@ public class StarshipSteering : MonoBehaviour
         target = transformTarget.position;
         targetPlane = new Plane(transform.position - target, target);
         isMoving = true;
-        pursuing = false;
+        pursuing = _pursuing;
         rigidbody.constraints = RigidbodyConstraints.FreezeRotation;      
     }
 

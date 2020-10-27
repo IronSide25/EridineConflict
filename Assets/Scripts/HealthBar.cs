@@ -5,17 +5,20 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Image healthImage;
+    public Image healthImageForeground;
+    public Image healthImageBackground;
     public float positionOffset;
 
     private HealthManager healthManager;
+    private Renderer targetRenderer;
 
     public void Start()
     {
+        targetRenderer = healthManager.gameObject.GetComponent<Renderer>();
         if (healthManager.gameObject.layer == 10)
-            healthImage.color = Color.red;
+            healthImageForeground.color = Color.red;
         else if (healthManager.gameObject.layer == 8)
-            healthImage.color = Color.green;
+            healthImageForeground.color = Color.green;
     }
 
     public void SetHealth(HealthManager healthManager)
@@ -26,12 +29,22 @@ public class HealthBar : MonoBehaviour
 
     private void HandleOnHealthChanged(float percent)
     {
-        healthImage.fillAmount = percent;
+        healthImageForeground.fillAmount = percent;
     }
 
     private void LateUpdate()
     {
-        transform.position = Camera.main.WorldToScreenPoint(healthManager.transform.position + Vector3.up * positionOffset);
+        if(targetRenderer.isVisible)
+        {
+            healthImageForeground.enabled = true;
+            healthImageBackground.enabled = true;
+            transform.position = Camera.main.WorldToScreenPoint(healthManager.transform.position + Vector3.up * positionOffset);
+        }            
+        else
+        {
+            healthImageForeground.enabled = false;
+            healthImageBackground.enabled = false;
+        }
     }
 
     private void OnDestroy()

@@ -14,6 +14,7 @@ public class SelectionManager : MonoBehaviour
     public List<Transform> enemyStarships; // rename and move this somewhere else XD
 
     private Vector3 dragStartPosition;
+    private bool allowDrag = false;
     private const float sqrMinDragDistance = 100;
     public RectTransform selectionBoxRect;
     public GameObject selectionGO;
@@ -34,6 +35,16 @@ public class SelectionManager : MonoBehaviour
     GameObject lightCountPanel;
     GameObject mediumCountPanel;
     GameObject heavyCountPanel;
+
+    public GameObject setAggresivePanel;
+    private Image setAggresiveImage;
+    public GameObject setDefensivePanel;
+    private Image setDefensiveImage;
+    public GameObject setPassivePanel;
+    private Image setPassiveImage;
+
+    private EventSystem eventSystem;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -43,9 +54,15 @@ public class SelectionManager : MonoBehaviour
         HealthManager.OnStarshipAdded += AddStarship;
         HealthManager.OnStarshipRemoved += RemoveStarship;
 
+        eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+
         lightCountPanel = lightCountText.transform.parent.gameObject;
         mediumCountPanel = mediumCountText.transform.parent.gameObject;
         heavyCountPanel = heavyCountText.transform.parent.gameObject;
+
+        setAggresiveImage = setAggresivePanel.GetComponent<Image>();
+        setDefensiveImage = setDefensivePanel.GetComponent<Image>();
+        setPassiveImage = setPassivePanel.GetComponent<Image>();
 
         lightCount = 0;
         mediumCount = 0;
@@ -55,9 +72,10 @@ public class SelectionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !eventSystem.IsPointerOverGameObject())
         {
             dragStartPosition = Input.mousePosition;
+            allowDrag = true;
 
             if (!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
                 ClearSelected();
@@ -74,6 +92,12 @@ public class SelectionManager : MonoBehaviour
                     StarshipAI starshipAI = hit.transform.GetComponent<StarshipAI>();                    
                     if (starshipAI)
                         starshipAI.isSelected = true;
+                    if (starshipAI.unitBehavior == UnitBehavior.Aggresive)
+                        setAggresiveImage.enabled = true;
+                    else if (starshipAI.unitBehavior == UnitBehavior.Defensive)
+                        setDefensiveImage.enabled = true;
+                    else
+                        setPassiveImage.enabled = true;
 
                     if (selectedPlayerStarships.Add(hit.transform))
                     {
@@ -93,22 +117,23 @@ public class SelectionManager : MonoBehaviour
                 AddHealthBar(hit.transform);
                 StarshipAI starshipAI = hit.transform.GetComponent<StarshipAI>();
             }
+
+            UpdateBehaviourUIIsActive();
         }
-        else if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0))//dragging
         {
-            if (Vector3.SqrMagnitude(dragStartPosition - Input.mousePosition) > sqrMinDragDistance)
+            if (Vector3.SqrMagnitude(dragStartPosition - Input.mousePosition) > sqrMinDragDistance && allowDrag)
             {
                 selectionGO.SetActive(true);
                 selectionBoxRect.position = dragStartPosition - ((dragStartPosition - Input.mousePosition) / 2);
                 float sizeX = Mathf.Abs(dragStartPosition.x - Input.mousePosition.x);
                 float sizeY = Mathf.Abs(dragStartPosition.y - Input.mousePosition.y);
                 selectionBoxRect.sizeDelta = new Vector2(sizeX, sizeY);
-                //ClearSelected();
             }
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))//end of drag
         {
-            if (Vector3.SqrMagnitude(dragStartPosition - Input.mousePosition) > sqrMinDragDistance)
+            if (allowDrag && Vector3.SqrMagnitude(dragStartPosition - Input.mousePosition) > sqrMinDragDistance)
             {
                 if (!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
                     ClearSelected();
@@ -128,6 +153,14 @@ public class SelectionManager : MonoBehaviour
                             AddHealthBar(tr);
                             StarshipAI starshipAI = tr.GetComponent<StarshipAI>();
                             starshipAI.isSelected = true;
+
+                            if (starshipAI.unitBehavior == UnitBehavior.Aggresive)
+                                setAggresiveImage.enabled = true;
+                            else if(starshipAI.unitBehavior == UnitBehavior.Defensive)
+                                setDefensiveImage.enabled = true;
+                            else
+                                setPassiveImage.enabled = true;
+
                             if (selectedPlayerStarships.Add(tr))
                             {
                                 if (starshipAI.starshipClass == StarshipClass.Light)
@@ -154,9 +187,11 @@ public class SelectionManager : MonoBehaviour
                 }
                 selectionGO.SetActive(false);
             }
+            allowDrag = false;
+            UpdateBehaviourUIIsActive();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))//give order
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -194,6 +229,8 @@ public class SelectionManager : MonoBehaviour
                         }                   
                     StarshipAI starshipAI = starshipTr.GetComponent<StarshipAI>();
                     starshipAI.SetMove(Input.GetKey(KeyCode.LeftControl) ? selectionPlaneHeight.position : hit.point, shipsInFormation, formationHelper);
+                    if (Input.GetKey(KeyCode.A))
+                        starshipAI.aMove = true;
                     starshipAI.isSelected = true;
                 }
             }
@@ -307,5 +344,78 @@ public class SelectionManager : MonoBehaviour
         HealthManager healthManager = shipTransform.GetComponent<HealthManager>();
         if (healthManager)
             healthManager.AddHealthBar();
+    }
+
+    public void OnSetAggresiveClicked()
+    {
+        if(selectedPlayerStarships.Count > 0)
+        {
+            setAggresiveImage.enabled = true;
+            setDefensiveImage.enabled = false;
+            setPassiveImage.enabled = false;
+        }
+        foreach (Transform tr in selectedPlayerStarships)
+        {          
+            StarshipAI starshipAI = tr.GetComponent<StarshipAI>();
+            if (starshipAI)
+            {
+                starshipAI.unitBehavior = UnitBehavior.Aggresive;
+            }
+        }
+    }
+
+    public void OnSetDeffensiveClicked()
+    {
+        if (selectedPlayerStarships.Count > 0)
+        {
+            setAggresiveImage.enabled = false;
+            setDefensiveImage.enabled = true;
+            setPassiveImage.enabled = false;
+        }
+        foreach (Transform tr in selectedPlayerStarships)
+        {
+            StarshipAI starshipAI = tr.GetComponent<StarshipAI>();
+            if (starshipAI)
+            {
+                starshipAI.unitBehavior = UnitBehavior.Defensive;
+            }
+        }
+    }
+
+    public void OnSetPassiveClicked()
+    {
+        if (selectedPlayerStarships.Count > 0)
+        {
+            setAggresiveImage.enabled = false;
+            setDefensiveImage.enabled = false;
+            setPassiveImage.enabled = true;
+        }
+        foreach (Transform tr in selectedPlayerStarships)
+        {
+            StarshipAI starshipAI = tr.GetComponent<StarshipAI>();
+            if (starshipAI)
+            {
+                starshipAI.unitBehavior = UnitBehavior.Passive;
+            }              
+        }
+    }
+
+    void UpdateBehaviourUIIsActive()
+    {
+        if(selectedPlayerStarships.Count == 0)
+        {
+            setAggresivePanel.SetActive(false);
+            setDefensivePanel.SetActive(false);
+            setPassivePanel.SetActive(false);
+            setAggresiveImage.enabled = false;
+            setDefensiveImage.enabled = false;
+            setPassiveImage.enabled = false;
+        }
+        else
+        {
+            setAggresivePanel.SetActive(true);
+            setDefensivePanel.SetActive(true);
+            setPassivePanel.SetActive(true);
+        }
     }
 }
