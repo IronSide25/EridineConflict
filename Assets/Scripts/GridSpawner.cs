@@ -56,7 +56,7 @@ public class GridSpawner : MonoBehaviour
                         shipsInFormation[count] = ship;
                         count++;
                     }
-                starshipAI.SetMove(setMoveDestination.position, shipsInFormation, formationHelper);
+                starshipAI.SetMove(setMoveDestination.position, formationHelper);
             }
         }
         this.enabled = false;

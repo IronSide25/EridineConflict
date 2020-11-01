@@ -778,7 +778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4159309185370774, guid: 59c52aad69955654794f62765f1da656, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31.5
+      value: 12.53
       objectReference: {fileID: 0}
     - target: {fileID: 4159309185370774, guid: 59c52aad69955654794f62765f1da656, type: 3}
       propertyPath: m_LocalPosition.y
@@ -24253,11 +24253,15 @@ MonoBehaviour:
   maxDesiredSeekForce: 50
   maxSeekForce: 50
   seekMult: 1
+  limitSeekRotation: 0
+  allowedSeekRotation: 0.05
   maxPrediction: 100
   maxDesiredPursuitForce: 0
   maxPursuitForce: 0
   pursuitMult: 1
   projectileSpeed: 0
+  limitPursuitRotation: 0
+  allowedPursuitRotation: 0.05
   maxAngularAcc: 2
   maxAvoidForce: 100
   sphereCastRadius: 8
@@ -24446,6 +24450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64765378088398514, guid: 28afa4f8ca37a7540bcc6b01886c8f74,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28afa4f8ca37a7540bcc6b01886c8f74, type: 3}
@@ -43149,11 +43158,15 @@ MonoBehaviour:
   maxDesiredSeekForce: 50
   maxSeekForce: 50
   seekMult: 1
+  limitSeekRotation: 0
+  allowedSeekRotation: 0.05
   maxPrediction: 100
   maxDesiredPursuitForce: 0
   maxPursuitForce: 0
   pursuitMult: 1
   projectileSpeed: 0
+  limitPursuitRotation: 0
+  allowedPursuitRotation: 0.05
   maxAngularAcc: 2
   maxAvoidForce: 100
   sphereCastRadius: 8
@@ -43203,7 +43216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1107234208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43253,7 +43266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1153747171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43826,7 +43839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1495197670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43839,7 +43852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d24a32dc3681d448b0b1e0498dea9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block1: {fileID: 1200994681200819698, guid: df1acfc9011af13469d5d136c0fc2635, type: 3}
+  block1: {fileID: 1200994681200819698, guid: b451b650c94506047ab0f1f00846a77b, type: 3}
   worldWidth: 4
   worldHeight: 4
   separation: 4
@@ -44042,8 +44055,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block1: {fileID: 6892940493220047012, guid: 5bccd6cf24e1473448523105acb80370, type: 3}
-  worldWidth: 3
-  worldHeight: 3
+  worldWidth: 2
+  worldHeight: 2
   separation: 7
   setMoveAtStart: 0
   setMoveDestination: {fileID: 0}
@@ -44390,7 +44403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1761634540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44403,7 +44416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d24a32dc3681d448b0b1e0498dea9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block1: {fileID: 1122383940670264, guid: d756f691afdce5445a3a81b08fa23fcc, type: 3}
+  block1: {fileID: 1122383940670264, guid: 9094e5548c368934bbb7ae862b40020f, type: 3}
   worldWidth: 5
   worldHeight: 5
   separation: 2
@@ -44949,8 +44962,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block1: {fileID: 6892940493220047012, guid: 896e8d98727c69a4a8a93e5f92fdf591, type: 3}
-  worldWidth: 2
-  worldHeight: 2
+  worldWidth: 4
+  worldHeight: 4
   separation: 7
   setMoveAtStart: 0
   setMoveDestination: {fileID: 0}
@@ -74219,7 +74232,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &2134916911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74251,11 +74264,15 @@ MonoBehaviour:
   maxDesiredSeekForce: 0
   maxSeekForce: 0
   seekMult: 1
+  limitSeekRotation: 0
+  allowedSeekRotation: 0.05
   maxPrediction: 100
   maxDesiredPursuitForce: 0
   maxPursuitForce: 0
   pursuitMult: 1
   projectileSpeed: 0
+  limitPursuitRotation: 0
+  allowedPursuitRotation: 0.05
   maxAngularAcc: 1
   maxAvoidForce: 0
   sphereCastRadius: 0
@@ -74275,6 +74292,20 @@ MonoBehaviour:
   calculatedVelocity: {x: 0, y: 0, z: 0}
   desiredRotation: {x: 0, y: 0, z: 0, w: 0}
   evade: 0
+--- !u!136 &2134916912
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134916904}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 94.2
+  m_Height: 678.4
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.000015258789}
 --- !u!1001 &2144929328
 PrefabInstance:
   m_ObjectHideFlags: 0

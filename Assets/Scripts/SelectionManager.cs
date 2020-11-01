@@ -197,38 +197,22 @@ public class SelectionManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 10))
             {
+                FormationHelper formationHelper = new FormationHelper();
+                formationHelper.shipsInFormation = new List<Transform>(selectedPlayerStarships);
                 foreach (Transform starshipTr in selectedPlayerStarships)
-                {
-                    Transform[] shipsInFormation = new Transform[selectedPlayerStarships.Count - 1];
-                    FormationHelper formationHelper = new FormationHelper();
-                    formationHelper.shipsInFormation = new List<Transform>(selectedPlayerStarships);
-                    int count = 0;
-                    foreach (Transform ship in selectedPlayerStarships)
-                        if (ship != starshipTr)
-                        {
-                            shipsInFormation[count] = ship;
-                            count++;
-                        }
+                {                    
                     StarshipAI starshipAI = starshipTr.GetComponent<StarshipAI>();
-                    starshipAI.SetAttack(hit.transform, shipsInFormation, formationHelper);                   
+                    starshipAI.SetAttack(hit.transform, formationHelper);                   
                 }
             }
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 9))
             {
+                FormationHelper formationHelper = new FormationHelper();
+                formationHelper.shipsInFormation = new List<Transform>(selectedPlayerStarships);
                 foreach (Transform starshipTr in selectedPlayerStarships)
                 {
-                    Transform[] shipsInFormation = new Transform[selectedPlayerStarships.Count - 1];
-                    FormationHelper formationHelper = new FormationHelper();
-                    formationHelper.shipsInFormation = new List<Transform>(selectedPlayerStarships);
-                    int count = 0;
-                    foreach (Transform ship in selectedPlayerStarships)
-                        if (ship != starshipTr)
-                        {
-                            shipsInFormation[count] = ship;
-                            count++;
-                        }                   
                     StarshipAI starshipAI = starshipTr.GetComponent<StarshipAI>();
-                    starshipAI.SetMove(Input.GetKey(KeyCode.LeftControl) ? selectionPlaneHeight.position : hit.point, shipsInFormation, formationHelper);
+                    starshipAI.SetMove(Input.GetKey(KeyCode.LeftControl) ? selectionPlaneHeight.position : hit.point, formationHelper);
                     if (Input.GetKey(KeyCode.A))
                         starshipAI.aMove = true;
                     starshipAI.isSelected = true;

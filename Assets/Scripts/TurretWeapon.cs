@@ -32,26 +32,47 @@ public class TurretWeapon : MonoBehaviour, IWeapon
 
         isWeaponAlive = true;
     }
-
+    public bool info;
     // Update is called once per frame
     void Update()
     {
         if(isActive && isWeaponAlive)
         {
-            float prediction = starshipSteering.distToTarget / projectileSpeed;
-            Vector3 attackPredictedTarget = starshipSteering.transformTarget.position + (starshipSteering.transformTarget.GetComponent<Rigidbody>().velocity * prediction);
-            Vector3 direction = (attackPredictedTarget - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            if (!(lookRotation.eulerAngles.x > maxRotationX && lookRotation.eulerAngles.x < 90))
+            if (starshipSteering.distToTarget < range)//i think its working fine, but test if rot z is always zero
             {
-                turretBase.rotation = Quaternion.RotateTowards(turretBase.rotation, lookRotation, rotationSpeed * Time.deltaTime);
-                if (Time.time - lastShootTime > shootingSpeed)
+                float prediction = starshipSteering.distToTarget / projectileSpeed;
+                Vector3 attackPredictedTarget = starshipSteering.transformTarget.position + (starshipSteering.transformTarget.GetComponent<Rigidbody>().velocity * prediction);
+                Vector3 direction = (attackPredictedTarget - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                Vector3 desRot = lookRotation.eulerAngles;
+                desRot.z = turretBase.rotation.eulerAngles.z;
+                lookRotation.eulerAngles = desRot;
+
+                Vector3 safeEuler = turretBase.localRotation.eulerAngles;
+
+                Quaternion q = Quaternion.RotateTowards(turretBase.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+                Vector3 qVec = q.eulerAngles;
+                qVec.z = 0;
+                turretBase.rotation = Quaternion.Euler(qVec);
+                Vector3 newRot = turretBase.localRotation.eulerAngles;
+                Quaternion safeRotation = Quaternion.Euler(new Vector3(safeEuler.x, newRot.y, 0));//rotation with limited x 
+
+                if (!(turretBase.localRotation.eulerAngles.x > maxRotationX && turretBase.localRotation.eulerAngles.x < 90))
                 {
-                    lastShootTime = Time.time;
-                    foreach (ParticleSystem laser in lasers)
-                        laser.Emit(1);
+                    info = true;
+                    if (Time.time - lastShootTime > shootingSpeed && Quaternion.Angle(turretBase.rotation, lookRotation) < 5)//make variable out of this
+                    {
+                        lastShootTime = Time.time;
+                        foreach (ParticleSystem laser in lasers)
+                            laser.Emit(1);
+                    }
                 }
-            }
+                else
+                {
+                    info = false;
+                    turretBase.localRotation = safeRotation;
+                }
+            }            
         }
     }
 

@@ -31,7 +31,7 @@ public class LaserWeapon : MonoBehaviour, IWeapon
     {
         if (isActive && isWeaponAlive)
         {
-            if (starshipSteering.isTargeting && starshipSteering.distToTarget < 100)
+            if (starshipSteering.isTargeting && starshipSteering.distToTarget < range)
             {
                 float angleDiff = Quaternion.Angle(starshipSteering.transform.rotation, starshipSteering.desiredRotation);
                 if (angleDiff < 5 && Time.time - lastShootTime > shootingSpeed)
@@ -45,7 +45,7 @@ public class LaserWeapon : MonoBehaviour, IWeapon
 
     public void Activate(Transform target)
     {
-        lastShootTime = Time.time + Random.Range(-0.5f, 0.5f);
+        //lastShootTime = Time.time + Random.Range(-0.5f, 0.5f);
         isActive = true;
     }
 

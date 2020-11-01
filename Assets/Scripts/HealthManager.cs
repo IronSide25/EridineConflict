@@ -12,6 +12,7 @@ public class HealthManager : MonoBehaviour
     public static event Action<Transform> OnStarshipRemoved = delegate { };
 
     public float maxHealth;
+    public float armor = 0;
     float currentHealth;
     public float explosionScale = 0.2f;
 
@@ -55,17 +56,20 @@ public class HealthManager : MonoBehaviour
 
     public void OnParticleCollision(GameObject other)
     {
-        IWeapon weapon = other.GetComponent<IWeapon>();
+        IWeapon weapon = other.GetComponentInParent<IWeapon>();
         if(weapon != null)
         {
-            ModifyHealth(-weapon.GetDamage());
+            DealDamage(weapon.GetDamage());
             gameObject.SendMessage("OnDamageReceived", other.transform.root);
         }        
     }
 
-    public void ModifyHealth(float value)
+    public void DealDamage(float value)
     {
-        currentHealth += value;
+        value -= armor;
+        if (value < 0)
+            value = 0;
+        currentHealth -= value;
         OnHealthChanged(currentHealth / maxHealth);
     }
 
