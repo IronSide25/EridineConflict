@@ -221,7 +221,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6892940493220047012}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
@@ -19983,11 +19983,15 @@ MonoBehaviour:
   maxDesiredSeekForce: 12.5
   maxSeekForce: 5
   seekMult: 1
+  limitSeekRotation: 1
+  allowedSeekRotation: 0.7853
   maxPrediction: 100
   maxDesiredPursuitForce: 12.5
   maxPursuitForce: 5
   pursuitMult: 1
   projectileSpeed: 100
+  limitPursuitRotation: 1
+  allowedPursuitRotation: 0.7853
   maxAngularAcc: 3
   maxAvoidForce: 25
   sphereCastRadius: 1
@@ -20020,12 +20024,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starshipClass: 2
+  typeIndex: 4
   unitBehavior: 0
   aMove: 0
   isAttacking: 0
   isShooting: 0
   isPlayer: 1
-  attackDistance: 100
+  attackDistance: 120
   target: {fileID: 0}
   lastTargetPos: {x: 0, y: 0, z: 0}
   isInCloseProximity: 0

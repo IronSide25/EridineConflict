@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class SelectionManager : MonoBehaviour
 {
-    public static SelectionManager globalAccess;
+    public static SelectionManager instance;
 
     public HashSet<Transform> selectedPlayerStarships;
     public HashSet<Transform> selectedEnemyStarships;
     public List<Transform> playerStarships; // rename and move this somewhere else XD
     public List<Transform> enemyStarships; // rename and move this somewhere else XD
+    public HashSet<FormationHelper> playerFormations;
 
     private Vector3 dragStartPosition;
     private bool allowDrag = false;
@@ -19,6 +20,7 @@ public class SelectionManager : MonoBehaviour
     public RectTransform selectionBoxRect;
     public GameObject selectionGO;
 
+    [Header("UI")]
     public float currentSelectionHeight;
 
     public Transform selectionPlaneFloor;
@@ -48,9 +50,10 @@ public class SelectionManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        globalAccess = this;
+        instance = this;
         selectedPlayerStarships = new HashSet<Transform>();
         selectedEnemyStarships = new HashSet<Transform>();
+        playerFormations = new HashSet<FormationHelper>();
         HealthManager.OnStarshipAdded += AddStarship;
         HealthManager.OnStarshipRemoved += RemoveStarship;
 
@@ -182,7 +185,7 @@ public class SelectionManager : MonoBehaviour
                     {
                         selectedEnemyStarships.Add(tr);
                         AddHealthBar(tr);
-                        StarshipAI starshipAI = tr.GetComponent<StarshipAI>();
+                        StarshipAI starshipAI = tr.GetComponent<StarshipAI>();//wtf
                     }
                 }
                 selectionGO.SetActive(false);
@@ -197,27 +200,32 @@ public class SelectionManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 10))
             {
-                FormationHelper formationHelper = new FormationHelper();
-                formationHelper.shipsInFormation = new List<Transform>(selectedPlayerStarships);
+                FormationHelper formationHelper = new FormationHelper(new List<Transform>(selectedPlayerStarships));
                 foreach (Transform starshipTr in selectedPlayerStarships)
-                {                    
+                {                                
                     StarshipAI starshipAI = starshipTr.GetComponent<StarshipAI>();
+                    starshipAI.formationHelper.RemoveShip(starshipTr);
                     starshipAI.SetAttack(hit.transform, formationHelper);                   
                 }
+                playerFormations.Add(formationHelper);
+                playerFormations.RemoveWhere(formation => formation.GetLength() == 0);
             }
             else if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 9))
             {
-                FormationHelper formationHelper = new FormationHelper();
-                formationHelper.shipsInFormation = new List<Transform>(selectedPlayerStarships);
+                FormationHelper formationHelper = new FormationHelper(new List<Transform>(selectedPlayerStarships));
                 foreach (Transform starshipTr in selectedPlayerStarships)
                 {
                     StarshipAI starshipAI = starshipTr.GetComponent<StarshipAI>();
+                    starshipAI.formationHelper.RemoveShip(starshipTr);
                     starshipAI.SetMove(Input.GetKey(KeyCode.LeftControl) ? selectionPlaneHeight.position : hit.point, formationHelper);
-                    if (Input.GetKey(KeyCode.A))
+                    if (Input.GetKey(KeyCode.A))//wtf
                         starshipAI.aMove = true;
-                    starshipAI.isSelected = true;
+                    //starshipAI.isSelected = true;
                 }
+                playerFormations.Add(formationHelper);
+                playerFormations.RemoveWhere(formation => formation.GetLength() == 0);
             }
+            Debug.Log(playerFormations.Count);
         }
 
         if (Input.GetKey(KeyCode.LeftControl) && selectedPlayerStarships.Count > 0)

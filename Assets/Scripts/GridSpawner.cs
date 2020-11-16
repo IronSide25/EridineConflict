@@ -29,8 +29,17 @@ public class GridSpawner : MonoBehaviour
             }
         }
 
-        formationHelper = new FormationHelper();
-        formationHelper.shipsInFormation = ships;
+        formationHelper = new FormationHelper(ships);
+
+        if(ships[0].GetComponent<StarshipAI>().isPlayer)
+        {
+            //EnemyAI.Instance.playerFormations.Add(ships.ToArray());
+            SelectionManager.instance.playerFormations.Add(formationHelper);
+        }
+        else
+        {
+            EnemyAI.Instance.enemyFormations.Add(ships.ToArray());
+        }
 
         foreach (Transform tr in ships)
         {
@@ -60,5 +69,11 @@ public class GridSpawner : MonoBehaviour
             }
         }
         this.enabled = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, 1);
     }
 }

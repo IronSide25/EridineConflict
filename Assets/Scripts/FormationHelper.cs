@@ -2,9 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FormationHelper
+public class FormationHelper// add set move set attack
 {
+    //maybe change to hashset
     public List<Transform> shipsInFormation;//change to private later, with setter and getter
+
+    public FormationHelper()
+    {
+        shipsInFormation = new List<Transform>();
+    }
+
+    public FormationHelper(List<Transform> _shipsInFormation)
+    {
+        shipsInFormation = _shipsInFormation;
+    }
 
     public List<Transform> GetShipsInFormationRemoveNull()
     {
@@ -15,5 +26,10 @@ public class FormationHelper
     public void RemoveShip(Transform ship)
     {
         shipsInFormation.Remove(ship);
+    }
+
+    public int GetLength()
+    {
+        return shipsInFormation.Count;
     }
 }
