@@ -62,35 +62,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Example.cs" />
-    <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\Scripts\AI\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\AI\FormationHelper.cs" />
     <Compile Include="Assets\Scripts\AI\StarshipAI.cs" />
     <Compile Include="Assets\Scripts\AI\StarshipSteering.cs" />
     <Compile Include="Assets\Scripts\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\FormationHelper.cs" />
     <Compile Include="Assets\Scripts\GridSpawner.cs" />
     <Compile Include="Assets\Scripts\Health\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Health\HealthBarManager.cs" />
     <Compile Include="Assets\Scripts\Health\HealthManager.cs" />
     <Compile Include="Assets\Scripts\PooledObject.cs" />
     <Compile Include="Assets\Scripts\PoolingManager.cs" />
-    <Compile Include="Assets\Scripts\SelectionManager.cs" />
-    <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
+    <Compile Include="Assets\Scripts\UI\Outline.cs" />
+    <Compile Include="Assets\Scripts\UI\SelectionManager.cs" />
+    <Compile Include="Assets\Scripts\UI\UILineRenderer.cs" />
     <Compile Include="Assets\Scripts\Weapon\IWeapon.cs" />
     <Compile Include="Assets\Scripts\Weapon\LaserWeapon.cs" />
     <Compile Include="Assets\Scripts\Weapon\TurretWeapon.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\UILineRenderer.cs" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\SyntyStudios_Asteroid.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\POLYGON_Triplanar.shader" />
-    <None Include="Assets\QuickOutline\Resources\Shaders\OutlineMask.shader" />
+    <None Include="Assets\Scripts\Shaders\OutlineMask.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\SyntyStudios_Triplanar_ObjectSpace.shader" />
-    <None Include="Assets\QuickOutline\Readme.txt" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\SyntyStudios_Planet.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\SyntyStudios_Planet_Lines.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\POLYGON_SpaceShip_Rim.shader" />
-    <None Include="Assets\QuickOutline\Resources\Shaders\OutlineFill.shader" />
+    <None Include="Assets\Scripts\Shaders\OutlineFill.shader" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Program Files/Unity/2019.4.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

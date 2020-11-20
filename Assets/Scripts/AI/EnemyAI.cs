@@ -8,13 +8,13 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
 {
     public static EnemyAI Instance;
 
-    public List<Transform[]> enemyFormations;//weapons
-    public List<FormationHelper> playerFormations;//targets
-    public float[] playerFormationsCountBefore;
-    public float[] playerFormationsCountAfter;
+    private List<Transform[]> enemyFormations;//weapons
+    private List<FormationHelper> playerFormations;//targets
+    private float[] playerFormationsCountBefore;
+    private float[] playerFormationsCountAfter;
 
-    public static float[] starshipTypesValues = new float[] { 5f, 5f, 25f, 25f, 100f };//dostroić to potem
-    public static float[,] starshipTypesEffectiveness = new float[,] {
+    private static float[] starshipTypesValues = new float[] { 5f, 5f, 25f, 25f, 100f };//dostroić to potem   zamiast 100 daj 70
+    private static float[,] starshipTypesEffectiveness = new float[,] {
             {0.5f, 0.7f, 0.1f, 0.15f, 0.05f },//small fighter
             {0.3f, 0.5f, 0.25f, 0.35f, 0.10f },//small bomber
             {0.9f, 0.75f, 0.5f, 0.7f, 0.20f },//medium bomber
@@ -25,27 +25,25 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
     {
         if (!Instance)
             Instance = this;
-        enemyFormations = new List<Transform[]>();
-        playerFormations = new List<FormationHelper>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         Invoke("AssignTargets", 5);
-        
-        Debug.Log(enemyFormations.Count);
-        Debug.Log(playerFormations.Count);
     }
 
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void AssignTargets()
     {
         playerFormations = SelectionManager.instance.playerFormations.ToList();
+        enemyFormations = SelectionManager.instance.enemyFormations;
+
         UnifyPlayerFormations();
         Debug.Log("Unified player formations count: " + playerFormations.Count);
 
@@ -58,6 +56,7 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
 
         int[] solution = ExhaustiveSearch();//ex. [0,1,2] first enemy formation attack player formation at playerFormations[0]
         //int[] solution = WTAGreedyMMR();
+
         for (int i = 0; i < enemyFormations.Count; i++)
         {
             Debug.Log("Enemy Type: " + enemyFormations[i][0].GetComponent<StarshipAI>().typeIndex + " attacks player type: " + playerFormations[solution[i]].shipsInFormation[0].GetComponent<StarshipAI>().typeIndex + " Formation index: " + solution[i]);

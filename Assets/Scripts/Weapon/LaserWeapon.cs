@@ -5,7 +5,6 @@ using UnityEngine;
 public class LaserWeapon : MonoBehaviour, IWeapon
 {
     StarshipSteering starshipSteering;
-
     public ParticleSystem laser;
     public float shootingSpeed = 1f;
     public float damagePerShot = 2;

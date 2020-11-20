@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -24300,13 +24300,11 @@ MonoBehaviour:
   moveEpsilon: 0.5
   distanceToStop: 1
   slowingRadius: 15
-  maxDesiredSeekForce: 50
   maxSeekForce: 50
   seekMult: 1
   limitSeekRotation: 0
   allowedSeekRotation: 0.05
   maxPrediction: 100
-  maxDesiredPursuitForce: 0
   maxPursuitForce: 0
   pursuitMult: 1
   projectileSpeed: 0
@@ -24323,6 +24321,7 @@ MonoBehaviour:
   separationForceMultiplier: 200
   maxSeparationForce: 50
   viewAngle: 60
+  maxCohesionForce: 1
   cohesionForceMultiplier: 1
   alignDistance: 10
   alignmentMultiplier: 5
@@ -43255,13 +43254,11 @@ MonoBehaviour:
   moveEpsilon: 0.5
   distanceToStop: 1
   slowingRadius: 15
-  maxDesiredSeekForce: 50
   maxSeekForce: 50
   seekMult: 1
   limitSeekRotation: 0
   allowedSeekRotation: 0.05
   maxPrediction: 100
-  maxDesiredPursuitForce: 0
   maxPursuitForce: 0
   pursuitMult: 1
   projectileSpeed: 0
@@ -43278,6 +43275,7 @@ MonoBehaviour:
   separationForceMultiplier: 200
   maxSeparationForce: 50
   viewAngle: 60
+  maxCohesionForce: 1
   cohesionForceMultiplier: 1
   alignDistance: 10
   alignmentMultiplier: 5
@@ -45311,14 +45309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a773f24b891b8a42a81ae2749d4e621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyFormationsCountBefore: []
-  enemyFormationsCountAfter: []
-  playerFormationsCountBefore: []
-  playerFormationsCountAfter: []
-  playerValues: []
-  enemyValues: []
-  targetsTest: []
-  weaponsTest: []
 --- !u!4 &2069986209
 Transform:
   m_ObjectHideFlags: 0
@@ -74612,13 +74602,11 @@ MonoBehaviour:
   moveEpsilon: 0.01
   distanceToStop: 1
   slowingRadius: 5
-  maxDesiredSeekForce: 0
   maxSeekForce: 0
   seekMult: 1
   limitSeekRotation: 0
   allowedSeekRotation: 0.05
   maxPrediction: 100
-  maxDesiredPursuitForce: 0
   maxPursuitForce: 0
   pursuitMult: 1
   projectileSpeed: 0
@@ -74635,6 +74623,7 @@ MonoBehaviour:
   separationForceMultiplier: 1
   maxSeparationForce: 0
   viewAngle: 60
+  maxCohesionForce: 1
   cohesionForceMultiplier: 1
   alignDistance: 10
   alignmentMultiplier: 5

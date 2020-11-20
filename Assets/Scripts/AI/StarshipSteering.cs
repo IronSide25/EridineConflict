@@ -30,7 +30,6 @@ public class StarshipSteering : MonoBehaviour
     public float slowingRadius = 5;
    
     [Header("Seek behavior")]
-    public float maxDesiredSeekForce;
     public float maxSeekForce;
     public float seekMult = 1;
     public bool limitSeekRotation = false;
@@ -38,7 +37,6 @@ public class StarshipSteering : MonoBehaviour
 
     [Header("Pursuit behavior")]
     public float maxPrediction = 100;
-    public float maxDesiredPursuitForce;
     public float maxPursuitForce;
     public float pursuitMult = 1;
     public float projectileSpeed;
@@ -63,6 +61,7 @@ public class StarshipSteering : MonoBehaviour
 
     [Header("Cohesion behavior")]
     public float viewAngle = 60;
+    public float maxCohesionForce = 1f;
     public float cohesionForceMultiplier = 1f;
 
     [Header("Alingment behavior")]
@@ -137,8 +136,8 @@ public class StarshipSteering : MonoBehaviour
                 targetPlane = new Plane(transform.position - target, target);//not optimal as f
                 target = transformTarget.position;
             }            
-            desiredVelocity = target - transform.position;
-            distToTarget = Vector3.Magnitude(desiredVelocity);
+            desiredVelocity = target - transform.position;//its calculated only once, and then used in seek and pusuit behaviors
+            distToTarget = Vector3.Magnitude(desiredVelocity);//its calculated only once, and then used in many behaviors
 
             if (distToTarget < slowingRadius)
                 target = targetPlane.ClosestPointOnPlane(transform.position);
@@ -215,14 +214,14 @@ public class StarshipSteering : MonoBehaviour
             lastDesiredVelocity = desiredVelocityNorm;
         }      
 
-        Vector3 steering = desiredVelocityNorm * maxDesiredSeekForce;//Vector3 steering = desiredVelocity - rigidbody.velocity;//which is better
+        Vector3 steering = desiredVelocityNorm * maxSeekForce;//Vector3 steering = desiredVelocity - rigidbody.velocity;//which is better
 
         if (distToTarget > slowingRadius)
-            steering = compensateMass ? steering : (steering / rigidbody.mass);
+            steering = compensateMass ? steering : (steering / rigidbody.mass);//not sure about this
         if (steering.magnitude < moveEpsilon)
             steering = Vector3.zero;
 
-        return Vector3.ClampMagnitude(steering, maxSeekForce) * seekMult;
+        return steering * seekMult;
     }
 
     private Vector3 Pursuit()
@@ -246,13 +245,13 @@ public class StarshipSteering : MonoBehaviour
             lastDesiredVelocity = desiredVelocityNorm;
         }
 
-        steering = desiredVelocityNorm * maxDesiredPursuitForce;
+        steering = desiredVelocityNorm * maxPursuitForce;
         if (distToTarget > slowingRadius)
             steering = compensateMass ? steering : (steering / rigidbody.mass);
         if (steering.magnitude < moveEpsilon)
             steering = Vector3.zero;
 
-        return (evade ? -Vector3.ClampMagnitude(steering, maxPursuitForce) : Vector3.ClampMagnitude(steering, maxPursuitForce)) * pursuitMult;
+        return (evade ? -steering : steering) * pursuitMult;
     }
 
     private Vector3 Separation()
@@ -266,7 +265,7 @@ public class StarshipSteering : MonoBehaviour
                 float distanceSqr = direction.sqrMagnitude;
                 if (distanceSqr < threshold * threshold)
                 {
-                    float strength = Mathf.Min(decayCoefficient / (distanceSqr), maxSeparationForce);
+                    float strength = Mathf.Min(decayCoefficient / distanceSqr, maxSeparationForce);
                     direction.Normalize();
                     steering = strength * direction;
                 }
@@ -294,12 +293,12 @@ public class StarshipSteering : MonoBehaviour
             centerOfMass = centerOfMass / count;
             steering = centerOfMass - transform.position;
             steering.Normalize();
-            Debug.DrawRay(transform.position, steering * cohesionForceMultiplier);
+            steering *= maxCohesionForce;
         }
         return steering * cohesionForceMultiplier;
     }
 
-    private Vector3 Alignment()
+    private Vector3 Alignment()//używać danych z formationHelper w celu optymalizacji
     {
         Vector3 steering = Vector3.zero;
         int count = 0;

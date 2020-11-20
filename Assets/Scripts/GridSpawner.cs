@@ -38,7 +38,8 @@ public class GridSpawner : MonoBehaviour
         }
         else
         {
-            EnemyAI.Instance.enemyFormations.Add(ships.ToArray());
+            SelectionManager.instance.enemyFormations.Add(ships.ToArray());
+            //EnemyAI.Instance.enemyFormations.Add(ships.ToArray());
         }
 
         foreach (Transform tr in ships)
