@@ -32,4 +32,12 @@ public class FormationHelper// add set move set attack
     {
         return shipsInFormation.Count;
     }
+
+    public void SetFormationTarget(FormationHelper enemyFormationHelper)
+    {
+        foreach(Transform ship in shipsInFormation)
+        {
+            ship.GetComponent<StarshipAI>().targetFormationHelper = enemyFormationHelper;
+        }
+    }
 }

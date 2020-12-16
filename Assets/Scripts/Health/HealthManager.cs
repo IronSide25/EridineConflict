@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
-    public static event Action<HealthManager> OnHealthManagerAdded = delegate { };
+    public static event Action<HealthManager,Vector3> OnHealthManagerAdded = delegate { };
     public static event Action<HealthManager> OnHealthManagerRemoved = delegate { };
 
     public static event Action<Transform> OnStarshipAdded = delegate { };
@@ -15,13 +15,13 @@ public class HealthManager : MonoBehaviour
     public float armor = 0;
     float currentHealth;
     public float explosionScale = 0.2f;
+    public Vector3 healthBarScale;
 
     public event Action<float> OnHealthChanged = delegate { };
 
     private void Start()
     {
         currentHealth = maxHealth;
-        //OnHealthManagerAdded(this);
         if (gameObject.tag == "Player" || gameObject.tag == "Enemy")
         {
             OnStarshipAdded(transform);
@@ -30,7 +30,7 @@ public class HealthManager : MonoBehaviour
 
     public void AddHealthBar()
     {
-        OnHealthManagerAdded(this);
+        OnHealthManagerAdded(this, healthBarScale);
         OnHealthChanged(currentHealth / maxHealth);
     }
 

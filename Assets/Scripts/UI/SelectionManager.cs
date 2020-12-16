@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -28,24 +27,20 @@ public class SelectionManager : MonoBehaviour
     public Transform selectionPlaneHeight;
     float selectionPlaneHeightPosY = 0;
 
-    float lightCount;
-    float mediumCount;
-    float heavyCount;
-
-    public Text lightCountText;
-    public Text mediumCountText;
-    public Text heavyCountText;
-    GameObject lightCountPanel;
-    GameObject mediumCountPanel;
-    GameObject heavyCountPanel;
-
-    public GameObject setAggresivePanel;
-    private Image setAggresiveImage;
-    public GameObject setDefensivePanel;
-    private Image setDefensiveImage;
-    public GameObject setPassivePanel;
-    private Image setPassiveImage;
-
+    //HUD
+    public GameObject HUDGameobject;
+    private const float starshipIconsStart = 80;
+    private const float starshipIconsSpacing = 90;
+    public float[] selectedCountByTypeIndex;
+    public Text[] textCounts;
+    GameObject[] starshipIcons;
+    public GameObject selectedStarshipsPanel;
+    public GameObject setBehaviorPanel;
+    public Image setAggresiveImage;
+    public Image setDefensiveImage;
+    public Image setPassiveImage;
+    public Image enableHUDButtonImage;
+    
     private EventSystem eventSystem;
 
     // Start is called before the first frame update
@@ -61,17 +56,12 @@ public class SelectionManager : MonoBehaviour
 
         eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
 
-        lightCountPanel = lightCountText.transform.parent.gameObject;
-        mediumCountPanel = mediumCountText.transform.parent.gameObject;
-        heavyCountPanel = heavyCountText.transform.parent.gameObject;
-
-        setAggresiveImage = setAggresivePanel.GetComponent<Image>();
-        setDefensiveImage = setDefensivePanel.GetComponent<Image>();
-        setPassiveImage = setPassivePanel.GetComponent<Image>();
-
-        lightCount = 0;
-        mediumCount = 0;
-        heavyCount = 0;
+        setBehaviorPanel.SetActive(false);
+        selectedStarshipsPanel.SetActive(false);
+        selectedCountByTypeIndex = new float[] { 0, 0, 0, 0, 0 };
+        starshipIcons = new GameObject[textCounts.Length];
+        for(int i = 0; i < textCounts.Length; i++)
+            starshipIcons[i] = textCounts[i].transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -106,12 +96,7 @@ public class SelectionManager : MonoBehaviour
 
                     if (selectedPlayerStarships.Add(hit.transform))
                     {
-                        if (starshipAI.starshipClass == StarshipClass.Light)
-                            lightCount++;
-                        else if (starshipAI.starshipClass == StarshipClass.Medium)
-                            mediumCount++;
-                        else
-                            heavyCount++;                    
+                        selectedCountByTypeIndex[starshipAI.typeIndex]++;                 
                     }                    
                 }
             }
@@ -123,7 +108,7 @@ public class SelectionManager : MonoBehaviour
                 StarshipAI starshipAI = hit.transform.GetComponent<StarshipAI>();
             }
 
-            UpdateBehaviourUIIsActive();
+            UpdateUIActive();
         }
         else if (Input.GetMouseButton(0))//dragging
         {
@@ -168,12 +153,7 @@ public class SelectionManager : MonoBehaviour
 
                             if (selectedPlayerStarships.Add(tr))
                             {
-                                if (starshipAI.starshipClass == StarshipClass.Light)
-                                    lightCount++;
-                                else if (starshipAI.starshipClass == StarshipClass.Medium)
-                                    mediumCount++;
-                                else
-                                    heavyCount++;
+                                selectedCountByTypeIndex[starshipAI.typeIndex]++;
                             }
                         }
                     }
@@ -193,7 +173,7 @@ public class SelectionManager : MonoBehaviour
                 selectionGO.SetActive(false);
             }
             allowDrag = false;
-            UpdateBehaviourUIIsActive();
+            UpdateUIActive();
         }
 
         if (Input.GetMouseButtonDown(1))//give order
@@ -257,13 +237,19 @@ public class SelectionManager : MonoBehaviour
             selectionPlaneHeightPosY = 0;
         }
 
-        lightCountText.text = lightCount.ToString();
-        mediumCountText.text = mediumCount.ToString();
-        heavyCountText.text = heavyCount.ToString();
-
-        lightCountPanel.SetActive(lightCount > 0);
-        mediumCountPanel.SetActive(mediumCount > 0);
-        heavyCountPanel.SetActive(heavyCount > 0);
+        int starshipIconCount = 0;
+        for(int i = 0; i< textCounts.Length; i++)
+        {
+            textCounts[i].text = selectedCountByTypeIndex[i].ToString();           
+            starshipIcons[i].SetActive(selectedCountByTypeIndex[i] > 0);
+            if(starshipIcons[i].activeSelf)
+            {
+                Vector3 pos = starshipIcons[i].transform.position;
+                pos.x = starshipIconsStart + (starshipIconCount * starshipIconsSpacing);
+                starshipIcons[i].transform.position = pos;
+                starshipIconCount++;
+            }         
+        }
     }
 
     void ClearSelected()
@@ -286,9 +272,7 @@ public class SelectionManager : MonoBehaviour
                 starshipAI.isSelected = false;
         }
         selectedEnemyStarships.Clear();
-        lightCount = 0;
-        mediumCount = 0;
-        heavyCount = 0;
+        selectedCountByTypeIndex = new float[] { 0, 0, 0, 0, 0 };
     }
 
     void AddStarship(Transform starship)
@@ -311,13 +295,10 @@ public class SelectionManager : MonoBehaviour
             if(selectedPlayerStarships.Remove(starship))
             {
                 StarshipAI starshipAI = starship.GetComponent<StarshipAI>();
-                if (starshipAI.starshipClass == StarshipClass.Light)
-                    lightCount--;
-                else if (starshipAI.starshipClass == StarshipClass.Medium)
-                    mediumCount--;
-                else
-                    heavyCount--;
+                selectedCountByTypeIndex[starshipAI.typeIndex]--;
             }
+            if (selectedPlayerStarships.Count == 0)
+                UpdateUIActive();
         }
         else if (starship.tag == "Enemy")
         {
@@ -394,22 +375,63 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
-    void UpdateBehaviourUIIsActive()
+    void UpdateUIActive()
     {
-        if(selectedPlayerStarships.Count == 0)
+        if(setBehaviorPanel)
         {
-            setAggresivePanel.SetActive(false);
-            setDefensivePanel.SetActive(false);
-            setPassivePanel.SetActive(false);
-            setAggresiveImage.enabled = false;
-            setDefensiveImage.enabled = false;
-            setPassiveImage.enabled = false;
-        }
+            if (selectedPlayerStarships.Count == 0)
+            {
+                setBehaviorPanel.SetActive(false);
+                selectedStarshipsPanel.SetActive(false);
+                setAggresiveImage.enabled = false;
+                setDefensiveImage.enabled = false;
+                setPassiveImage.enabled = false;
+            }
+            else
+            {
+                setBehaviorPanel.SetActive(true);
+                selectedStarshipsPanel.SetActive(true);
+            }
+        }       
+    }
+
+    public void OnEnableHUDButtonClick()
+    {
+        HUDGameobject.SetActive(!HUDGameobject.activeSelf);
+        if (HUDGameobject.activeSelf)
+            enableHUDButtonImage.color = Color.green;
         else
+            enableHUDButtonImage.color = Color.white;
+    }
+
+    public void OnMainMenuButtonClick()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    public void OnStarshipTypeButtonClick(int index)
+    {
+        foreach(Transform ship in selectedPlayerStarships)
         {
-            setAggresivePanel.SetActive(true);
-            setDefensivePanel.SetActive(true);
-            setPassivePanel.SetActive(true);
+            if (ship.GetComponent<StarshipAI>().typeIndex != index)
+            {
+                Outline outline = ship.GetComponent<Outline>();
+                if (outline)
+                {
+                    outline.enabled = false;
+                }
+                RemoveHealthBar(ship);
+            }
         }
+        selectedPlayerStarships.RemoveWhere(starship => starship.GetComponent<StarshipAI>().typeIndex != index);
+        selectedCountByTypeIndex = new float[] { 0, 0, 0, 0, 0 };
+        selectedCountByTypeIndex[index] = selectedPlayerStarships.Count;
+        UpdateUIActive();
+    }
+
+    public void OnStarshipTypeRightClick(int index)
+    {
+        GameObject infoPanel = starshipIcons[index].FindObject("InfoPanel");
+        infoPanel.SetActive(!infoPanel.activeSelf);
     }
 }

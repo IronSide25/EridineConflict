@@ -33,7 +33,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122383940670264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 6.38}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 7292588475343933886}
@@ -10781,7 +10781,6 @@ MonoBehaviour:
   limitSeekRotation: 1
   allowedSeekRotation: 3.14
   maxPrediction: 100
-  maxDesiredPursuitForce: 20
   maxPursuitForce: 20
   pursuitMult: 1
   projectileSpeed: 100
@@ -10798,6 +10797,7 @@ MonoBehaviour:
   separationForceMultiplier: 2
   maxSeparationForce: 15
   viewAngle: 60
+  maxCohesionForce: 1
   cohesionForceMultiplier: 1
   alignDistance: 5
   alignmentMultiplier: 1
@@ -10856,6 +10856,7 @@ MonoBehaviour:
   maxHealth: 10
   armor: 0
   explosionScale: 0.2
+  healthBarScale: {x: 0.05, y: 0.05, z: 0.05}
 --- !u!120 &-5366451330378046836
 LineRenderer:
   m_ObjectHideFlags: 0

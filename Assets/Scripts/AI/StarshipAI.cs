@@ -84,23 +84,30 @@ public class StarshipAI : MonoBehaviour
                 else
                     AttackEvadeTactics();
             }
-            else//target has been destroyed, try to find another target
+            else
             {
+                //target has been destroyed, try to find another target in this enemy formation
                 bool newTargetSet = false;
                 if (targetFormationHelper != null)
                 {
-                    List<Transform> enemyFormation = targetFormationHelper.GetShipsInFormationRemoveNull();
-                    if (enemyFormation.Count > 0)
+                    List<Transform> enemyFormationShips = targetFormationHelper.GetShipsInFormationRemoveNull();
+                    if (enemyFormationShips.Count > 0)
                     {
-                        SetAttack(enemyFormation[Random.Range(0, enemyFormation.Count)].transform, formationHelper, false);
+                        SetAttack(enemyFormationShips[Random.Range(0, enemyFormationShips.Count)].transform, formationHelper, false);
                         newTargetSet = true;
                     }
                 }
-                if (!newTargetSet)
+                //try to find closest enemy
+                //set others target formation helpers for the same formation
+                if (!newTargetSet)//change this, maybe use formation helper to forward message to other ships in formation and do this only once
                 {
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackDistance, isPlayer ? 1 << 10 : 1 << 8);
                     if (hitColliders.Length > 0)
-                        SetAttack(hitColliders[Random.Range(0, hitColliders.Length)].transform.root, formationHelper, false);
+                    {
+                        Transform target = hitColliders[Random.Range(0, hitColliders.Length)].transform.root;
+                        formationHelper.SetFormationTarget(target.GetComponent<StarshipAI>().formationHelper);// new code, test this pls
+                        SetAttack(target, formationHelper, false);
+                    }                  
                     else
                     {
                         EndAttack();
@@ -154,7 +161,7 @@ public class StarshipAI : MonoBehaviour
 
     private void AttackEvadeTactics()//!!!!!!!!!!!!!!!!!!!!!!! zamiast ustawiać punkt jakiś można po prostu ustawić starshipSteering.evade = true;, na szybko przetestowane i dzieja sie rzeczy dziwne
     {
-        lastTargetPos = target.position;
+        //lastTargetPos = target.position;
         if (!isInCloseProximity)
         {
             if (Vector3.SqrMagnitude(transform.position - target.position) < currentMinSqrDistance /*&& !target.GetComponent<StarshipAI>().isInCloseProximity*/)
@@ -190,7 +197,7 @@ public class StarshipAI : MonoBehaviour
 
     private void AttackStopTactics()
     {
-        lastTargetPos = target.position;
+        //lastTargetPos = target.position;
         if (!isInCloseProximity)
         {
             if (Vector3.SqrMagnitude(transform.position - target.position) < currentMinSqrDistance)
@@ -220,6 +227,7 @@ public class StarshipAI : MonoBehaviour
         isInCloseProximity = false;
         target = _target;
         starshipSteering.SetDestinationFormation(_target, _formationHelper);
+        lastTargetPos = _target.position;
         foreach (IWeapon weapon in weapons)
             weapon.Activate(_target);
         starshipSteering.pursuing = true;
@@ -275,14 +283,14 @@ public class StarshipAI : MonoBehaviour
         starshipSteering.collideWithFormationUnits = false;
     }
 
-    public void SetMove(Vector3 target, FormationHelper _formationHelper)
+    public void SetMove(Vector3 _target, FormationHelper _formationHelper)
     {
         foreach (IWeapon weapon in weapons)
             weapon.Deactivate();
-        starshipSteering.SetDestinationFormation(target, _formationHelper);
+        starshipSteering.SetDestinationFormation(_target, _formationHelper);
+        lastTargetPos = _target;
         starshipSteering.SetMoveBehaviorInFormation();
-        isAttacking = false;
-        lastTargetPos = target;
+        isAttacking = false;        
         formationHelper = _formationHelper;
         starshipSteering.allowStopOnDistance = true;
         starshipSteering.allowTransitiveBumping = true;

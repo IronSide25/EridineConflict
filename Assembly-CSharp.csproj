@@ -67,12 +67,16 @@
     <Compile Include="Assets\Scripts\AI\StarshipAI.cs" />
     <Compile Include="Assets\Scripts\AI\StarshipSteering.cs" />
     <Compile Include="Assets\Scripts\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\DepthCamera.cs" />
+    <Compile Include="Assets\Scripts\Extensions.cs" />
     <Compile Include="Assets\Scripts\GridSpawner.cs" />
     <Compile Include="Assets\Scripts\Health\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Health\HealthBarManager.cs" />
     <Compile Include="Assets\Scripts\Health\HealthManager.cs" />
     <Compile Include="Assets\Scripts\PooledObject.cs" />
     <Compile Include="Assets\Scripts\PoolingManager.cs" />
+    <Compile Include="Assets\Scripts\UI\DetectRightClick.cs" />
+    <Compile Include="Assets\Scripts\UI\DisableScript.cs" />
     <Compile Include="Assets\Scripts\UI\Outline.cs" />
     <Compile Include="Assets\Scripts\UI\SelectionManager.cs" />
     <Compile Include="Assets\Scripts\UI\UILineRenderer.cs" />
