@@ -19967,38 +19967,9 @@ MonoBehaviour:
   calculatePrediction: 0
   allowStopOnDistance: 0
   allowTransitiveBumping: 0
-  maxSpeed: 5
-  accelerationRate: 2
-  noMovingMaxAngularAcc: 0.25
-  moveEpsilon: 0.05
-  distanceToStop: 2
-  slowingRadius: 12.5
-  maxSeekForce: 5
-  seekMult: 1
-  limitSeekRotation: 1
-  allowedSeekRotation: 0.7853
-  maxPrediction: 100
-  maxPursuitForce: 5
-  pursuitMult: 1
+  values: {fileID: 11400000, guid: c0dc58f85d3a0d9468464b59b469eb61, type: 2}
   projectileSpeed: 100
-  limitPursuitRotation: 1
-  allowedPursuitRotation: 0.7853
-  maxAngularAcc: 3
-  maxAvoidForce: 25
-  sphereCastRadius: 1
-  sphereCastDistance: 10
-  collisionAvoidanceMult: 1
   collideWithFormationUnits: 1
-  threshold: 15
-  decayCoefficient: 15
-  separationForceMultiplier: 0.75
-  maxSeparationForce: 2
-  viewAngle: 360
-  maxCohesionForce: 1
-  cohesionForceMultiplier: 0.1
-  alignDistance: 5
-  alignmentMultiplier: 0.25
-  maxAlingmentForce: 12.5
   shipsInFormation: []
   calculatedVelocity: {x: 0, y: 0, z: 0}
   desiredRotation: {x: 0, y: 0, z: 0, w: 0}

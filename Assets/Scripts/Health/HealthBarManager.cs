@@ -19,8 +19,7 @@ public class HealthBarManager : MonoBehaviour
     {
         if(healthBars.ContainsKey(healthManager) == false)
         {
-            HealthBar healthBar = Instantiate(healthBarPrefab, transform);
-            healthBar.transform.parent = healthBarParent;
+            HealthBar healthBar = Instantiate(healthBarPrefab, healthBarParent);
             healthBar.transform.localScale = scale;
             healthBars.Add(healthManager, healthBar);
             healthBar.SetHealth(healthManager);
