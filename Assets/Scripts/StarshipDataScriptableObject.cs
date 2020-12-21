@@ -37,18 +37,19 @@ public class StarshipDataScriptableObject : ScriptableObject
     public bool collideWithFormationUnits = true;//not SO
 
     [Header("Separation behavior")]
-    public float threshold = 2f;
+    //public float threshold = 2f;
+    public float thresholdSqr = 4;
     public float decayCoefficient = -25f;
     public float separationForceMultiplier = 1f;
     public float maxSeparationForce;
 
     [Header("Cohesion behavior")]
-    public float viewAngle = 60;
+    public float viewAngle = 60;//remove
     public float maxCohesionForce = 1f;
     public float cohesionForceMultiplier = 1f;
 
     [Header("Alingment behavior")]
-    public float alignDistance = 10f;
+    public float alignDistance = 10f;//remove
     public float alignmentMultiplier = 5;
     public float maxAlingmentForce;
 }

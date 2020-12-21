@@ -34,7 +34,7 @@ MonoBehaviour:
   sphereCastDistance: 10
   collisionAvoidanceMult: 1
   collideWithFormationUnits: 0
-  threshold: 5
+  thresholdSqr: 25
   decayCoefficient: -5
   separationForceMultiplier: 1
   maxSeparationForce: 7.5

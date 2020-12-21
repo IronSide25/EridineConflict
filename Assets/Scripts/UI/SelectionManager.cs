@@ -64,6 +64,12 @@ public class SelectionManager : MonoBehaviour
             starshipIcons[i] = textCounts[i].transform.parent.gameObject;
     }
 
+    private void FixedUpdate()
+    {
+        foreach (FormationHelper formationHelper in FormationHelper.formationHelpers)
+            formationHelper.InvalidateCache();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -413,8 +419,10 @@ public class SelectionManager : MonoBehaviour
     {
         foreach(Transform ship in selectedPlayerStarships)
         {
-            if (ship.GetComponent<StarshipAI>().typeIndex != index)
+            StarshipAI starshipAI = ship.GetComponent<StarshipAI>();
+            if (starshipAI.typeIndex != index)
             {
+                starshipAI.isSelected = false;
                 Outline outline = ship.GetComponent<Outline>();
                 if (outline)
                 {
@@ -423,7 +431,7 @@ public class SelectionManager : MonoBehaviour
                 RemoveHealthBar(ship);
             }
         }
-        selectedPlayerStarships.RemoveWhere(starship => starship.GetComponent<StarshipAI>().typeIndex != index);
+        selectedPlayerStarships.RemoveWhere(starship => starship.GetComponent<StarshipAI>().typeIndex != index);//optimize this pls!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         selectedCountByTypeIndex = new float[] { 0, 0, 0, 0, 0 };
         selectedCountByTypeIndex[index] = selectedPlayerStarships.Count;
         UpdateUIActive();

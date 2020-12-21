@@ -25535,38 +25535,9 @@ MonoBehaviour:
   calculatePrediction: 0
   allowStopOnDistance: 0
   allowTransitiveBumping: 0
-  maxSpeed: 50
-  accelerationRate: 5
-  noMovingMaxAngularAcc: 0.1
-  moveEpsilon: 0.5
-  distanceToStop: 1
-  slowingRadius: 15
-  maxSeekForce: 50
-  seekMult: 1
-  limitSeekRotation: 0
-  allowedSeekRotation: 0.05
-  maxPrediction: 100
-  maxPursuitForce: 0
-  pursuitMult: 1
+  values: {fileID: 0}
   projectileSpeed: 0
-  limitPursuitRotation: 0
-  allowedPursuitRotation: 0.05
-  maxAngularAcc: 2
-  maxAvoidForce: 100
-  sphereCastRadius: 8
-  sphereCastDistance: 45
-  collisionAvoidanceMult: 1
   collideWithFormationUnits: 1
-  threshold: 75
-  decayCoefficient: -25
-  separationForceMultiplier: 200
-  maxSeparationForce: 50
-  viewAngle: 60
-  maxCohesionForce: 1
-  cohesionForceMultiplier: 1
-  alignDistance: 10
-  alignmentMultiplier: 5
-  maxAlingmentForce: 50
   shipsInFormation: []
   calculatedVelocity: {x: 0, y: 0, z: 0}
   desiredRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -45123,38 +45094,9 @@ MonoBehaviour:
   calculatePrediction: 0
   allowStopOnDistance: 0
   allowTransitiveBumping: 0
-  maxSpeed: 50
-  accelerationRate: 5
-  noMovingMaxAngularAcc: 0.1
-  moveEpsilon: 0.5
-  distanceToStop: 1
-  slowingRadius: 15
-  maxSeekForce: 50
-  seekMult: 1
-  limitSeekRotation: 0
-  allowedSeekRotation: 0.05
-  maxPrediction: 100
-  maxPursuitForce: 0
-  pursuitMult: 1
+  values: {fileID: 0}
   projectileSpeed: 0
-  limitPursuitRotation: 0
-  allowedPursuitRotation: 0.05
-  maxAngularAcc: 2
-  maxAvoidForce: 100
-  sphereCastRadius: 8
-  sphereCastDistance: 45
-  collisionAvoidanceMult: 1
   collideWithFormationUnits: 1
-  threshold: 75
-  decayCoefficient: -25
-  separationForceMultiplier: 200
-  maxSeparationForce: 50
-  viewAngle: 60
-  maxCohesionForce: 1
-  cohesionForceMultiplier: 1
-  alignDistance: 10
-  alignmentMultiplier: 5
-  maxAlingmentForce: 50
   shipsInFormation: []
   calculatedVelocity: {x: 0, y: 0, z: 0}
   desiredRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -45208,7 +45150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d24a32dc3681d448b0b1e0498dea9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block1: {fileID: 1122383940670264, guid: 20dfe819867b9e84eb8e2f29cefaed5d, type: 3}
+  block1: {fileID: 1122383940670264, guid: 01489deeeb7ca1744877c2e3e590d958, type: 3}
   worldWidth: 10
   worldHeight: 10
   separation: 2
@@ -78855,38 +78797,9 @@ MonoBehaviour:
   calculatePrediction: 0
   allowStopOnDistance: 0
   allowTransitiveBumping: 0
-  maxSpeed: 10
-  accelerationRate: 0
-  noMovingMaxAngularAcc: 0.1
-  moveEpsilon: 0.01
-  distanceToStop: 1
-  slowingRadius: 5
-  maxSeekForce: 0
-  seekMult: 1
-  limitSeekRotation: 0
-  allowedSeekRotation: 0.05
-  maxPrediction: 100
-  maxPursuitForce: 0
-  pursuitMult: 1
+  values: {fileID: 0}
   projectileSpeed: 0
-  limitPursuitRotation: 0
-  allowedPursuitRotation: 0.05
-  maxAngularAcc: 1
-  maxAvoidForce: 0
-  sphereCastRadius: 0
-  sphereCastDistance: 0
-  collisionAvoidanceMult: 1
   collideWithFormationUnits: 1
-  threshold: 2
-  decayCoefficient: -25
-  separationForceMultiplier: 1
-  maxSeparationForce: 0
-  viewAngle: 60
-  maxCohesionForce: 1
-  cohesionForceMultiplier: 1
-  alignDistance: 10
-  alignmentMultiplier: 5
-  maxAlingmentForce: 0
   shipsInFormation: []
   calculatedVelocity: {x: 0, y: 0, z: 0}
   desiredRotation: {x: 0, y: 0, z: 0, w: 0}
