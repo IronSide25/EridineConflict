@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SelectionManager : MonoBehaviour
+public class SelectionManager : MonoBehaviour//rename class name, it currently does: unit selection, time managment, formationhelpers validation. Maybe UI manager, gameplay manager
 {
     public static SelectionManager instance;
 
@@ -14,20 +14,21 @@ public class SelectionManager : MonoBehaviour
     public HashSet<FormationHelper> playerFormations;
     public List<Transform[]> enemyFormations;
 
+    [Header("Selection")]
     private Vector3 dragStartPosition;
     private bool allowDrag = false;
     private const float sqrMinDragDistance = 100;
+    public float sqrMaxOrderDistance = 62500;
     public RectTransform selectionBoxRect;
     public GameObject selectionGO;
 
     [Header("UI")]
     public float currentSelectionHeight;
-
     public Transform selectionPlaneFloor;
     public Transform selectionPlaneHeight;
     float selectionPlaneHeightPosY = 0;
 
-    //HUD
+    [Header("HUD")]
     public GameObject HUDGameobject;
     private const float starshipIconsStart = 80;
     private const float starshipIconsSpacing = 90;
@@ -40,7 +41,11 @@ public class SelectionManager : MonoBehaviour
     public Image setDefensiveImage;
     public Image setPassiveImage;
     public Image enableHUDButtonImage;
-    
+    public GameObject tooFarTextGO;
+
+    public Text timeSpeedText;
+    public float timeScaleStep = 0.05f;
+    public const float defaultFixedDeltaTime = 0.02f;
     private EventSystem eventSystem;
 
     // Start is called before the first frame update
@@ -85,35 +90,13 @@ public class SelectionManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Camera.main.farClipPlane, 1 << 8))
             {
-                Outline outline = hit.transform.GetComponent<Outline>();
-                if (outline)
-                {
-                    outline.enabled = true;
-                    AddHealthBar(hit.transform);
-                    StarshipAI starshipAI = hit.transform.GetComponent<StarshipAI>();                    
-                    if (starshipAI)
-                        starshipAI.isSelected = true;
-                    if (starshipAI.unitBehavior == UnitBehavior.Aggresive)
-                        setAggresiveImage.enabled = true;
-                    else if (starshipAI.unitBehavior == UnitBehavior.Defensive)
-                        setDefensiveImage.enabled = true;
-                    else
-                        setPassiveImage.enabled = true;
-
-                    if (selectedPlayerStarships.Add(hit.transform))
-                    {
-                        selectedCountByTypeIndex[starshipAI.typeIndex]++;                 
-                    }                    
-                }
+                SelectStarship(hit.transform);
             }
-
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 10))
             {
                 selectedEnemyStarships.Add(hit.transform);
                 AddHealthBar(hit.transform);
-                StarshipAI starshipAI = hit.transform.GetComponent<StarshipAI>();
             }
-
             UpdateUIActive();
         }
         else if (Input.GetMouseButton(0))//dragging
@@ -142,26 +125,7 @@ public class SelectionManager : MonoBehaviour
                     screenSpace.z = 0;
                     if (selectionBox.Contains(screenSpace) && tr.tag == "Player")
                     {
-                        Outline outline = tr.GetComponent<Outline>();
-                        if (outline)
-                        {
-                            outline.enabled = true;
-                            AddHealthBar(tr);
-                            StarshipAI starshipAI = tr.GetComponent<StarshipAI>();
-                            starshipAI.isSelected = true;
-
-                            if (starshipAI.unitBehavior == UnitBehavior.Aggresive)
-                                setAggresiveImage.enabled = true;
-                            else if(starshipAI.unitBehavior == UnitBehavior.Defensive)
-                                setDefensiveImage.enabled = true;
-                            else
-                                setPassiveImage.enabled = true;
-
-                            if (selectedPlayerStarships.Add(tr))
-                            {
-                                selectedCountByTypeIndex[starshipAI.typeIndex]++;
-                            }
-                        }
+                        SelectStarship(tr);
                     }
                 }
 
@@ -173,7 +137,6 @@ public class SelectionManager : MonoBehaviour
                     {
                         selectedEnemyStarships.Add(tr);
                         AddHealthBar(tr);
-                        StarshipAI starshipAI = tr.GetComponent<StarshipAI>();//wtf
                     }
                 }
                 selectionGO.SetActive(false);
@@ -182,11 +145,11 @@ public class SelectionManager : MonoBehaviour
             UpdateUIActive();
         }
 
-        if (Input.GetMouseButtonDown(1))//give order
+        if (Input.GetMouseButtonDown(1) && selectedPlayerStarships.Count > 0)//give order
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 10))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 10))//hit enemy ship
             {
                 FormationHelper formationHelper = new FormationHelper(new List<Transform>(selectedPlayerStarships));
                 foreach (Transform starshipTr in selectedPlayerStarships)
@@ -198,22 +161,33 @@ public class SelectionManager : MonoBehaviour
                 playerFormations.Add(formationHelper);
                 playerFormations.RemoveWhere(formation => formation.GetLength() == 0);
             }
-            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 9))
+            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 9))//hit selection plane
             {
-                FormationHelper formationHelper = new FormationHelper(new List<Transform>(selectedPlayerStarships));
-                foreach (Transform starshipTr in selectedPlayerStarships)
+                if(Vector3.SqrMagnitude(hit.point - Vector3.zero) < sqrMaxOrderDistance)
                 {
-                    StarshipAI starshipAI = starshipTr.GetComponent<StarshipAI>();
-                    starshipAI.formationHelper.RemoveShip(starshipTr);
-                    starshipAI.SetMove(Input.GetKey(KeyCode.LeftControl) ? selectionPlaneHeight.position : hit.point, formationHelper);
-                    if (Input.GetKey(KeyCode.A))//wtf
-                        starshipAI.aMove = true;
-                    //starshipAI.isSelected = true;
+                    FormationHelper formationHelper = new FormationHelper(new List<Transform>(selectedPlayerStarships));
+                    foreach (Transform starshipTr in selectedPlayerStarships)
+                    {
+                        StarshipAI starshipAI = starshipTr.GetComponent<StarshipAI>();
+                        starshipAI.formationHelper.RemoveShip(starshipTr);
+                        starshipAI.SetMove(Input.GetKey(KeyCode.LeftControl) ? selectionPlaneHeight.position : hit.point, formationHelper);
+                        if (Input.GetKey(KeyCode.A))//not used for now
+                            starshipAI.aMove = true;
+                        //starshipAI.isSelected = true;
+                    }
+                    playerFormations.Add(formationHelper);
+                    playerFormations.RemoveWhere(formation => formation.GetLength() == 0);
+                }    
+                else
+                {
+                    tooFarTextGO.SetActive(true);
                 }
-                playerFormations.Add(formationHelper);
-                playerFormations.RemoveWhere(formation => formation.GetLength() == 0);
             }
-            Debug.Log("Player formation No: " + playerFormations.Count);
+            else
+            {
+                tooFarTextGO.SetActive(true);
+            }
+            //Debug.Log("Player formation No: " + playerFormations.Count);
         }
 
         if (Input.GetKey(KeyCode.LeftControl) && selectedPlayerStarships.Count > 0)
@@ -258,7 +232,31 @@ public class SelectionManager : MonoBehaviour
         }
     }
 
-    void ClearSelected()
+    void SelectStarship(Transform shipTransform)
+    {
+        Outline outline = shipTransform.GetComponent<Outline>();
+        if (outline)
+        {
+            outline.enabled = true;
+            AddHealthBar(shipTransform);
+            StarshipAI starshipAI = shipTransform.GetComponent<StarshipAI>();
+            starshipAI.isSelected = true;
+
+            if (starshipAI.unitBehavior == UnitBehavior.Aggresive)
+                setAggresiveImage.enabled = true;
+            else if (starshipAI.unitBehavior == UnitBehavior.Defensive)
+                setDefensiveImage.enabled = true;
+            else
+                setPassiveImage.enabled = true;
+
+            if (selectedPlayerStarships.Add(shipTransform))
+            {
+                selectedCountByTypeIndex[starshipAI.typeIndex]++;
+            }
+        }
+    }
+
+    public void ClearSelected()
     {
         foreach (Transform tr in selectedPlayerStarships)
         {
@@ -441,5 +439,34 @@ public class SelectionManager : MonoBehaviour
     {
         GameObject infoPanel = starshipIcons[index].FindObject("InfoPanel");
         infoPanel.SetActive(!infoPanel.activeSelf);
+    }
+
+    public void OnSelectAllClick()
+    {
+        ClearSelected();
+        foreach (Transform tr in playerStarships)
+        {
+            SelectStarship(tr);
+        }
+    }
+
+    public void IncrementTimeScale()
+    {
+        float value = Time.timeScale;
+        if (Time.timeScale < 1)
+            value += timeScaleStep;
+        Time.timeScale = Mathf.Clamp(value, 0, 10);
+        Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
+        timeSpeedText.text = "Time speed: " + Mathf.Round(100 * Time.timeScale) + "%";
+    }
+
+    public void DecrementTimeScale()
+    {
+        float value = Time.timeScale;
+        if (Time.timeScale > 0)
+            value -= timeScaleStep;
+        Time.timeScale = Mathf.Clamp(value, 0, 10);
+        Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
+        timeSpeedText.text = "Time speed: " + Mathf.Round(100 * Time.timeScale) + "%";
     }
 }

@@ -49,6 +49,10 @@ public class StarshipSteering : MonoBehaviour
     private MoveBehavior[] currentMoveBehavior;
     private delegate Quaternion RotateBehavior();
     private RotateBehavior currentRotateBehavior;
+    private RaycastHit[] hitsBuffer;
+    private Collider[] collidersBuffer;
+    public int maxRaycastBufferCount = 15;// maximum recorded value was 13
+    public int maxCollisionBufferCount = 15;//maximum recorded value was 35
 
     private void Awake()
     {
@@ -60,6 +64,9 @@ public class StarshipSteering : MonoBehaviour
         SetMoveBehaviorInFormation();
         SetRotationBehaviorLookVelocity();
         layer = gameObject.layer;
+
+        hitsBuffer = new RaycastHit[maxRaycastBufferCount];
+        collidersBuffer = new Collider[maxCollisionBufferCount];
     }
 
     // Start is called before the first frame update
@@ -87,10 +94,7 @@ public class StarshipSteering : MonoBehaviour
 
         if (isMoving)
         {
-            Profiler.BeginSample("MainF");
-            //quite high performance cost and lots of GC Alloc
-            shipsInFormation = new HashSet<Transform>(formationHelper.shipsInFormation);//change formationhelper ships to hashset
-            Profiler.EndSample();
+            shipsInFormation = formationHelper.shipsHashSet;
 
             //check angle and apply preturn
             if (useTransformTarget)
@@ -101,11 +105,12 @@ public class StarshipSteering : MonoBehaviour
             desiredVelocity = target - transform.position;//its calculated only once, and then used in seek and pusuit behaviors
             distToTarget = Vector3.Magnitude(desiredVelocity);//its calculated only once, and then used in behaviors
 
-            if (distToTarget < values.slowingRadius)
+            if (distToTarget < (values.slowingRadius + values.distanceToStop))
+            {
                 target = targetPlane.ClosestPointOnPlane(transform.position);
-          
-            if (distToTarget < values.slowingRadius)
-                currentMaxSpeed = Mathf.Clamp(values.maxSpeed * (distToTarget / values.slowingRadius), 0, currentMaxSpeed);
+                currentMaxSpeed = Mathf.Clamp(values.maxSpeed * (distToTarget / (values.slowingRadius + values.distanceToStop)), 0, currentMaxSpeed);
+            }
+
             if (currentMaxSpeed < values.maxSpeed)
                 currentMaxSpeed += values.accelerationRate * Time.deltaTime;
             else
@@ -178,7 +183,7 @@ public class StarshipSteering : MonoBehaviour
 
         Vector3 steering = desiredVelocityNorm * values.maxSeekForce;//Vector3 steering = desiredVelocity - rigidbody.velocity;//which is better
 
-        if (distToTarget > values.slowingRadius)
+        if (distToTarget > (values.slowingRadius + values.distanceToStop))
             steering = compensateMass ? steering : (steering / starshipRigidbody.mass);//not sure about this
         if (steering.magnitude < values.moveEpsilon)
             steering = Vector3.zero;
@@ -208,7 +213,7 @@ public class StarshipSteering : MonoBehaviour
         }
 
         steering = desiredVelocityNorm * values.maxPursuitForce;
-        if (distToTarget > values.slowingRadius)
+        if (distToTarget > (values.slowingRadius + values.distanceToStop))
             steering = compensateMass ? steering : (steering / starshipRigidbody.mass);
         if (steering.magnitude < values.moveEpsilon)
             steering = Vector3.zero;
@@ -219,9 +224,8 @@ public class StarshipSteering : MonoBehaviour
     private Vector3 Separation()
     {
         Profiler.BeginSample("Separation");
-
         Vector3 steering = Vector3.zero;
-        if(shipsInFormation.Count > 0)
+        if(shipsInFormation.Count > 1)
         {
             foreach (Transform ship in shipsInFormation)
             {
@@ -239,20 +243,18 @@ public class StarshipSteering : MonoBehaviour
         return steering * values.separationForceMultiplier;
     }
 
-    private Vector3 SeparationTest()
+    private Vector3 SeparationPhysics()
     {
         Profiler.BeginSample("Separation");
         Vector3 steering = Vector3.zero;
-
         float threshold = (float)Math.Sqrt(values.thresholdSqr);
-
-        if (shipsInFormation.Count > 0)
+        if (shipsInFormation.Count > 1)
         {
-            //allocates memory
-            Collider[] hits = Physics.OverlapSphere(transform.position, threshold, (1 << layer));
-            foreach (Collider ship in hits)
+            //Collider[] hits = Physics.OverlapSphere(transform.position, threshold, (1 << layer));//allocates memory
+            Physics.OverlapSphereNonAlloc(transform.position, threshold, collidersBuffer, (1 << layer));
+            foreach (Collider ship in collidersBuffer)
             {
-                if(shipsInFormation.Contains(ship.transform))
+                if(ship && shipsInFormation.Contains(ship.transform))
                 {
                     Vector3 direction = ship.transform.position - transform.position;
                     float distanceSqr = direction.sqrMagnitude;
@@ -270,7 +272,7 @@ public class StarshipSteering : MonoBehaviour
         return steering * values.separationForceMultiplier;
     }
 
-    private Vector3 Cohesion()
+    private Vector3 Cohesion()//sprawia ze statki lecą do celu po łuku
     {
         Profiler.BeginSample("Cohesion");
         Vector3 steering = Vector3.zero;
@@ -292,9 +294,12 @@ public class StarshipSteering : MonoBehaviour
             steering.Normalize();
             steering *= values.maxCohesionForce;
         }*/
-        steering = formationHelper.GetCenterOfMass() - transform.position;
-        steering.Normalize();
-        steering *= values.maxCohesionForce;
+        if(shipsInFormation.Count > 1)
+        {
+            steering = formationHelper.GetCenterOfMass() - transform.position;
+            steering.Normalize();
+            steering *= values.maxCohesionForce;
+        }      
         Profiler.EndSample();
         return steering * values.cohesionForceMultiplier;
     }
@@ -303,7 +308,6 @@ public class StarshipSteering : MonoBehaviour
     {
         Profiler.BeginSample("Alignment");
         Vector3 steering = Vector3.zero;
-
         /*int count = 0;
         foreach (Transform ship in shipsInFormation)
         {
@@ -320,13 +324,15 @@ public class StarshipSteering : MonoBehaviour
             if (steering.magnitude > values.maxAlingmentForce)
                 steering = steering.normalized * values.maxAlingmentForce;
         }*/
+        if (shipsInFormation.Count > 1)
+        {
+            steering = formationHelper.GetAverageVelocity();
+            if (steering.magnitude > values.maxAlingmentForce)
+                steering = steering.normalized * values.maxAlingmentForce;
 
-        steering = formationHelper.GetAverageVelocity();
-        if (steering.magnitude > values.maxAlingmentForce)
-            steering = steering.normalized * values.maxAlingmentForce;
-
-        if (distToTarget < values.slowingRadius)
-            steering *= distToTarget / values.slowingRadius;
+            if (distToTarget < (values.slowingRadius + values.distanceToStop))
+                steering *= distToTarget / (values.slowingRadius + values.distanceToStop);
+        }            
         Profiler.EndSample();
         return steering * values.alignmentMultiplier;
     }
@@ -335,23 +341,23 @@ public class StarshipSteering : MonoBehaviour
     private Vector3 CollisionAvoidance()//maybe use calculatedVelocity instead of velocity
     {
         Profiler.BeginSample("CollisionAvoidance");
-        //RaycastHit hit;
         Vector3 avoidanceForce = Vector3.zero;
         Vector3 ahead = transform.position + (starshipRigidbody.velocity.normalized * (values.sphereCastDistance + values.sphereCastRadius));
-        //RaycastHit[] hits = Physics.SphereCastAll(transform.position, sphereCastRadius, rigidbody.velocity.normalized, sphereCastDistance, (1 << 8) | (1 << 10));
-        //if(hits.Length > 0)
-        //if (Physics.SphereCast(transform.position, sphereCastRadius, rigidbody.velocity.normalized, out hit, sphereCastDistance, (1 << 8) | (1 << 10)))
-        //if (rigidbody.SweepTest(rigidbody.velocity.normalized, out hit, sphereCastDistance))      
-        //if (Physics.SphereCast(transform.position - (transform.forward * sphereCastRadius), sphereCastRadius, rigidbody.velocity.normalized, out hit, sphereCastDistance, (1 << 8) | (1 << 10)))
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position - (transform.forward * values.sphereCastRadius), values.sphereCastRadius, starshipRigidbody.velocity.normalized, values.sphereCastDistance, (1 << 8) | (1 << 10));
-        if (hits.Length > 0)
+
+        /*RaycastHit[] hits = Physics.SphereCastAll(transform.position - (transform.forward * values.sphereCastRadius),
+            values.sphereCastRadius, starshipRigidbody.velocity.normalized, values.sphereCastDistance, (1 << 8) | (1 << 10));*/
+
+        int count = Physics.SphereCastNonAlloc(transform.position - (transform.forward * values.sphereCastRadius), 
+            values.sphereCastRadius, starshipRigidbody.velocity.normalized, hitsBuffer, values.sphereCastDistance, (1 << 8) | (1 << 10));
+
+        if (hitsBuffer.Length > 0)
         {
-            foreach(RaycastHit hit in hits)
+            for(int i = 0; i < count; i++)
             {
-                if (hit.transform != transform)
-                    if (collideWithFormationUnits || !shipsInFormation.Contains(hit.transform))//this contains is quite costly
+                if (hitsBuffer[i].transform != transform)
+                    if (collideWithFormationUnits || !shipsInFormation.Contains(hitsBuffer[i].transform))//this contains is quite costly
                     {
-                        avoidanceForce = ahead - hit.transform.position;
+                        avoidanceForce = ahead - hitsBuffer[i].transform.position;
                         avoidanceForce = Vector3.Normalize(avoidanceForce) * values.maxAvoidForce;
                         if (avoidanceForce.y > 0)
                             avoidanceForce.y = 1;
@@ -363,8 +369,7 @@ public class StarshipSteering : MonoBehaviour
                         //avoidanceForce.z = 0;
                         break;
                     }
-            }
-            
+            }            
         }
         avoidanceForce = avoidanceForce / starshipRigidbody.mass;
         if (avoidanceForce.sqrMagnitude < values.moveEpsilon * values.moveEpsilon)
@@ -485,7 +490,8 @@ public class StarshipSteering : MonoBehaviour
     {
         currentMoveBehavior = new MoveBehavior[5];
         currentMoveBehavior[0] = new MoveBehavior(SeekPursuitAuto);
-        currentMoveBehavior[1] = new MoveBehavior(SeparationTest);
+        //currentMoveBehavior[1] = new MoveBehavior(Separation);
+        currentMoveBehavior[1] = new MoveBehavior(SeparationPhysics);
         currentMoveBehavior[2] = new MoveBehavior(Cohesion);
         currentMoveBehavior[3] = new MoveBehavior(Alignment);
         currentMoveBehavior[4] = new MoveBehavior(CollisionAvoidance);
@@ -541,7 +547,7 @@ public class StarshipSteering : MonoBehaviour
         TransitiveBumping(collision);
     }
 
-    public void OnCollisionStay(Collision collision)//test this|| performance !!!
+    public void OnCollisionStay(Collision collision)//bad performance
     {
         TransitiveBumping(collision);
     }

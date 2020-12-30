@@ -8,6 +8,7 @@ public class FormationHelper// add set move set attack
 
     //maybe change to hashset
     public List<Transform> shipsInFormation;//change to private later, with setter and getter
+    public HashSet<Transform> shipsHashSet;//for optimization
     public Vector3 centerOfMass;
     public Vector3 averageVelocity;
     private bool massCacheIsValid;
@@ -16,6 +17,7 @@ public class FormationHelper// add set move set attack
     public FormationHelper()
     {
         shipsInFormation = new List<Transform>();
+        shipsHashSet = new HashSet<Transform>();
         massCacheIsValid = false;
         velocityCacheIsValid = false;
 
@@ -27,6 +29,7 @@ public class FormationHelper// add set move set attack
     public FormationHelper(List<Transform> _shipsInFormation)
     {
         shipsInFormation = _shipsInFormation;
+        shipsHashSet = new HashSet<Transform>(shipsInFormation);
         massCacheIsValid = false;
         velocityCacheIsValid = false;
 
@@ -40,15 +43,22 @@ public class FormationHelper// add set move set attack
         formationHelpers.Remove(this);
     }
 
+    public void RefreshHashSet()
+    {
+        shipsHashSet = new HashSet<Transform>(shipsInFormation);
+    }
+
     public List<Transform> GetShipsInFormationRemoveNull()
     {
         shipsInFormation.RemoveAll(item => item == null);
+        shipsHashSet.RemoveWhere(item => item == null);
         return shipsInFormation;
     }
 
     public void RemoveShip(Transform ship)
     {
         shipsInFormation.Remove(ship);
+        shipsHashSet.Remove(ship);
     }
 
     public int GetLength()

@@ -9,6 +9,21 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: f872f62ae5ca94c4f8cc67be6d5af63a
+  - enabled: 1
+    path: Assets/Scenes/BattleScene.unity
+    guid: 362663b931851fd45aa2d9b38a2d7c36
+  - enabled: 1
     path: Assets/Scenes/OverloadTest.unity
     guid: 2b924e0d1cff37241ba65191247fdb90
+  - enabled: 1
+    path: Assets/Tests/TestScenes/StarshipAITestScene.unity
+    guid: 4a60118744e343345bd9a3a93985d653
+  - enabled: 1
+    path: Assets/Tests/TestScenes/PoolingTestScene.unity
+    guid: 47c73dd40729d14418b77eaf1a00f9e0
+  - enabled: 1
+    path: Assets/Tests/TestScenes/SelectionManagerTestScene.unity
+    guid: 9aa420a434dc6da4f910d7ec3290fad7
   m_configObjects: {}

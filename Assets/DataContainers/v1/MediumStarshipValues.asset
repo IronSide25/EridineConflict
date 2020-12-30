@@ -40,7 +40,7 @@ MonoBehaviour:
   maxSeparationForce: 7.5
   viewAngle: 60
   maxCohesionForce: 1
-  cohesionForceMultiplier: 0.5
+  cohesionForceMultiplier: 0.1
   alignDistance: 5
   alignmentMultiplier: 0.5
   maxAlingmentForce: 25

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GridSpawner : MonoBehaviour
 {
-    public GameObject block1;
-    public int worldWidth = 10;
-    public int worldHeight = 10;
-    public float separation = 2;
+    public GameObject prefab;
+    public int gridWidth = 10;
+    public int gridHeight = 10;
+    public float gridSeparation = 2;
     private List<Transform> ships;
     private FormationHelper formationHelper;
 
@@ -20,12 +20,18 @@ public class GridSpawner : MonoBehaviour
     void Start()
     {
         ships = new List<Transform>();
-        for (int x = 0; x < worldWidth; x++)
+        for (int x = 0; x < gridWidth; x++)
         {
-            for (int z = 0; z < worldHeight; z++)
+            for (int z = 0; z < gridHeight; z++)
             {
-                Transform block = Instantiate(block1, new Vector3(transform.position.x + (x * separation), 0, transform.position.z + (z * separation)), block1.transform.rotation).transform;
-                ships.Add(block);
+                /*Transform spawnedObject = Instantiate(prefab, 
+                    new Vector3(transform.position.x + (x * gridSeparation), transform.position.y, transform.position.z + (z * gridSeparation)), 
+                    transform.rotation).transform;*/
+
+                Transform spawnedObject = Instantiate(prefab,
+                    new Vector3(transform.position.x , transform.position.y + (x * gridSeparation), transform.position.z + (z * gridSeparation)),
+                    transform.rotation).transform;
+                ships.Add(spawnedObject);
             }
         }
 

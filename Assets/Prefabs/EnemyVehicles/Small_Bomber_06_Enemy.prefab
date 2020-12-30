@@ -10769,13 +10769,14 @@ MonoBehaviour:
   calculatePrediction: 0
   allowStopOnDistance: 0
   allowTransitiveBumping: 0
-  values: {fileID: 11400000, guid: 3c45e815159b331499e5db6969f0e83f, type: 2}
+  values: {fileID: 11400000, guid: 1cce2d8e0e3233c41a40b20a2b2c0202, type: 2}
   projectileSpeed: 100
   collideWithFormationUnits: 0
-  shipsInFormation: []
   calculatedVelocity: {x: 0, y: 0, z: 0}
   desiredRotation: {x: 0, y: 0, z: 0, w: 0}
   evade: 0
+  maxRaycastBufferCount: 15
+  maxCollisionBufferCount: 15
 --- !u!114 &3907493566813407217
 MonoBehaviour:
   m_ObjectHideFlags: 0

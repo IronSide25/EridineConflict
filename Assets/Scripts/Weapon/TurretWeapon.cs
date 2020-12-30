@@ -32,7 +32,6 @@ public class TurretWeapon : MonoBehaviour, IWeapon
 
         isWeaponAlive = true;
     }
-    public bool info;
     // Update is called once per frame
     void Update()
     {
@@ -59,7 +58,6 @@ public class TurretWeapon : MonoBehaviour, IWeapon
 
                 if (!(turretBase.localRotation.eulerAngles.x > maxRotationX && turretBase.localRotation.eulerAngles.x < 90))
                 {
-                    info = true;
                     if (Time.time - lastShootTime > shootingSpeed && Quaternion.Angle(turretBase.rotation, lookRotation) < 5)//make variable out of this
                     {
                         lastShootTime = Time.time;
@@ -69,7 +67,6 @@ public class TurretWeapon : MonoBehaviour, IWeapon
                 }
                 else
                 {
-                    info = false;
                     turretBase.localRotation = safeRotation;
                 }
             }            

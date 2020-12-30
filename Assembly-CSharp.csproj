@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\StarshipDataScriptableObject.cs" />
     <Compile Include="Assets\Scripts\UI\DetectRightClick.cs" />
     <Compile Include="Assets\Scripts\UI\DisableScript.cs" />
+    <Compile Include="Assets\Scripts\UI\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\UI\Outline.cs" />
     <Compile Include="Assets\Scripts\UI\SelectionManager.cs" />
     <Compile Include="Assets\Scripts\UI\UILineRenderer.cs" />

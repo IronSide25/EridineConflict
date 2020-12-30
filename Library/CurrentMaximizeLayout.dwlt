@@ -21,10 +21,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 677, y: 342}
-  m_MaxSize: {x: 12002, y: 8042}
+  m_MinSize: {x: 504, y: 342}
+  m_MaxSize: {x: 12004, y: 8042}
   vertical: 0
-  controlID: 5001
+  controlID: 842
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -46,9 +46,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 345
-    y: 19
-    width: 1045
+    x: 366
+    y: 73
+    width: 1115
     height: 655
   m_ViewDataDictionary: {fileID: 0}
   m_SerializedViewNames: []
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1045, y: 634}
+  m_TargetSize: {x: 1115, y: 634}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -74,8 +74,8 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -522.5
-    m_HBaseRangeMax: 522.5
+    m_HBaseRangeMin: -557.5
+    m_HBaseRangeMax: 557.5
     m_VBaseRangeMin: -317
     m_VBaseRangeMax: 317
     m_HAllowExceedBaseRangeMin: 1
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -95,23 +95,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1045
+      width: 1115
       height: 634
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 522.5, y: 317}
+    m_Translation: {x: 557.5, y: 317}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -522.5
+      x: -557.5
       y: -317
-      width: 1045
+      width: 1115
       height: 634
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 1045, y: 655}
+  m_LastWindowPixelSize: {x: 1115, y: 655}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -136,12 +136,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1391
+    width: 1483
     height: 947
-  m_MinSize: {x: 402, y: 342}
-  m_MaxSize: {x: 8002, y: 8042}
+  m_MinSize: {x: 403, y: 342}
+  m_MaxSize: {x: 8003, y: 8042}
   vertical: 1
-  controlID: 4957
+  controlID: 843
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -161,12 +161,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1391
+    width: 1483
     height: 676
-  m_MinSize: {x: 402, y: 221}
-  m_MaxSize: {x: 8002, y: 4021}
+  m_MinSize: {x: 403, y: 221}
+  m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 4791
+  controlID: 844
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -184,7 +184,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 344
+    width: 366
     height: 676
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
@@ -216,7 +216,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 343
+    width: 365
     height: 655
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
@@ -224,7 +224,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6afbffff
+      m_ExpandedIDs: c4e1fffface7ffff0ce8ffff58e9ffff78f1ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -263,9 +263,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 344
+    x: 366
     y: 0
-    width: 1047
+    width: 1117
     height: 676
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -278,7 +278,7 @@ MonoBehaviour:
   - {fileID: 12}
   - {fileID: 2}
   m_Selected: 5
-  m_LastSelected: 1
+  m_LastSelected: 0
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -300,9 +300,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 344
+    x: 323
     y: 73
-    width: 1045
+    width: 976
     height: 655
   m_ViewDataDictionary: {fileID: 0}
   m_ShowContextualTools: 0
@@ -310,14 +310,14 @@ MonoBehaviour:
   m_Gizmos: 1
   m_SceneIsLit: 0
   m_SceneLighting: 1
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 51.0832, y: -0.000000059604645, z: -30.733196}
+    m_Target: {x: 62.868004, y: 209.56941, z: -0.53869396}
     speed: 2
-    m_Value: {x: 51.0832, y: -0.000000059604645, z: -30.733196}
+    m_Value: {x: 62.868004, y: 209.56941, z: -0.53869396}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -367,9 +367,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 60.829674
+    m_Target: 45.466694
     speed: 2
-    m_Value: 60.829674
+    m_Value: 45.466694
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -387,8 +387,8 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LastSceneViewOrtho: 1
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+  m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
   m_SceneVisActive: 0
@@ -415,13 +415,13 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 344
+    x: 323
     y: 73
-    width: 1045
+    width: 976
     height: 655
   m_ViewDataDictionary: {fileID: 0}
   m_VertSplit:
-    ID: 4808
+    ID: 593
     splitterInitialOffset: 437
     currentActiveSplitter: -1
     realSizes: 9f010000db000000
@@ -464,9 +464,9 @@ MonoBehaviour:
           m_Serialized: 1
           m_TreeViewState:
             scrollPos: {x: 0, y: 0}
-            m_SelectedIDs: d3000000
-            m_LastClickedID: 211
-            m_ExpandedIDs: 0100000002000000280000003100000032000000360000004100000042000000530000006e0000007400000075000000760000007700000078000000790000007a00000080000000ce000000cf000000d0000000d1000000d2000000da000000e5000000ef000000bd010000c7010000
+            m_SelectedIDs: d6000000
+            m_LastClickedID: 214
+            m_ExpandedIDs: 01000000020000002800000031000000350000003600000041000000420000006e0000007400000075000000770000007800000079000000ce000000cf000000d0000000d1000000da000000dc000000e5000000e6000000ef000000f5000000210100005d010000bd010000c7010000
             m_RenameOverlay:
               m_UserAcceptedRename: 0
               m_Name: 
@@ -945,10 +945,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 380
+    x: 323
     y: 73
-    width: 1157
-    height: 707
+    width: 976
+    height: 655
   m_ViewDataDictionary: {fileID: 0}
   m_ViewTransforms:
     m_KeySerializationHelper:
@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -101966
+  m_LastSelectedObjectID: 39560
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1064,7 +1064,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 676
-    width: 1391
+    width: 1483
     height: 271
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
@@ -1098,7 +1098,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 749
-    width: 1390
+    width: 1300
     height: 250
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
@@ -1114,20 +1114,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/PlayerVehicles
+    - Assets/Tests/PlayModeTests
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/PlayerVehicles
+  - Assets/Tests/PlayModeTests
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "D:\\DATA\\Programming\\IN\u017BYNIERKA\\NewEridineConflict\\EridineConflict"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 42}
-    m_SelectedIDs: 74420000
-    m_LastClickedID: 17012
-    m_ExpandedIDs: 00000000b23a000026410000284100002a4100002c4100002e41000030410000324100004842000000ca9a3b
+    scrollPos: {x: 0, y: 122}
+    m_SelectedIDs: c4450000
+    m_LastClickedID: 17860
+    m_ExpandedIDs: 000000002e3e00006e44000070440000724400007444000076440000784400007a4400009e45000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1155,7 +1155,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b23a000026410000284100002a4100002c4100002e410000304100003241000000ca9a3b
+    m_ExpandedIDs: 000000002e3e00006e44000070440000724400007444000076440000784400007a44000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1180,8 +1180,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: f43e0000
-    m_LastClickedInstanceID: 16116
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c623000092f70000c254010066cb010022390100c6a301008255010006120200cc0d1200cad301004c3c1100587f01008a3a1100c88001004ebe6800aab4000032e20000609f010002e3000086d100001c260200b22a110076f201004e640100d6510100bab401007af20100da51010004780100669001001e380b00343a0b002e320200cca4010074f95a00603e87009ec30000f62201009226020016500100a8ed00005c9201004aa30000ca0a01005a32020010d701009c317500e6f20100c6c30000243c0b00eaf20100a23202000cf301003ccd0000ac9f00009a330100fe080200fa120200a0920100beed0000d045010004f80000a4920100c6c601003e5d0100ba9f0000b2330100e81d0b00a6f30100586d010018ba0100e09f0000b6050200c23602001e930100ac27020064ed090012a6000076110200445a00001a530100ec5600007257000048560000486c00001c5800000a5800002e58000006580000865a00001a560000245600001c56000000000000
     m_RenameOverlay:
@@ -1234,7 +1234,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 749
-    width: 1390
+    width: 1482
     height: 250
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &16
@@ -1296,26 +1296,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: InspectorWindow
+  m_Name: TestRunnerWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1391
+    x: 1483
     y: 0
-    width: 529
+    width: 437
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 18}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 23}
   m_Panes:
   - {fileID: 18}
   - {fileID: 19}
   - {fileID: 20}
   - {fileID: 21}
   - {fileID: 22}
-  m_Selected: 0
-  m_LastSelected: 4
+  - {fileID: 23}
+  m_Selected: 5
+  m_LastSelected: 0
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1337,9 +1338,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1391
+    x: 1301
     y: 73
-    width: 528
+    width: 618
     height: 926
   m_ViewDataDictionary: {fileID: 0}
   m_OpenAddComponentMenu: 0
@@ -1375,9 +1376,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1275
+    x: 1569
     y: 73
-    width: 644
+    width: 350
     height: 926
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &20
@@ -1401,9 +1402,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1275
+    x: 1301
     y: 73
-    width: 644
+    width: 618
     height: 926
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &21
@@ -1453,12 +1454,269 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1391
+    x: 1301
     y: 73
-    width: 528
+    width: 618
     height: 926
   m_ViewDataDictionary: {fileID: 0}
   m_PosLeft: {x: 0, y: 0}
   m_PosRight: {x: 0, y: 0}
   m_Scope: 1
   m_SplitterFlex: 0.2
+--- !u!114 &23
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13401, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Test Runner
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1483
+    y: 73
+    width: 436
+    height: 926
+  m_ViewDataDictionary: {fileID: 0}
+  m_Spl:
+    ID: 870
+    splitterInitialOffset: 0
+    currentActiveSplitter: -1
+    realSizes: 82020000d6000000
+    relativeSizes:
+    - 0.75
+    - 0.25
+    minSizes: 2000000020000000
+    maxSizes: 0000000000000000
+    lastTotalSize: 856
+    splitSize: 6
+    xOffset: 0
+  m_TestTypeToolbarIndex: 0
+  m_PlayModeTestListGUI:
+    m_Window: {fileID: 23}
+    newResultList:
+    - id: 1003
+      uniqueId: '[EridineConflict][suite]'
+      name: EridineConflict
+      fullName: EridineConflict
+      resultStatus: 0
+      duration: 0.1564651
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 
+      parentUniqueId: 
+    - id: 1004
+      uniqueId: '[PlayModeTests.dll][suite]'
+      name: PlayModeTests.dll
+      fullName: "D:/DATA/Programming/IN\u017BYNIERKA/NewEridineConflict/EridineConflict/Library/ScriptAssemblies/PlayModeTests.dll"
+      resultStatus: 0
+      duration: 0.1244528
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1000
+      parentUniqueId: '[EridineConflict][suite]'
+    - id: 1005
+      uniqueId: PlayModeTests.dll/[PlayModeTests][Tests][suite]
+      name: Tests
+      fullName: Tests
+      resultStatus: 0
+      duration: 0.1131837
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1004
+      parentUniqueId: '[PlayModeTests.dll][suite]'
+    - id: 1001
+      uniqueId: PlayModeTests.dll/Tests/[PlayModeTests][Tests.TestSuite][suite]
+      name: TestSuite
+      fullName: Tests.TestSuite
+      resultStatus: 0
+      duration: 0.1012045
+      messages: One or more child tests had errors
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1005
+      parentUniqueId: PlayModeTests.dll/[PlayModeTests][Tests][suite]
+    - id: 1004
+      uniqueId: PlayModeTests.dll/Tests/TestSuite/[PlayModeTests][Tests.TestSuite.Test1]
+      name: Test1
+      fullName: Tests.TestSuite.Test1
+      resultStatus: 0
+      duration: 0.0382259
+      messages: 'System.ArgumentException : The Object you want to instantiate is
+        null.'
+      output: 
+      stacktrace: "  at UnityEngine.Object.CheckNullArgument (System.Object arg,
+        System.String message) [0x00009] in <d1422b3fc93746018c92eda852993b93>:0
+        \r\n  at UnityEngine.Object.Instantiate[T] (T original) [0x00001] in <d1422b3fc93746018c92eda852993b93>:0
+        \r\n  at Tests.TestSuite+<Test1>d__2.MoveNext () [0x00023] in D:\\DATA\\Programming\\IN\u017BYNIERKA\\NewEridineConflict\\EridineConflict\\Assets\\Tests\\PlayModeTests\\TestSuite.cs:31
+        \r\n  at UnityEngine.TestTools.TestEnumerator+<Execute>d__5.MoveNext () [0x0004c]
+        in D:\\DATA\\Programming\\IN\u017BYNIERKA\\NewEridineConflict\\EridineConflict\\Library\\PackageCache\\com.unity.test-framework@1.1.14\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:31 "
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: PlayModeTests.dll/Tests/[PlayModeTests][Tests.TestSuite][suite]
+    - id: 1002
+      uniqueId: PlayModeTests.dll/Tests/TestSuite/[PlayModeTests][Tests.TestSuite.TestSuiteSimplePasses]
+      name: TestSuiteSimplePasses
+      fullName: Tests.TestSuite.TestSuiteSimplePasses
+      resultStatus: 0
+      duration: 0.0033792
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: PlayModeTests.dll/Tests/[PlayModeTests][Tests.TestSuite][suite]
+    - id: 1003
+      uniqueId: PlayModeTests.dll/Tests/TestSuite/[PlayModeTests][Tests.TestSuite.TestSuiteWithEnumeratorPasses]
+      name: TestSuiteWithEnumeratorPasses
+      fullName: Tests.TestSuite.TestSuiteWithEnumeratorPasses
+      resultStatus: 0
+      duration: 0.0177511
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: PlayModeTests.dll/Tests/[PlayModeTests][Tests.TestSuite][suite]
+    m_ResultText: "Test1 (0,038s)\n---\nSystem.ArgumentException : The Object you
+      want to instantiate is null.\n---\nat UnityEngine.Object.CheckNullArgument
+      (System.Object arg, System.String message) [0x00009] in <d1422b3fc93746018c92eda852993b93>:0
+      \r\n  at UnityEngine.Object.Instantiate[T] (T original) [0x00001] in <d1422b3fc93746018c92eda852993b93>:0
+      \r\n  at Tests.TestSuite+<Test1>d__2.MoveNext () [0x00023] in D:\\DATA\\Programming\\IN\u017BYNIERKA\\NewEridineConflict\\EridineConflict\\Assets\\Tests\\PlayModeTests\\TestSuite.cs:31
+      \r\n  at UnityEngine.TestTools.TestEnumerator+<Execute>d__5.MoveNext () [0x0004c]
+      in D:\\DATA\\Programming\\IN\u017BYNIERKA\\NewEridineConflict\\EridineConflict\\Library\\PackageCache\\com.unity.test-framework@1.1.14\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:31"
+    m_ResultStacktrace: "  at UnityEngine.Object.CheckNullArgument (System.Object
+      arg, System.String message) [0x00009] in <d1422b3fc93746018c92eda852993b93>:0
+      \r\n  at UnityEngine.Object.Instantiate[T] (T original) [0x00001] in <d1422b3fc93746018c92eda852993b93>:0
+      \r\n  at Tests.TestSuite+<Test1>d__2.MoveNext () [0x00023] in D:\\DATA\\Programming\\IN\u017BYNIERKA\\NewEridineConflict\\EridineConflict\\Assets\\Tests\\PlayModeTests\\TestSuite.cs:31
+      \r\n  at UnityEngine.TestTools.TestEnumerator+<Execute>d__5.MoveNext () [0x0004c]
+      in D:\\DATA\\Programming\\IN\u017BYNIERKA\\NewEridineConflict\\EridineConflict\\Library\\PackageCache\\com.unity.test-framework@1.1.14\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:31 "
+    m_TestListState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 503abe6a
+      m_LastClickedID: 1790851664
+      m_ExpandedIDs: ae332b9144b3fb9cc0b46ace54ace930ffffff7f
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    m_TestRunnerUIFilter:
+      PassedHidden: 0
+      FailedHidden: 0
+      NotRunHidden: 0
+      m_SearchString: 
+      selectedCategoryMask: 0
+      availableCategories:
+      - Uncategorized
+  m_EditModeTestListGUI:
+    m_Window: {fileID: 23}
+    newResultList:
+    - id: 1000
+      uniqueId: '[EridineConflict][suite]'
+      name: EridineConflict
+      fullName: EridineConflict
+      resultStatus: 1
+      duration: 0.0777834
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 
+      parentUniqueId: 
+    m_ResultText: TestSuite (0,000s)
+    m_ResultStacktrace: 
+    m_TestListState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: aac44b39
+      m_LastClickedID: 961266858
+      m_ExpandedIDs: f389ac9be557abf754ace930aac44b398359db41ffffff7f
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    m_TestRunnerUIFilter:
+      PassedHidden: 0
+      FailedHidden: 0
+      NotRunHidden: 0
+      m_SearchString: 
+      selectedCategoryMask: 0
+      availableCategories:
+      - Uncategorized

@@ -14,7 +14,7 @@ public class DepthCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         Vector3 translation = mainCamera.position - mainCameraLastPos;
         transform. position += translation / 10;

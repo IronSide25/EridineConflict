@@ -5,11 +5,11 @@ using UnityEngine;
 public class PoolingManager : MonoBehaviour
 {
     public static PoolingManager instance;
-    public List<GameObject> gameobjectList;
+    private List<GameObject> gameobjectList;
     public GameObject prefab;
 
     public int prealocateCount;
-    // Start is called before the first frame update
+
     void Awake()
     {
         instance = this;

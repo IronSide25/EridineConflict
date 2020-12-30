@@ -120,7 +120,7 @@ public class StarshipAI : MonoBehaviour
             if(Time.time - lastSphereCast > timeBetweenSphereCast && (unitBehavior == UnitBehavior.Aggresive || aMove))
             {
                 lastSphereCast = Time.time;
-                Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackDistance, isPlayer ? 1 << 10 : 1 << 8);
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackDistance, isPlayer ? 1 << 10 : 1 << 8);//spikes in profiler
                 if (hitColliders.Length > 0)
                 {
                     Transform enemyTransform = hitColliders[Random.Range(0, hitColliders.Length)].attachedRigidbody.transform;
@@ -274,13 +274,16 @@ public class StarshipAI : MonoBehaviour
 
     public void EndAttack()
     {
-        foreach (IWeapon weapon in weapons)
-            weapon.Deactivate();
-        isAttacking = false;
-        starshipSteering.SetDestinationFormation(lastTargetPos, starshipSteering.formationHelper);
-        starshipSteering.allowStopOnDistance = true;
-        starshipSteering.allowTransitiveBumping = true;
-        starshipSteering.collideWithFormationUnits = false;
+        if(isAttacking)
+        {
+            foreach (IWeapon weapon in weapons)
+                weapon.Deactivate();
+            isAttacking = false;
+            starshipSteering.SetDestinationFormation(lastTargetPos, starshipSteering.formationHelper);
+            starshipSteering.allowStopOnDistance = true;
+            starshipSteering.allowTransitiveBumping = true;
+            starshipSteering.collideWithFormationUnits = false;
+        }       
     }
 
     public void SetMove(Vector3 _target, FormationHelper _formationHelper)

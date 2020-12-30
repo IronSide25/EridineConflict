@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84377ed4c113121459951dad98a98cb3, type: 3}
+  m_Name: SmallStarshipValues 1
+  m_EditorClassIdentifier: 
+  maxSpeed: 20
+  accelerationRate: 10
+  noMovingMaxAngularAcc: 0.25
+  moveEpsilon: 0.5
+  distanceToStop: 0.5
+  slowingRadius: 10
+  maxSeekForce: 20
+  seekMult: 1
+  limitSeekRotation: 1
+  allowedSeekRotation: 3.14
+  maxPrediction: 100
+  maxPursuitForce: 20
+  pursuitMult: 1
+  projectileSpeed: 100
+  limitPursuitRotation: 1
+  allowedPursuitRotation: 3.14
+  maxAngularAcc: 12
+  maxAvoidForce: 100
+  sphereCastRadius: 1
+  sphereCastDistance: 10
+  collisionAvoidanceMult: 1
+  collideWithFormationUnits: 0
+  thresholdSqr: 16
+  decayCoefficient: -5
+  separationForceMultiplier: 0.75
+  maxSeparationForce: 5
+  viewAngle: 60
+  maxCohesionForce: 1
+  cohesionForceMultiplier: 0.25
+  alignDistance: 5
+  alignmentMultiplier: 1
+  maxAlingmentForce: 25

@@ -11,13 +11,13 @@ public class HealthManager : MonoBehaviour
     public static event Action<Transform> OnStarshipAdded = delegate { };
     public static event Action<Transform> OnStarshipRemoved = delegate { };
 
+    public event Action<float> OnHealthChanged = delegate { };
+
     public float maxHealth;
     public float armor = 0;
-    float currentHealth;
+    public float currentHealth;
     public float explosionScale = 0.2f;
-    public Vector3 healthBarScale;
-
-    public event Action<float> OnHealthChanged = delegate { };
+    public Vector3 healthBarScale;   
 
     private void Start()
     {

@@ -10,37 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84377ed4c113121459951dad98a98cb3, type: 3}
-  m_Name: SmallStarshipValues
+  m_Name: MediumStarshipValues 1
   m_EditorClassIdentifier: 
-  maxSpeed: 20
-  accelerationRate: 10
+  maxSpeed: 10
+  accelerationRate: 5
   noMovingMaxAngularAcc: 0.25
   moveEpsilon: 0.5
   distanceToStop: 2
   slowingRadius: 10
-  maxSeekForce: 20
+  maxSeekForce: 10
   seekMult: 1
   limitSeekRotation: 1
-  allowedSeekRotation: 3.14
+  allowedSeekRotation: 1.5708
   maxPrediction: 100
-  maxPursuitForce: 20
+  maxPursuitForce: 10
   pursuitMult: 1
   projectileSpeed: 100
   limitPursuitRotation: 1
-  allowedPursuitRotation: 3.14
-  maxAngularAcc: 12
-  maxAvoidForce: 100
+  allowedPursuitRotation: 1.5708
+  maxAngularAcc: 6
+  maxAvoidForce: 50
   sphereCastRadius: 1
   sphereCastDistance: 10
   collisionAvoidanceMult: 1
   collideWithFormationUnits: 0
   thresholdSqr: 25
   decayCoefficient: -5
-  separationForceMultiplier: 2
-  maxSeparationForce: 15
+  separationForceMultiplier: 1
+  maxSeparationForce: 7.5
   viewAngle: 60
   maxCohesionForce: 1
-  cohesionForceMultiplier: 1
-  alignDistance: 55555
-  alignmentMultiplier: 1
-  maxAlingmentForce: 50
+  cohesionForceMultiplier: 0.1
+  alignDistance: 5
+  alignmentMultiplier: 0.5
+  maxAlingmentForce: 25
