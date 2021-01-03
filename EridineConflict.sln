@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameAssembly", "GameAssembl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayModeTests", "PlayModeTests.csproj", "{EF6EBB3C-DD73-6ABE-D5CA-72365ED403A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{878F8C02-5548-C5ED-8E03-F19CF362F428}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{2A1DC14B-8211-6945-5488-A7B69BB66D60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{EF6EBB3C-DD73-6ABE-D5CA-72365ED403A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF6EBB3C-DD73-6ABE-D5CA-72365ED403A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF6EBB3C-DD73-6ABE-D5CA-72365ED403A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{878F8C02-5548-C5ED-8E03-F19CF362F428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{878F8C02-5548-C5ED-8E03-F19CF362F428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{878F8C02-5548-C5ED-8E03-F19CF362F428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{878F8C02-5548-C5ED-8E03-F19CF362F428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A1DC14B-8211-6945-5488-A7B69BB66D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A1DC14B-8211-6945-5488-A7B69BB66D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A1DC14B-8211-6945-5488-A7B69BB66D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A1DC14B-8211-6945-5488-A7B69BB66D60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

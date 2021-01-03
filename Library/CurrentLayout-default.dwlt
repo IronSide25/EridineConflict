@@ -112,10 +112,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 679, y: 492}
+  m_MinSize: {x: 678, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 127
+  controlID: 619
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,12 +135,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1544
+    width: 1310
     height: 947
-  m_MinSize: {x: 403, y: 492}
+  m_MinSize: {x: 402, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 128
+  controlID: 221
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -160,12 +160,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1544
-    height: 676
-  m_MinSize: {x: 403, y: 221}
-  m_MaxSize: {x: 8003, y: 4021}
+    width: 1310
+    height: 671
+  m_MinSize: {x: 402, y: 221}
+  m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
-  controlID: 129
+  controlID: 222
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -183,10 +183,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 307
-    height: 676
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+    width: 263
+    height: 671
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -207,22 +207,22 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 307
+    x: 263
     y: 0
-    width: 1237
-    height: 676
+    width: 1047
+    height: 671
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
-  - {fileID: 15}
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 18}
+  - {fileID: 15}
   - {fileID: 12}
   m_Selected: 0
-  m_LastSelected: 5
+  m_LastSelected: 4
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -239,9 +239,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 676
-    width: 1544
-    height: 271
+    y: 671
+    width: 1310
+    height: 276
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 19}
@@ -266,9 +266,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1544
+    x: 1310
     y: 0
-    width: 376
+    width: 610
     height: 947
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
@@ -279,9 +279,8 @@ MonoBehaviour:
   - {fileID: 24}
   - {fileID: 25}
   - {fileID: 26}
-  - {fileID: 27}
   m_Selected: 0
-  m_LastSelected: 5
+  m_LastSelected: 4
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -303,10 +302,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 383
+    x: 263
     y: 73
-    width: 712
-    height: 655
+    width: 1045
+    height: 650
   m_ViewDataDictionary: {fileID: 0}
   m_SerializedViewNames: []
   m_SerializedViewValues: []
@@ -316,7 +315,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 712, y: 634}
+  m_TargetSize: {x: 1045, y: 629}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -324,17 +323,17 @@ MonoBehaviour:
   m_UseMipMap: 0
   m_VSyncEnabled: 0
   m_Gizmos: 0
-  m_Stats: 1
+  m_Stats: 0
   m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -356
-    m_HBaseRangeMax: 356
-    m_VBaseRangeMin: -317
-    m_VBaseRangeMax: 317
+    m_HBaseRangeMin: -522.5
+    m_HBaseRangeMax: 522.5
+    m_VBaseRangeMin: -314.5
+    m_VBaseRangeMax: 314.5
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -352,23 +351,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 712
-      height: 634
+      width: 1045
+      height: 629
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 356, y: 317}
+    m_Translation: {x: 522.5, y: 314.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -356
-      y: -317
-      width: 712
-      height: 634
+      x: -522.5
+      y: -314.5
+      width: 1045
+      height: 629
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 712, y: 655}
+  m_LastWindowPixelSize: {x: 1045, y: 650}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -397,15 +396,15 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 306
-    height: 655
+    width: 262
+    height: 650
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 06300000
       m_LastClickedID: 0
-      m_ExpandedIDs: fcd9ffff6cdaffffdaf8ffff6afbffff
+      m_ExpandedIDs: e07cfffff87cffff547fffffdc7fffffd480ffff1c82ffff9083ffffaa83ffffb083ffff8885ffffa085ffff28a3ffff74a4ffff7ac4ffff92c4ffffeec6ffff76c7ffff6ec8ffffb6c9ffffd0c9ffff18cbffff1ecbfffffcccffff72cdffffcecfffff56d0ffff4ed1ffff96d2ffffb0d2fffff8d3fffffed3ffff66d6ffffdcd6ffff38d9ffffc0d9ffffb8daffff00dcffff1adcffff62ddffff68ddffffe2dfffffdce1ffff1ce4ffff92e4ffffd6e5ffff5ee6ffff50e7ffff96e8ffff02eaffff48ebffff4cebffff7eefffffecf0ffff1cf2ffffacf2ffff0af5ffff92f5ffff8af6ffffa4f6ffffecf7fffff2f7ffff6afbffff6a880000a888000082fe00004242010062420100ac420100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -450,24 +449,24 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 307
+    x: 263
     y: 73
-    width: 1235
-    height: 655
+    width: 1045
+    height: 650
   m_ViewDataDictionary: {fileID: 0}
   m_ShowContextualTools: 0
   m_WindowGUID: f59f477fec6520c48a2471d4d96567a6
   m_Gizmos: 1
   m_SceneIsLit: 0
   m_SceneLighting: 1
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 60.2002, y: -0.000000059604645, z: 0.40913266}
+    m_Target: {x: 375.99185, y: 322.395, z: -13.441638}
     speed: 2
-    m_Value: {x: 60.2002, y: -0.000000059604645, z: 0.40913266}
+    m_Value: {x: 375.99185, y: 322.395, z: -13.441638}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -495,7 +494,7 @@ MonoBehaviour:
       m_Size: {x: 1, y: 1}
     yGrid:
       m_Fade:
-        m_Target: 1
+        m_Target: 0
         speed: 2
         m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
@@ -503,7 +502,7 @@ MonoBehaviour:
       m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
-        m_Target: 0
+        m_Target: 1
         speed: 2
         m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
@@ -513,17 +512,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0
   m_Rotation:
-    m_Target: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 97.535774
+    m_Target: 441.8209
     speed: 2
-    m_Value: 97.535774
+    m_Value: 441.8209
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1.1
     m_SpeedNormalized: 0.54773873
@@ -565,22 +564,22 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 323
+    x: -1657
     y: 73
-    width: 976
-    height: 655
+    width: 1045
+    height: 650
   m_ViewDataDictionary: {fileID: 0}
   m_VertSplit:
-    ID: 593
-    splitterInitialOffset: 437
+    ID: 370
+    splitterInitialOffset: 360
     currentActiveSplitter: -1
-    realSizes: 9f010000db000000
+    realSizes: 5101000024010000
     relativeSizes:
-    - 0.65457416
-    - 0.34542584
+    - 0.5357711
+    - 0.46422893
     minSizes: 6400000064000000
     maxSizes: 0000000000000000
-    lastTotalSize: 634
+    lastTotalSize: 629
     splitSize: 6
     xOffset: 0
   m_Recording: 1
@@ -614,9 +613,9 @@ MonoBehaviour:
           m_Serialized: 1
           m_TreeViewState:
             scrollPos: {x: 0, y: 0}
-            m_SelectedIDs: d6000000
-            m_LastClickedID: 214
-            m_ExpandedIDs: 01000000020000002800000031000000350000003600000041000000420000006e0000007400000075000000770000007800000079000000ce000000cf000000d0000000d1000000da000000dc000000e5000000e6000000ef000000f5000000210100005d010000bd010000c7010000
+            m_SelectedIDs: c4000000
+            m_LastClickedID: 196
+            m_ExpandedIDs: 010000000200000022000000250000002800000031000000340000003500000036000000410000004200000065000000680000006e0000007400000075000000770000007800000079000000c0000000c1000000c2000000c4000000c5000000c7000000c8000000ce000000cf000000d0000000d1000000d8000000dc000000e1000000e5000000e6000000ef000000f5000000210100003a010000400100005d010000bd010000c7010000
             m_RenameOverlay:
               m_UserAcceptedRename: 0
               m_Name: 
@@ -807,9 +806,9 @@ MonoBehaviour:
           m_Serialized: 1
           m_TreeViewState:
             scrollPos: {x: 0, y: 0}
-            m_SelectedIDs: 79000000
-            m_LastClickedID: 121
-            m_ExpandedIDs: 71000000
+            m_SelectedIDs: 77000000
+            m_LastClickedID: 119
+            m_ExpandedIDs: 
             m_RenameOverlay:
               m_UserAcceptedRename: 0
               m_Name: 
@@ -1170,7 +1169,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 195498
+  m_LastSelectedObjectID: 88410
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1192,10 +1191,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 364
+    x: -1631
     y: 73
-    width: 1108
-    height: 707
+    width: 1158
+    height: 650
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &19
 MonoBehaviour:
@@ -1219,9 +1218,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 749
-    width: 1543
-    height: 250
+    y: 744
+    width: 1309
+    height: 255
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
@@ -1236,20 +1235,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scripts/AI
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Scripts/AI
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "D:\\DATA\\Programming\\IN\u017BYNIERKA\\NewEridineConflict\\EridineConflict"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 95}
-    m_SelectedIDs: da3a0000
-    m_LastClickedID: 15066
-    m_ExpandedIDs: 00000000da3a0000f4410000f6410000f8410000fa410000fc410000fe410000004200007c5f000000ca9a3b
+    scrollPos: {x: 0, y: 133}
+    m_SelectedIDs: 3c430000
+    m_LastClickedID: 17212
+    m_ExpandedIDs: 00000000f23a000010420000124200001442000016420000184200001a4200001c420000344300004c4300005043000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1277,7 +1276,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000da3a0000f4410000f6410000f8410000fa410000fc410000fe41000000420000
+    m_ExpandedIDs: 00000000f23a000010420000124200001442000016420000184200001a4200001c420000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1354,10 +1353,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 749
-    width: 1096
-    height: 250
+    x: -1920
+    y: 744
+    width: 1448
+    height: 255
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &21
 MonoBehaviour:
@@ -1429,9 +1428,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1544
+    x: 1310
     y: 73
-    width: 375
+    width: 609
     height: 926
   m_ViewDataDictionary: {fileID: 0}
   m_OpenAddComponentMenu: 0
@@ -1447,32 +1446,6 @@ MonoBehaviour:
   m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
 --- !u!114 &23
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12141, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 300, y: 360}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Navigation
-    m_Image: {fileID: 7874161543223113035, guid: 0000000000000000d000000000000000,
-      type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 1362
-    y: 73
-    width: 557
-    height: 926
-  m_ViewDataDictionary: {fileID: 0}
---- !u!114 &24
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1498,7 +1471,7 @@ MonoBehaviour:
     width: 618
     height: 926
   m_ViewDataDictionary: {fileID: 0}
---- !u!114 &25
+--- !u!114 &24
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1524,7 +1497,7 @@ MonoBehaviour:
     width: 644
     height: 926
   m_ViewDataDictionary: {fileID: 0}
---- !u!114 &26
+--- !u!114 &25
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1545,16 +1518,16 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 635
+    x: 1310
     y: 73
-    width: 1284
+    width: 609
     height: 926
   m_ViewDataDictionary: {fileID: 0}
   m_PosLeft: {x: 0, y: 0}
   m_PosRight: {x: 0, y: 0}
   m_Scope: 1
   m_SplitterFlex: 0.2
---- !u!114 &27
+--- !u!114 &26
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1574,13 +1547,13 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1097
+    x: -610
     y: 73
-    width: 822
+    width: 609
     height: 926
   m_ViewDataDictionary: {fileID: 0}
   m_Spl:
-    ID: 155
+    ID: 4282
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes: 82020000d6000000
@@ -1594,14 +1567,14 @@ MonoBehaviour:
     xOffset: 0
   m_TestTypeToolbarIndex: 0
   m_PlayModeTestListGUI:
-    m_Window: {fileID: 27}
+    m_Window: {fileID: 26}
     newResultList:
     - id: 1003
       uniqueId: '[EridineConflict][suite]'
       name: EridineConflict
       fullName: EridineConflict
       resultStatus: 1
-      duration: 7.879685
+      duration: 7.090644
       messages: 
       output: 
       stacktrace: 
@@ -1617,7 +1590,7 @@ MonoBehaviour:
       name: PlayModeTests.dll
       fullName: "D:/DATA/Programming/IN\u017BYNIERKA/NewEridineConflict/EridineConflict/Library/ScriptAssemblies/PlayModeTests.dll"
       resultStatus: 1
-      duration: 7.823426
+      duration: 7.027567
       messages: 
       output: 
       stacktrace: 
@@ -1633,7 +1606,7 @@ MonoBehaviour:
       name: Tests
       fullName: Tests
       resultStatus: 1
-      duration: 7.8035145
+      duration: 7.0012913
       messages: 
       output: 
       stacktrace: 
@@ -1649,7 +1622,7 @@ MonoBehaviour:
       name: FormationHelperTests
       fullName: Tests.FormationHelperTests
       resultStatus: 1
-      duration: 0.0694973
+      duration: 0.1054649
       messages: 
       output: 
       stacktrace: 
@@ -1665,7 +1638,7 @@ MonoBehaviour:
       name: TestAverageVelocity
       fullName: Tests.FormationHelperTests.TestAverageVelocity
       resultStatus: 1
-      duration: 0.0324797
+      duration: 0.0341921
       messages: 
       output: 
       stacktrace: 
@@ -1682,7 +1655,7 @@ MonoBehaviour:
       name: TestCenterOfMass
       fullName: Tests.FormationHelperTests.TestCenterOfMass
       resultStatus: 1
-      duration: 0.0017727
+      duration: 0.0017263
       messages: 
       output: 
       stacktrace: 
@@ -1699,7 +1672,7 @@ MonoBehaviour:
       name: PoolingTests
       fullName: Tests.PoolingTests
       resultStatus: 1
-      duration: 1.8154612
+      duration: 1.8749378
       messages: 
       output: 
       stacktrace: 
@@ -1715,7 +1688,7 @@ MonoBehaviour:
       name: TestAdditionalAllocation
       fullName: Tests.PoolingTests.TestAdditionalAllocation
       resultStatus: 1
-      duration: 0.4857968
+      duration: 0.5395414
       messages: 
       output: 
       stacktrace: 
@@ -1732,7 +1705,7 @@ MonoBehaviour:
       name: TestPooling
       fullName: Tests.PoolingTests.TestPooling
       resultStatus: 1
-      duration: 1.3190666
+      duration: 1.3249215
       messages: 
       output: 
       stacktrace: 
@@ -1749,7 +1722,7 @@ MonoBehaviour:
       name: SelectionManagerTests
       fullName: Tests.SelectionManagerTests
       resultStatus: 1
-      duration: 2.4279373
+      duration: 1.531579
       messages: 
       output: 
       stacktrace: 
@@ -1765,7 +1738,7 @@ MonoBehaviour:
       name: TestBehaviorSetting
       fullName: Tests.SelectionManagerTests.TestBehaviorSetting
       resultStatus: 1
-      duration: 1.8045995
+      duration: 0.6192667
       messages: 
       output: 
       stacktrace: 
@@ -1782,7 +1755,7 @@ MonoBehaviour:
       name: TestSelectAll
       fullName: Tests.SelectionManagerTests.TestSelectAll
       resultStatus: 1
-      duration: 0.3054024
+      duration: 0.5755875
       messages: 
       output: 
       stacktrace: 
@@ -1799,7 +1772,7 @@ MonoBehaviour:
       name: TestTimeManagement
       fullName: Tests.SelectionManagerTests.TestTimeManagement
       resultStatus: 1
-      duration: 0.3007755
+      duration: 0.3176443
       messages: 
       output: 
       stacktrace: 
@@ -1816,7 +1789,7 @@ MonoBehaviour:
       name: StarshipAITests
       fullName: Tests.StarshipAITests
       resultStatus: 1
-      duration: 3.446191
+      duration: 3.4474688
       messages: 
       output: 
       stacktrace: 
@@ -1832,7 +1805,7 @@ MonoBehaviour:
       name: TestMoving
       fullName: Tests.StarshipAITests.TestMoving
       resultStatus: 1
-      duration: 1.249996
+      duration: 1.2506036
       messages: 
       output: 
       stacktrace: 
@@ -1849,7 +1822,7 @@ MonoBehaviour:
       name: TestMovingAttack
       fullName: Tests.StarshipAITests.TestMovingAttack
       resultStatus: 1
-      duration: 1.2340157
+      duration: 1.2374223
       messages: 
       output: 
       stacktrace: 
@@ -1866,7 +1839,7 @@ MonoBehaviour:
       name: TestUnitBehavior
       fullName: Tests.StarshipAITests.TestUnitBehavior
       resultStatus: 1
-      duration: 0.9414706
+      duration: 0.9408572
       messages: 
       output: 
       stacktrace: 
@@ -1883,7 +1856,7 @@ MonoBehaviour:
       name: TestSuite
       fullName: Tests.TestSuite
       resultStatus: 1
-      duration: 0.0229893
+      duration: 0.0233702
       messages: 
       output: 
       stacktrace: 
@@ -1899,7 +1872,7 @@ MonoBehaviour:
       name: TestHealthManager
       fullName: Tests.TestSuite.TestHealthManager
       resultStatus: 1
-      duration: 0.0071027
+      duration: 0.0079661
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1916,12 +1889,12 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1001
       parentUniqueId: PlayModeTests.dll/Tests/[PlayModeTests][Tests.TestSuite][suite]
-    m_ResultText: PoolingTests (1,815s)
+    m_ResultText: StarshipAITests (3,447s)
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 31445092
-      m_LastClickedID: -1840233423
+      m_SelectedIDs: 97f88669
+      m_LastClickedID: 1770453143
       m_ExpandedIDs: ae332b913144509244b3fb9c0a538caac0b46ace161dce3054ace93097f88669ffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1949,7 +1922,7 @@ MonoBehaviour:
       availableCategories:
       - Uncategorized
   m_EditModeTestListGUI:
-    m_Window: {fileID: 27}
+    m_Window: {fileID: 26}
     newResultList:
     - id: 1000
       uniqueId: '[EridineConflict][suite]'

@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2305,7 +2305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &707435350
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2547,8 +2547,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b481cbd6392374e4d98d275e13b6ffa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStarships: []
-  enemyStarships: []
   sqrMaxOrderDistance: 250000
   selectionBoxRect: {fileID: 1592708055}
   selectionGO: {fileID: 1592708054}
@@ -2571,6 +2569,7 @@ MonoBehaviour:
   enableHUDButtonImage: {fileID: 707435352}
   tooFarTextGO: {fileID: 1211109793}
   timeSpeedText: {fileID: 817307241}
+  timeScaleStep: 0.05
 --- !u!114 &747360042
 MonoBehaviour:
   m_ObjectHideFlags: 0

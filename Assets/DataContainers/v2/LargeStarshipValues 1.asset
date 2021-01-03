@@ -34,13 +34,13 @@ MonoBehaviour:
   sphereCastDistance: 10
   collisionAvoidanceMult: 1
   collideWithFormationUnits: 1
-  thresholdSqr: 225
+  thresholdSqr: 100
   decayCoefficient: -15
-  separationForceMultiplier: 0.75
-  maxSeparationForce: 2
+  separationForceMultiplier: 0.5
+  maxSeparationForce: 1.5
   viewAngle: 360
   maxCohesionForce: 1
   cohesionForceMultiplier: 0.1
-  alignDistance: 5
+  alignDistance: 2.5
   alignmentMultiplier: 0.25
-  maxAlingmentForce: 12.5
+  maxAlingmentForce: 2.5

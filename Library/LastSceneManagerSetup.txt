@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Tests/TestScenes/SelectionManagerTestScene.unity
+- path: Assets/Scenes/BattleScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

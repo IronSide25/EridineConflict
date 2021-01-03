@@ -15,8 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/BattleScene.unity
     guid: 362663b931851fd45aa2d9b38a2d7c36
   - enabled: 1
-    path: Assets/Scenes/OverloadTest.unity
+    path: Assets/Tests/TestScenes/LoadTest.unity
     guid: 2b924e0d1cff37241ba65191247fdb90
+  - enabled: 1
+    path: Assets/Tests/TestScenes/SoakTestScene.unity
+    guid: 1e1eee0585517a849a687b191aa10ebf
   - enabled: 1
     path: Assets/Tests/TestScenes/StarshipAITestScene.unity
     guid: 4a60118744e343345bd9a3a93985d653

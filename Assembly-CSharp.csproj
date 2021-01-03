@@ -62,37 +62,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AI\EnemyAI.cs" />
-    <Compile Include="Assets\Scripts\AI\FormationHelper.cs" />
-    <Compile Include="Assets\Scripts\AI\StarshipAI.cs" />
-    <Compile Include="Assets\Scripts\AI\StarshipSteering.cs" />
-    <Compile Include="Assets\Scripts\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\DepthCamera.cs" />
-    <Compile Include="Assets\Scripts\Extensions.cs" />
-    <Compile Include="Assets\Scripts\GridSpawner.cs" />
-    <Compile Include="Assets\Scripts\Health\HealthBar.cs" />
-    <Compile Include="Assets\Scripts\Health\HealthBarManager.cs" />
-    <Compile Include="Assets\Scripts\Health\HealthManager.cs" />
-    <Compile Include="Assets\Scripts\PooledObject.cs" />
-    <Compile Include="Assets\Scripts\PoolingManager.cs" />
-    <Compile Include="Assets\Scripts\StarshipDataScriptableObject.cs" />
-    <Compile Include="Assets\Scripts\UI\DetectRightClick.cs" />
-    <Compile Include="Assets\Scripts\UI\DisableScript.cs" />
-    <Compile Include="Assets\Scripts\UI\MainMenuController.cs" />
-    <Compile Include="Assets\Scripts\UI\Outline.cs" />
-    <Compile Include="Assets\Scripts\UI\SelectionManager.cs" />
-    <Compile Include="Assets\Scripts\UI\UILineRenderer.cs" />
-    <Compile Include="Assets\Scripts\Weapon\IWeapon.cs" />
-    <Compile Include="Assets\Scripts\Weapon\LaserWeapon.cs" />
-    <Compile Include="Assets\Scripts\Weapon\TurretWeapon.cs" />
+    <Compile Include="Assets\OmniSARTechnologies\Common\Helper\GUI\ColorHelper.cs" />
+    <Compile Include="Assets\OmniSARTechnologies\Common\Helper\Reflection\CustomAttributes.cs" />
+    <Compile Include="Assets\OmniSARTechnologies\Common\Helper\Transforms\TransformRotate.cs" />
+    <Compile Include="Assets\OmniSARTechnologies\LiteFPSCounter\Demo\Scripts\HeavyRenderingController.cs" />
+    <Compile Include="Assets\OmniSARTechnologies\LiteFPSCounter\Demo\Scripts\SimpleSceneSwitcher.cs" />
+    <Compile Include="Assets\OmniSARTechnologies\LiteFPSCounter\Scripts\LiteFPSCounter.cs" />
+    <Compile Include="Assets\Tests\LoadTestingScript.cs" />
+    <Compile Include="Assets\Tests\MouseSimulation.cs" />
+    <Compile Include="Assets\Tests\SoakTestingScript.cs" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\SyntyStudios_Asteroid.shader" />
+    <None Include="Assets\OmniSARTechnologies\LiteFPSCounter\Demo\Shaders\HeavyRenderingTest.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\POLYGON_Triplanar.shader" />
-    <None Include="Assets\Scripts\Shaders\OutlineMask.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\SyntyStudios_Triplanar_ObjectSpace.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\SyntyStudios_Planet.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\SyntyStudios_Planet_Lines.shader" />
     <None Include="Assets\PolygonSciFiSpace\Shaders\POLYGON_SpaceShip_Rim.shader" />
-    <None Include="Assets\Scripts\Shaders\OutlineFill.shader" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Program Files/Unity/2019.4.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -685,7 +670,12 @@
       <HintPath>D:/DATA/Programming/INŻYNIERKA/NewEridineConflict/EridineConflict/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="GameAssembly.csproj">
+      <Project>{E3B0AC79-BC4D-6AFB-F0C9-336959E49BC1}</Project>
+      <Name>GameAssembly</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

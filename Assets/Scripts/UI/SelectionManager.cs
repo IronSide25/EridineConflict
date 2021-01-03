@@ -7,10 +7,10 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
 {
     public static SelectionManager instance;
 
-    public HashSet<Transform> selectedPlayerStarships;
-    public HashSet<Transform> selectedEnemyStarships;
-    public List<Transform> playerStarships; // rename and move this somewhere else XD
-    public List<Transform> enemyStarships; // rename and move this somewhere else XD
+    private HashSet<Transform> selectedPlayerStarships;
+    private HashSet<Transform> selectedEnemyStarships;
+    private List<Transform> playerStarships; // rename and move this somewhere else XD
+    private List<Transform> enemyStarships; // rename and move this somewhere else XD
     public HashSet<FormationHelper> playerFormations;
     public List<Transform[]> enemyFormations;
 
