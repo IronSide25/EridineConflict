@@ -44,7 +44,7 @@ public class HealthManager : MonoBehaviour
     {
         if (currentHealth < 0)
         {
-            GameObject go = PoolingManager.instance.Spawn();
+            GameObject go = PoolingManager.Instance.Spawn();
             go.transform.position = transform.position;
             go.transform.rotation = Quaternion.identity;
             go.transform.localScale = new Vector3(explosionScale, explosionScale, explosionScale);

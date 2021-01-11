@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PoolingManager : MonoBehaviour
 {
-    public static PoolingManager instance;
+    public static PoolingManager Instance;
     private List<GameObject> gameobjectList;
     public GameObject prefab;
 
@@ -12,7 +12,7 @@ public class PoolingManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        Instance = this;
         gameobjectList = new List<GameObject>();
         
         if(prealocateCount > 0)

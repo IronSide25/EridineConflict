@@ -129,14 +129,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0, g: 1, b: 0.16342616, a: 1}
-  outlineWidth: 1
-  precomputeOutline: 1
-  bakeKeys:
+  width: 1
+  bakedKeys:
   - {fileID: 4300000, guid: df183b756c0d6f542852af3c753d4e80, type: 3}
-  bakeValues:
-  - data:
+  bakedValues:
+  - vecList:
     - {x: -0.43179265, y: -0.65744793, z: 0.61750907}
     - {x: 0.24269964, y: -0.70710677, z: 0.66415125}
     - {x: -0.43179265, y: 0.65744793, z: 0.61750907}
@@ -10745,8 +10742,8 @@ MonoBehaviour:
     - {x: -0.24477725, y: 0.8592863, z: 0.44912273}
   renderers:
   - {fileID: 23514865417621352}
-  outlineMaskMaterial: {fileID: 2100000, guid: 219ed2b21f09b0e439c677d6efa64074, type: 2}
-  outlineFillMaterial: {fileID: 2100000, guid: 7812adc21a1e0f94e9f854acf41321d4, type: 2}
+  maskMaterial: {fileID: 2100000, guid: 219ed2b21f09b0e439c677d6efa64074, type: 2}
+  fillMaterial: {fileID: 2100000, guid: 428d3a63e454edd4eaa249a7df304bde, type: 2}
 --- !u!114 &1065056570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10805,7 +10802,6 @@ MonoBehaviour:
   lineGreen: {fileID: 0}
   lineRed: {fileID: 0}
   isSelected: 0
-  fightPivot: {x: 0, y: 0, z: 0}
   minSqrDistanceVsLight: 100
   maxSqrDistanceVsLight: 4000
   minSqrDistanceVsMedium: 250
@@ -10826,6 +10822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   armor: 0
+  currentHealth: 0
   explosionScale: 0.2
   healthBarScale: {x: 0.05, y: 0.05, z: 0.05}
 --- !u!1001 &1395066644843565485

@@ -34,7 +34,6 @@ namespace Tests
             tr2.position = new Vector3(50, -50, 50);
             Vector3 centerOfMass = formationHelper.GetCenterOfMass();
             Assert.AreEqual(centerOfMass, Vector3.Lerp(tr1.position, tr2.position, .5f));
-
             tr1.position = new Vector3(-100, -100, -100);
             tr2.position = new Vector3(-50, -50, -50);
             Vector3 centerOfMass2 = formationHelper.GetCenterOfMass();
@@ -51,7 +50,6 @@ namespace Tests
             r2.velocity = new Vector3(0, 10, 0);
             Vector3 avgVelocity = formationHelper.GetAverageVelocity();
             Assert.AreEqual(new Vector3(5, 7.5f, 5), avgVelocity);
-
             r1.velocity = new Vector3(-10, -5, -10);
             r2.velocity = new Vector3(0, -10, 0);
             Vector3 avgVelocity2 = formationHelper.GetAverageVelocity();
@@ -64,8 +62,8 @@ namespace Tests
         [TearDown]
         public void TearDown()
         {
-            Object.Destroy(tr1.gameObject);
-            Object.Destroy(tr2.gameObject);
+            Object.DestroyImmediate(tr1.gameObject);
+            Object.DestroyImmediate(tr2.gameObject);
         }
     }
 }

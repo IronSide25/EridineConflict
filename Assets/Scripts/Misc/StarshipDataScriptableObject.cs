@@ -44,12 +44,12 @@ public class StarshipDataScriptableObject : ScriptableObject
     public float maxSeparationForce;
 
     [Header("Cohesion behavior")]
-    public float viewAngle = 60;//remove
+    //public float viewAngle = 60;//remove
     public float maxCohesionForce = 1f;
     public float cohesionForceMultiplier = 1f;
 
     [Header("Alingment behavior")]
-    public float alignDistance = 10f;//remove
+    public float alignDistance = 10f;
     public float alignmentMultiplier = 5;
     public float maxAlingmentForce;
 }

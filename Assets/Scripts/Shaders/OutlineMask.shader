@@ -1,15 +1,4 @@
-﻿//
-//  OutlineMask.shader
-//  QuickOutline
-//
-//  Created by Chris Nolet on 2/21/18.
-//  Copyright © 2018 Chris Nolet. All rights reserved.
-//
-
-Shader "Custom/Outline Mask" {
-  Properties {
-    [Enum(UnityEngine.Rendering.CompareFunction)] _ZTest("ZTest", Float) = 0
-  }
+﻿Shader "Custom/Outline Mask" {
 
   SubShader {
     Tags {
@@ -20,7 +9,7 @@ Shader "Custom/Outline Mask" {
     Pass {
       Name "Mask"
       Cull Off
-      ZTest [_ZTest]
+      ZTest Always
       ZWrite Off
       ColorMask 0
 

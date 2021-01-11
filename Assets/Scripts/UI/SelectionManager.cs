@@ -52,6 +52,8 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
     void Awake()
     {
         instance = this;
+        playerStarships = new List<Transform>();
+        enemyStarships = new List<Transform>();
         selectedPlayerStarships = new HashSet<Transform>();
         selectedEnemyStarships = new HashSet<Transform>();
         playerFormations = new HashSet<FormationHelper>();
@@ -136,6 +138,10 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
                     if (selectionBox.Contains(screenSpace) && tr.tag == "Enemy")
                     {
                         selectedEnemyStarships.Add(tr);
+                        Outline outline = tr.GetComponent<Outline>();
+                        if (outline)
+                            outline.enabled = true;
+
                         AddHealthBar(tr);
                     }
                 }
@@ -269,7 +275,7 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
         selectedPlayerStarships.Clear();
         foreach (Transform tr in selectedEnemyStarships)
         {
-            //tr.GetComponent<Outline>().enabled = false;
+            tr.GetComponent<Outline>().enabled = false;
             RemoveHealthBar(tr);
             StarshipAI starshipAI = tr.GetComponent<StarshipAI>();
             if (starshipAI)

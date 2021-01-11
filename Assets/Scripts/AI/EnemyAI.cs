@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimalizing player cost function
 {
-    public static EnemyAI Instance;
-
     public bool autoAttack;
     public float attackDelay;
     private bool targetsAssigned;
@@ -25,12 +23,7 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
             {0.8f, 0.7f, 0.4f, 0.5f, 0.35f },//medium destroyer
             {0.95f, 0.9f, 0.80f, 0.65f, 0.5f }};//large cruiser
 
-    void Awake()
-    {
-        if (!Instance)
-            Instance = this;
-    }
-
+  
     // Start is called before the first frame update
     void Start()
     {

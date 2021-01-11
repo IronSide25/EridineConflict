@@ -6,6 +6,7 @@ public class DepthCamera : MonoBehaviour
 {
     Transform mainCamera;
     Vector3 mainCameraLastPos;
+    public float movementCoef = 10;
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class DepthCamera : MonoBehaviour
     void LateUpdate()
     {
         Vector3 translation = mainCamera.position - mainCameraLastPos;
-        transform. position += translation / 10;
+        transform. position += translation / movementCoef;
         mainCameraLastPos = mainCamera.position;
         transform.rotation = mainCamera.rotation;
     }

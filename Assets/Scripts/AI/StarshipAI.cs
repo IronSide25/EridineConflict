@@ -29,15 +29,15 @@ public class StarshipAI : MonoBehaviour
     public bool isInCloseProximity = false;//is evading or stopped
     public float maxEvadeTime;
     public float maxEvadeTimeDeviation;
-    float lastEvadeTime;
+    private float lastEvadeTime;
 
-    IWeapon[] weapons;
-    LineRenderer lineRendererMoveHint;
+    private IWeapon[] weapons;
+    private LineRenderer lineRendererMoveHint;
     public Material lineGreen;
     public Material lineRed;
     public bool isSelected;
 
-    public Vector3 fightPivot; //prevents starship from moving away during fight
+    private Vector3 fightPivot; //prevents starship from moving away during fight
     public FormationHelper targetFormationHelper;
 
     public float minSqrDistanceVsLight;

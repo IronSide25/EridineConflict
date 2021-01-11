@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayModeTests", "PlayModeTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{878F8C02-5548-C5ED-8E03-F19CF362F428}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditModeTests", "EditModeTests.csproj", "{2BD83A04-6872-6DA1-85CD-06CC9882C368}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{2A1DC14B-8211-6945-5488-A7B69BB66D60}"
 EndProject
 Global
@@ -27,6 +29,10 @@ Global
 		{878F8C02-5548-C5ED-8E03-F19CF362F428}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{878F8C02-5548-C5ED-8E03-F19CF362F428}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{878F8C02-5548-C5ED-8E03-F19CF362F428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BD83A04-6872-6DA1-85CD-06CC9882C368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BD83A04-6872-6DA1-85CD-06CC9882C368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BD83A04-6872-6DA1-85CD-06CC9882C368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BD83A04-6872-6DA1-85CD-06CC9882C368}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A1DC14B-8211-6945-5488-A7B69BB66D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2A1DC14B-8211-6945-5488-A7B69BB66D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A1DC14B-8211-6945-5488-A7B69BB66D60}.Release|Any CPU.ActiveCfg = Release|Any CPU

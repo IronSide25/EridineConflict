@@ -17,7 +17,7 @@ namespace Tests
         {
             SceneManager.LoadScene("PoolingTestScene");
             yield return new WaitForSeconds(0.1f);
-            poolingManager = PoolingManager.instance;
+            poolingManager = PoolingManager.Instance;
         }
 
         [UnityTest]
