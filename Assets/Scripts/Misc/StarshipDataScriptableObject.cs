@@ -42,6 +42,7 @@ public class StarshipDataScriptableObject : ScriptableObject
     public float decayCoefficient = -25f;
     public float separationForceMultiplier = 1f;
     public float maxSeparationForce;
+    public float separationStrength;
 
     [Header("Cohesion behavior")]
     //public float viewAngle = 60;//remove

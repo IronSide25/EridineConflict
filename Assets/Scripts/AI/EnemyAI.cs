@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimalizing player cost function
 {
+    public bool useExhaustive = true;
     public bool autoAttack;
     public float attackDelay;
     private bool targetsAssigned;
@@ -49,8 +50,13 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
                 playerFormationsCountBefore[i] = playerFormations[i].GetLength();
             }
 
-            int[] solution = ExhaustiveSearch();//ex. [0,1,2] first enemy formation attack player formation at playerFormations[0]
-                                                //int[] solution = WTAGreedyMMR();
+            //int[] solution = ExhaustiveSearch();//ex. [0,1,2] first enemy formation attack player formation at playerFormations[0]
+            //int[] solution = WTAGreedyMMR();
+            int[] solution;
+            if (useExhaustive)
+                solution = ExhaustiveSearch();
+            else
+                solution = WTAGreedyMMR();
 
             for (int i = 0; i < enemyFormations.Count; i++)
             {

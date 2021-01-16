@@ -9,9 +9,9 @@ using System.Collections;
 using System.Linq;
 using System.Reflection;
 
-public class EditorScreenshot //: EditorWindow
+public class EditorScreenshot : EditorWindow
 {
-    /*
+    
     string screenshotFolderPath = "Screenshots";
     string screenshotFilenamePrefix = "screenshot_";
     int nextScreenshotIndex = 0;
@@ -91,5 +91,5 @@ public class EditorScreenshot //: EditorWindow
         ++nextScreenshotIndex;
         EditorPrefs.SetInt("EditorScreenshot.nextScreenshotIndex", nextScreenshotIndex);
     }
-    */
+    
 }

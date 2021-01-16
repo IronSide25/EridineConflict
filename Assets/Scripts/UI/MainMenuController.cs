@@ -2,24 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
     public GameObject mainPanel;
     public GameObject selectLevelPanel;
     public GameObject aboutPanel;
-
+    public GameObject[] levelButtons;
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        int highestFinishedLevel = 0;
+        if (PlayerPrefs.HasKey("highestFinishedLevel"))
+        {
+            highestFinishedLevel = PlayerPrefs.GetInt("highestFinishedLevel");            
+        }
+        else
+        {
+            PlayerPrefs.SetInt("highestFinishedLevel", 0);
+            PlayerPrefs.Save();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for(int i = 0; i< levelButtons.Length; i++)
+        {
+            if(i > highestFinishedLevel)//level is locked
+            {
+                levelButtons[i].GetComponent<Button>().interactable = false;
+                Text text = levelButtons[i].GetComponentInChildren<Text>();
+                text.color = Color.red;
+            }
+        }
     }
 
     public void OnSelectLevelClick()

@@ -100,7 +100,7 @@ PrefabInstance:
     - target: {fileID: 1340278007990116628, guid: ea98b3f6ab31af448920a1e5f695522d,
         type: 3}
       propertyPath: m_Name
-      value: FX_Laser_BulletBlue1 Variant
+      value: FX_Laser_BulletBlue Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4381809987560072049, guid: ea98b3f6ab31af448920a1e5f695522d,
         type: 3}
@@ -110,7 +110,7 @@ PrefabInstance:
     - target: {fileID: 4381809987560072049, guid: ea98b3f6ab31af448920a1e5f695522d,
         type: 3}
       propertyPath: damagePerShot
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4381809987560072049, guid: ea98b3f6ab31af448920a1e5f695522d,
         type: 3}

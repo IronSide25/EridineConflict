@@ -38,7 +38,7 @@ MonoBehaviour:
   decayCoefficient: -5
   separationForceMultiplier: 1.5
   maxSeparationForce: 10
-  viewAngle: 60
+  separationStrength: 10
   maxCohesionForce: 1
   cohesionForceMultiplier: 0.5
   alignDistance: 5

@@ -20,7 +20,7 @@ PrefabInstance:
     - target: {fileID: 1821711057732112092, guid: b8f2699b6ca03d84e85dcda3e5e716ea,
         type: 3}
       propertyPath: damagePerShot
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3880338244868754005, guid: b8f2699b6ca03d84e85dcda3e5e716ea,
         type: 3}

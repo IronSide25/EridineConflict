@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laser: {fileID: 3881990601730663765}
   shootingSpeed: 0.5
-  damagePerShot: 3
+  damagePerShot: 2.5
   range: 100
   projectileSpeed: 200
 --- !u!1001 &3971427951985654371

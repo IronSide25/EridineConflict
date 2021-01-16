@@ -181,14 +181,11 @@ public class StarshipSteering : MonoBehaviour
             }
             lastDesiredVelocity = desiredVelocityNorm;
         }      
-
         Vector3 steering = desiredVelocityNorm * values.maxSeekForce;//Vector3 steering = desiredVelocity - rigidbody.velocity;//which is better
-
         if (distToTarget > (values.slowingRadius + values.distanceToStop))
             steering = compensateMass ? steering : (steering / starshipRigidbody.mass);//not sure about this
         if (steering.magnitude < values.moveEpsilon)
             steering = Vector3.zero;
-
         return steering * values.seekMult;
     }
 
@@ -240,6 +237,9 @@ public class StarshipSteering : MonoBehaviour
                 }
             }
         }
+
+
+
         Profiler.EndSample();
         return steering * values.separationForceMultiplier;
     }
@@ -273,6 +273,9 @@ public class StarshipSteering : MonoBehaviour
                 }                                
             }
         }
+
+
+
         Profiler.EndSample();
         return steering * values.separationForceMultiplier;
     }
@@ -454,7 +457,7 @@ public class StarshipSteering : MonoBehaviour
             desiredRotation = lookRotationVel;
         else
         {
-            float prediction = distToTarget / projectileSpeed;
+            float prediction = distToTarget / projectileSpeed;//check line 200
             attackPredictedTarget = transformTarget.position + (transformTargetRigidbody.velocity * prediction);
             
             lookRotationPred = Quaternion.LookRotation(attackPredictedTarget - transform.position);

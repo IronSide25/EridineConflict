@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FormationHelper// add set move set attack
 {
-    public static List<FormationHelper> formationHelpers;//lepiej to zamien na listę w selectionmanager
+    public static List<FormationHelper> instances;//lepiej to zamien na listę w selectionmanager
 
     //maybe change to hashset
     public List<Transform> shipsInFormation;//change to private later, with setter and getter
@@ -21,9 +21,9 @@ public class FormationHelper// add set move set attack
         massCacheIsValid = false;
         velocityCacheIsValid = false;
 
-        if (formationHelpers == null)
-            formationHelpers = new List<FormationHelper>();
-        formationHelpers.Add(this);
+        if (instances == null)
+            instances = new List<FormationHelper>();
+        instances.Add(this);
     }
 
     public FormationHelper(List<Transform> _shipsInFormation)
@@ -33,14 +33,14 @@ public class FormationHelper// add set move set attack
         massCacheIsValid = false;
         velocityCacheIsValid = false;
 
-        if (formationHelpers == null)
-            formationHelpers = new List<FormationHelper>();
-        formationHelpers.Add(this);
+        if (instances == null)
+            instances = new List<FormationHelper>();
+        instances.Add(this);
     }
 
     ~FormationHelper()
     {
-        formationHelpers.Remove(this);
+        instances.Remove(this);
     }
 
     public void RefreshHashSet()

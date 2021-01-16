@@ -13,6 +13,7 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
     private List<Transform> enemyStarships; // rename and move this somewhere else XD
     public HashSet<FormationHelper> playerFormations;
     public List<Transform[]> enemyFormations;
+    public int levelIndex;
 
     [Header("Selection")]
     private Vector3 dragStartPosition;
@@ -42,11 +43,15 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
     public Image setPassiveImage;
     public Image enableHUDButtonImage;
     public GameObject tooFarTextGO;
+    public GameObject winPanel;
+    public GameObject defeatPanel;
 
     public Text timeSpeedText;
     public float timeScaleStep = 0.05f;
     public const float defaultFixedDeltaTime = 0.02f;
     private EventSystem eventSystem;
+
+
 
     // Start is called before the first frame update
     void Awake()
@@ -73,7 +78,7 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
 
     private void FixedUpdate()
     {
-        foreach (FormationHelper formationHelper in FormationHelper.formationHelpers)
+        foreach (FormationHelper formationHelper in FormationHelper.instances)
             formationHelper.InvalidateCache();
     }
 
@@ -151,7 +156,7 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
             UpdateUIActive();
         }
 
-        if (Input.GetMouseButtonDown(1) && selectedPlayerStarships.Count > 0)//give order
+        if (Input.GetMouseButtonDown(1) && selectedPlayerStarships.Count > 0 && !eventSystem.IsPointerOverGameObject())//give order
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -309,11 +314,30 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
             }
             if (selectedPlayerStarships.Count == 0)
                 UpdateUIActive();
+
+            if(playerStarships.Count == 0 && defeatPanel)
+            {
+                defeatPanel.SetActive(true);
+            }
         }
         else if (starship.tag == "Enemy")
         {
             enemyStarships.Remove(starship);
             selectedEnemyStarships.Remove(starship);
+
+            if (enemyStarships.Count == 0 && winPanel)
+            {
+                winPanel.SetActive(true);
+                if(PlayerPrefs.HasKey("highestFinishedLevel"))
+                {
+                    int highestFinishedLevel = PlayerPrefs.GetInt("highestFinishedLevel");
+                    if(levelIndex > highestFinishedLevel)
+                    {
+                        PlayerPrefs.SetInt("highestFinishedLevel", levelIndex);
+                        PlayerPrefs.Save();
+                    }
+                }
+            }
         }
     }
 
@@ -443,8 +467,18 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
 
     public void OnStarshipTypeRightClick(int index)
     {
-        GameObject infoPanel = starshipIcons[index].FindObject("InfoPanel");
-        infoPanel.SetActive(!infoPanel.activeSelf);
+        for(int i = 0; i< starshipIcons.Length;i++)
+        {
+            GameObject panel = starshipIcons[i].FindObject("InfoPanel");
+            if (i != index)
+            {            
+                panel.SetActive(false);
+            }
+            else
+            {
+                panel.SetActive(!panel.activeSelf);
+            }
+        }
     }
 
     public void OnSelectAllClick()
