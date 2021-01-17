@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EditorScreenshot.cs" />
     <Compile Include="Assets\OmniSARTechnologies\Common\Helper\GUI\ColorHelper.cs" />
     <Compile Include="Assets\OmniSARTechnologies\Common\Helper\Reflection\CustomAttributes.cs" />
     <Compile Include="Assets\OmniSARTechnologies\Common\Helper\Transforms\TransformRotate.cs" />

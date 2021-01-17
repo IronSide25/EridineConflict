@@ -19,12 +19,12 @@ MonoBehaviour:
   distanceToStop: 2
   slowingRadius: 12.5
   maxSeekForce: 5
-  seekMult: 1
+  seekMultiplier: 1
   limitSeekRotation: 1
   allowedSeekRotation: 0.7853
   maxPrediction: 100
   maxPursuitForce: 5
-  pursuitMult: 1
+  pursuitMultiplier: 1
   limitPursuitRotation: 1
   allowedPursuitRotation: 0.7853
   maxAngularAcc: 3
@@ -32,15 +32,14 @@ MonoBehaviour:
   maxAvoidForce: 25
   sphereCastRadius: 1
   sphereCastDistance: 10
-  collisionAvoidanceMult: 1
-  collideWithFormationUnits: 1
-  thresholdSqr: 100
+  collisionAvoidanceMultiplier: 1
+  separationDistance: 10
   decayCoefficient: -15
   separationForceMultiplier: 0.5
   maxSeparationForce: 1.5
   separationStrength: 1.5
   maxCohesionForce: 0.5
   cohesionForceMultiplier: 0.05
-  alignDistance: 2.5
+  alignDistance: 4
   alignmentMultiplier: 0.25
   maxAlingmentForce: 2.5

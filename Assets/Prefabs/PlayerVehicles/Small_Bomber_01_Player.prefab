@@ -8046,7 +8046,7 @@ MonoBehaviour:
   lineGreen: {fileID: 2100000, guid: 747ac54ffb6312e4dbba329bbb4e958b, type: 2}
   lineRed: {fileID: 2100000, guid: c8cd2dde19c4ae44aa51f635aa33de1c, type: 2}
   isSelected: 0
-  minSqrDistanceVsLight: 200
+  minSqrDistanceVsLight: 160
   maxSqrDistanceVsLight: 5500
   minSqrDistanceVsMedium: 250
   maxSqrDistanceVsMedium: 7000

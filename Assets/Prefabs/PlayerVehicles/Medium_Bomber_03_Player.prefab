@@ -12184,9 +12184,9 @@ MonoBehaviour:
   lineGreen: {fileID: 2100000, guid: 747ac54ffb6312e4dbba329bbb4e958b, type: 2}
   lineRed: {fileID: 2100000, guid: c8cd2dde19c4ae44aa51f635aa33de1c, type: 2}
   isSelected: 0
-  minSqrDistanceVsLight: 200
+  minSqrDistanceVsLight: 160
   maxSqrDistanceVsLight: 6500
-  minSqrDistanceVsMedium: 500
+  minSqrDistanceVsMedium: 300
   maxSqrDistanceVsMedium: 7500
   minSqrDistanceVsHeavy: 250
   maxSqrDistanceVsHeavy: 7500
@@ -12329,8 +12329,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4780668833399245430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 30, y: 7, z: 21}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0.5}
+  m_LocalScale: {x: 29, y: 6, z: 19}
   m_Children: []
   m_Father: {fileID: 1206899581083855022}
   m_RootOrder: 0

@@ -651,8 +651,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 282.7, y: -181.2}
-  m_SizeDelta: {x: 747.52234, y: 415.52606}
+  m_AnchoredPosition: {x: 321, y: -146.62}
+  m_SizeDelta: {x: 747.52234, y: 484.7705}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &127075409
 MonoBehaviour:
@@ -692,9 +692,10 @@ MonoBehaviour:
     weakest armor and health, but high speed \n* medium - average armor, health and
     speed\n* heavy - heavy armor and a lot of health points, but low speed\nEach
     unit has some number of weapons - laser guns. There are three laser types:\n*
-    red - highest projectile speed and shooting speed but low damage\n* blue - average
-    projectile speed, shooting speed and damage\n* green - low projectile speed and
-    shooting speed but high damage"
+    red - highest projectile speed and shooting speed but low damage. Good against
+    fast units without armor.\n* blue - average projectile speed, shooting speed
+    and damage\n* green - low projectile speed and shooting speed but high damage.
+    Great against slow and armored units."
 --- !u!222 &127075410
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -931,8 +932,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -714, y: -182.3}
-  m_SizeDelta: {x: 456.1925, y: 471.03503}
+  m_AnchoredPosition: {x: -672, y: -175.6}
+  m_SizeDelta: {x: 456.1925, y: 578.64374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &165905782
 MonoBehaviour:
@@ -1788,8 +1789,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141, y: 238.9}
-  m_SizeDelta: {x: 367.11768, y: 286.2611}
+  m_AnchoredPosition: {x: 150, y: 256.87}
+  m_SizeDelta: {x: 405.1494, y: 286.2611}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &752738523
 MonoBehaviour:
@@ -2410,8 +2411,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -679.8, y: 251}
-  m_SizeDelta: {x: 522.4536, y: 250}
+  m_AnchoredPosition: {x: -670.57, y: 251}
+  m_SizeDelta: {x: 453.32306, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1054194120
 MonoBehaviour:
@@ -2761,14 +2762,14 @@ RectTransform:
   m_GameObject: {fileID: 1333222474}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 127075408}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 410, y: 433}
+  m_AnchoredPosition: {x: 350, y: 433}
   m_SizeDelta: {x: 689, y: 572}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1333222476

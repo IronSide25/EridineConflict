@@ -506,4 +506,10 @@ public class SelectionManager : MonoBehaviour
         Time.fixedDeltaTime = defaultFixedDeltaTime * Time.timeScale;
         timeSpeedText.text = "Time speed: " + Mathf.Round(100 * Time.timeScale) + "%";
     }
+
+    private void OnDestroy()
+    {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = defaultFixedDeltaTime;
+    }
 }

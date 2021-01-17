@@ -8045,7 +8045,7 @@ MonoBehaviour:
   lineGreen: {fileID: 0}
   lineRed: {fileID: 0}
   isSelected: 0
-  minSqrDistanceVsLight: 200
+  minSqrDistanceVsLight: 160
   maxSqrDistanceVsLight: 5500
   minSqrDistanceVsMedium: 250
   maxSqrDistanceVsMedium: 7000

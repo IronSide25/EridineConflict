@@ -14,14 +14,14 @@ public class StarshipDataScriptableObject : ScriptableObject
 
     [Header("Seek behavior")]
     public float maxSeekForce;
-    public float seekMult = 1;
+    public float seekMultiplier = 1;
     public bool limitSeekRotation = false;
     public float allowedSeekRotation = 1.5708f;//90 degr
 
     [Header("Pursuit behavior")]
     public float maxPrediction = 100;
     public float maxPursuitForce;
-    public float pursuitMult = 1;
+    public float pursuitMultiplier = 1;
     public bool limitPursuitRotation = false;
     public float allowedPursuitRotation = 1.5708f;//90 degr
 
@@ -33,12 +33,11 @@ public class StarshipDataScriptableObject : ScriptableObject
     public float maxAvoidForce;
     public float sphereCastRadius;
     public float sphereCastDistance;
-    public float collisionAvoidanceMult = 1;
-    public bool collideWithFormationUnits = true;//not SO
+    public float collisionAvoidanceMultiplier = 1;
 
     [Header("Separation behavior")]
     //public float threshold = 2f;
-    public float thresholdSqr = 4;
+    public float separationDistance = 4;
     public float decayCoefficient = -25f;
     public float separationForceMultiplier = 1f;
     public float maxSeparationForce;
