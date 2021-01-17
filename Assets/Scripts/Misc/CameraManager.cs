@@ -11,7 +11,7 @@ public class CameraManager : MonoBehaviour
     public float cameraHeightMin = -200;
     public float cameraHeightMax = 200;
     public float maxDistanceFromOrigin = 1000;
-    Camera cam;
+    private Camera mainCamera;
     private Vector3 lastCameraPos;
     private float lastCameraHeight;
 
@@ -19,7 +19,7 @@ public class CameraManager : MonoBehaviour
     {
         lastCameraHeight = transform.position.y;
         lastCameraPos = transform.position;
-        cam = Camera.main;
+        mainCamera = Camera.main;
     }
 
     void LateUpdate()
@@ -36,12 +36,11 @@ public class CameraManager : MonoBehaviour
                 lastPosition = Input.mousePosition;
             }
 
-            Vector3 point = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.nearClipPlane));
+            Vector3 point = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, mainCamera.nearClipPlane));
             transform.Translate((point - transform.position).normalized * Input.GetAxis("Mouse ScrollWheel") * scrollSpeed, Space.World);
 
             if (Vector2.Distance(Vector2.zero, new Vector2(transform.position.x, transform.position.z)) > maxDistanceFromOrigin)
             {
-                //transform.position = lastCameraPos;
                 transform.position = new Vector3(lastCameraPos.x, transform.position.y, lastCameraPos.z);
             }
             lastCameraPos = transform.position;
@@ -54,13 +53,11 @@ public class CameraManager : MonoBehaviour
             }
             lastCameraHeight = transform.position.y;
            
-            if (Input.GetMouseButton(1) /*&& !Input.GetKey(KeyCode.LeftControl)*/)
+            if (Input.GetMouseButton(1))
             {
                 transform.Rotate(0f, Input.GetAxis("Mouse X") * rotationSpeed, 0f, Space.World);
                 transform.Rotate(-Input.GetAxis("Mouse Y") * rotationSpeed, 0f, 0f, Space.Self);
             }
-            /*if (Input.GetMouseButtonDown(0))
-                Cursor.lockState = CursorLockMode.Locked;*/
         }
     }
 

@@ -12,6 +12,8 @@ public class HealthBar : MonoBehaviour
     private HealthManager healthManager;
     private Renderer targetRenderer;
 
+    private Camera mainCamera;
+
     public void Start()
     {
         targetRenderer = healthManager.gameObject.GetComponent<Renderer>();
@@ -19,6 +21,7 @@ public class HealthBar : MonoBehaviour
             healthImageForeground.color = Color.red;
         else if (healthManager.gameObject.layer == 8)
             healthImageForeground.color = Color.green;
+        mainCamera = Camera.main;
     }
 
     public void SetHealth(HealthManager healthManager)
@@ -38,7 +41,7 @@ public class HealthBar : MonoBehaviour
         {
             healthImageForeground.enabled = true;
             healthImageBackground.enabled = true;
-            transform.position = Camera.main.WorldToScreenPoint(healthManager.transform.position + Vector3.up * positionOffset);
+            transform.position = mainCamera.WorldToScreenPoint(healthManager.transform.position + Vector3.up * positionOffset);
         }            
         else
         {

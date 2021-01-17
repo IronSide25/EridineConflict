@@ -10,8 +10,9 @@ public class LaserWeapon : MonoBehaviour, IWeapon
     public float damagePerShot = 2;
     public float range = 100f;
     public float projectileSpeed = 100f;
-    float lastShootTime;
+    public float maxAngleToShot = 5;
 
+    private float lastShootTime;
     private bool isActive;
     private bool isWeaponAlive;
 
@@ -33,7 +34,7 @@ public class LaserWeapon : MonoBehaviour, IWeapon
             if (starshipSteering.isTargeting && starshipSteering.distToTarget < range)
             {
                 float angleDiff = Quaternion.Angle(starshipSteering.transform.rotation, starshipSteering.desiredRotation);
-                if (angleDiff < 5 && Time.time - lastShootTime > shootingSpeed)
+                if (angleDiff < maxAngleToShot && Time.time - lastShootTime > shootingSpeed)
                 {
                     lastShootTime = Time.time;
                     laser.Emit(1);
@@ -44,7 +45,6 @@ public class LaserWeapon : MonoBehaviour, IWeapon
 
     public void Activate(Transform target)
     {
-        //lastShootTime = Time.time + Random.Range(-0.5f, 0.5f);
         isActive = true;
     }
 
@@ -66,7 +66,7 @@ public class LaserWeapon : MonoBehaviour, IWeapon
 
     public float GetRange()
     {
-        throw new System.NotImplementedException();
+        return range;
     }
 
     public float GetProjectileSpeed()

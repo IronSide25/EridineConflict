@@ -25,10 +25,10 @@ MonoBehaviour:
   maxPrediction: 100
   maxPursuitForce: 5
   pursuitMult: 1
-  projectileSpeed: 100
   limitPursuitRotation: 1
   allowedPursuitRotation: 0.7853
   maxAngularAcc: 3
+  maxLookRotationAngle: 5
   maxAvoidForce: 25
   sphereCastRadius: 1
   sphereCastDistance: 10
@@ -39,8 +39,8 @@ MonoBehaviour:
   separationForceMultiplier: 0.5
   maxSeparationForce: 1.5
   separationStrength: 1.5
-  maxCohesionForce: 1
-  cohesionForceMultiplier: 0.1
+  maxCohesionForce: 0.5
+  cohesionForceMultiplier: 0.05
   alignDistance: 2.5
   alignmentMultiplier: 0.25
   maxAlingmentForce: 2.5

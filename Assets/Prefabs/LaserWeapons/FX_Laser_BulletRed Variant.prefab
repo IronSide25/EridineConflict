@@ -17,6 +17,7 @@ MonoBehaviour:
   damagePerShot: 2.5
   range: 100
   projectileSpeed: 200
+  maxAngleToShot: 3
 --- !u!1001 &3971427951985654371
 PrefabInstance:
   m_ObjectHideFlags: 0

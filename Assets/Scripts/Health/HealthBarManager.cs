@@ -28,7 +28,7 @@ public class HealthBarManager : MonoBehaviour
 
     void RemoveHealthBar(HealthManager healthManager)
     {
-        if (healthBars.ContainsKey(healthManager) && healthBars[healthManager])//check if "&& healthBars[healthManager]" is required later
+        if (healthBars.ContainsKey(healthManager) && healthBars[healthManager])
         {
             Destroy(healthBars[healthManager].gameObject);
             healthBars.Remove(healthManager);

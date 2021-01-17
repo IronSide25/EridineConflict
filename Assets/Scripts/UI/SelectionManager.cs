@@ -3,14 +3,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SelectionManager : MonoBehaviour//rename class name, it currently does: unit selection, time managment, formationhelpers validation. Maybe UI manager, gameplay manager
+public class SelectionManager : MonoBehaviour
 {
     public static SelectionManager instance;
 
     private HashSet<Transform> selectedPlayerStarships;
     private HashSet<Transform> selectedEnemyStarships;
-    private List<Transform> playerStarships; // rename and move this somewhere else XD
-    private List<Transform> enemyStarships; // rename and move this somewhere else XD
+    private List<Transform> playerStarships;
+    private List<Transform> enemyStarships;
     public HashSet<FormationHelper> playerFormations;
     public List<Transform[]> enemyFormations;
     public int levelIndex;
@@ -22,18 +22,19 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
     public float sqrMaxOrderDistance = 62500;
     public RectTransform selectionBoxRect;
     public GameObject selectionGO;
-
+    
     [Header("UI")]
-    public float currentSelectionHeight;
     public Transform selectionPlaneFloor;
     public Transform selectionPlaneHeight;
-    float selectionPlaneHeightPosY = 0;
+    private float selectionPlaneHeightPosY = 0;
+    public float selectionPlaneScrollSpeed = 10;
+    public float maxSelectionPlaneHeight = 50;
 
     [Header("HUD")]
     public GameObject HUDGameobject;
     private const float starshipIconsStart = 80;
     private const float starshipIconsSpacing = 90;
-    public float[] selectedCountByTypeIndex;
+    private float[] selectedCountByTypeIndex;
     public Text[] textCounts;
     GameObject[] starshipIcons;
     public GameObject selectedStarshipsPanel;
@@ -50,7 +51,6 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
     public float timeScaleStep = 0.05f;
     public const float defaultFixedDeltaTime = 0.02f;
     private EventSystem eventSystem;
-
 
 
     // Start is called before the first frame update
@@ -160,7 +160,7 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 10))//hit enemy ship
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 10))//enemy ship hit
             {
                 FormationHelper formationHelper = new FormationHelper(new List<Transform>(selectedPlayerStarships));
                 foreach (Transform starshipTr in selectedPlayerStarships)
@@ -172,7 +172,7 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
                 playerFormations.Add(formationHelper);
                 playerFormations.RemoveWhere(formation => formation.GetLength() == 0);
             }
-            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 9))//hit selection plane
+            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 9))//selection plane hit
             {
                 if(Vector3.SqrMagnitude(hit.point - Vector3.zero) < sqrMaxOrderDistance)
                 {
@@ -182,9 +182,6 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
                         StarshipAI starshipAI = starshipTr.GetComponent<StarshipAI>();
                         starshipAI.formationHelper.RemoveShip(starshipTr);
                         starshipAI.SetMove(Input.GetKey(KeyCode.LeftControl) ? selectionPlaneHeight.position : hit.point, formationHelper);
-                        if (Input.GetKey(KeyCode.A))//not used for now
-                            starshipAI.aMove = true;
-                        //starshipAI.isSelected = true;
                     }
                     playerFormations.Add(formationHelper);
                     playerFormations.RemoveWhere(formation => formation.GetLength() == 0);
@@ -210,8 +207,8 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
                 selectionPlaneFloor.gameObject.SetActive(true);
                 selectionPlaneHeight.gameObject.SetActive(true);
                 selectionPlaneFloor.position = hit.point;
-                selectionPlaneHeightPosY -= Input.GetAxis("Mouse ScrollWheel") * 10;
-                selectionPlaneHeightPosY = Mathf.Clamp(selectionPlaneHeightPosY, -50, 50);
+                selectionPlaneHeightPosY -= Input.GetAxis("Mouse ScrollWheel") * selectionPlaneScrollSpeed;
+                selectionPlaneHeightPosY = Mathf.Clamp(selectionPlaneHeightPosY, -maxSelectionPlaneHeight, maxSelectionPlaneHeight);
                 selectionPlaneHeight.position = new Vector3(hit.point.x, selectionPlaneHeightPosY, hit.point.z);
             }
             else
@@ -459,7 +456,7 @@ public class SelectionManager : MonoBehaviour//rename class name, it currently d
                 RemoveHealthBar(ship);
             }
         }
-        selectedPlayerStarships.RemoveWhere(starship => starship.GetComponent<StarshipAI>().typeIndex != index);//optimize this pls!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        selectedPlayerStarships.RemoveWhere(starship => starship.GetComponent<StarshipAI>().typeIndex != index);
         selectedCountByTypeIndex = new float[] { 0, 0, 0, 0, 0 };
         selectedCountByTypeIndex[index] = selectedPlayerStarships.Count;
         UpdateUIActive();

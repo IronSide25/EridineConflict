@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FormationHelper// add set move set attack
+public class FormationHelper
 {
-    public static List<FormationHelper> instances;//lepiej to zamien na listę w selectionmanager
+    public static List<FormationHelper> instances;
 
-    //maybe change to hashset
-    public List<Transform> shipsInFormation;//change to private later, with setter and getter
+    public List<Transform> shipsInFormation;
     public HashSet<Transform> shipsHashSet;//for optimization
-    public Vector3 centerOfMass;
-    public Vector3 averageVelocity;
+    private Vector3 centerOfMass;
+    private Vector3 averageVelocity;
     private bool massCacheIsValid;
     private bool velocityCacheIsValid;
 
@@ -74,19 +73,27 @@ public class FormationHelper// add set move set attack
         }
     }
 
+    public void SetFormationAttack(FormationHelper enemyFormationHelper)
+    {
+        foreach (Transform ship in shipsInFormation)
+        {
+            List<Transform> shipsInFormation = enemyFormationHelper.shipsInFormation;
+            ship.GetComponent<StarshipAI>().SetAttack(shipsInFormation[Random.Range(0, shipsInFormation.Count)], this, true);
+        }
+    }
+
     public void InvalidateCache()
     {
         massCacheIsValid = false;
         velocityCacheIsValid = false;
     }
 
-    public Vector3 GetCenterOfMass()//moze spróbuj jakoś odjąć pozycję pytającego statku 
+    public Vector3 GetCenterOfMass()
     {
         if (massCacheIsValid)
             return centerOfMass;
         else
         {
-            //Debug.Log("Recalculating center of mass");
             int count = 0;
             foreach (Transform ship in shipsInFormation)
             {
@@ -102,13 +109,12 @@ public class FormationHelper// add set move set attack
         }
     }
 
-    public Vector3 GetAverageVelocity()//moze spróbuj jakoś odjąć pozycję pytającego statku 
+    public Vector3 GetAverageVelocity()
     {
         if (velocityCacheIsValid)
             return averageVelocity;
         else
         {
-            //Debug.Log("Recalculating average velocity");
             int count = 0;
             foreach (Transform ship in shipsInFormation)
             {

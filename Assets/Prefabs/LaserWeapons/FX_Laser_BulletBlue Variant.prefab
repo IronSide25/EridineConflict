@@ -117,5 +117,10 @@ PrefabInstance:
       propertyPath: projectileSpeed
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 4381809987560072049, guid: ea98b3f6ab31af448920a1e5f695522d,
+        type: 3}
+      propertyPath: maxAngleToShot
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea98b3f6ab31af448920a1e5f695522d, type: 3}

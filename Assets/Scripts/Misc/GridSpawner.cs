@@ -13,9 +13,7 @@ public class GridSpawner : MonoBehaviour
 
     public bool setMoveAtStart;
     public Transform setMoveDestination;
-
     public UnitBehavior unitBehavior;
-
 
     void Start()
     {
@@ -24,10 +22,6 @@ public class GridSpawner : MonoBehaviour
         {
             for (int z = 0; z < gridHeight; z++)
             {
-                /*Transform spawnedObject = Instantiate(prefab, 
-                    new Vector3(transform.position.x + (x * gridSeparation), transform.position.y, transform.position.z + (z * gridSeparation)), 
-                    transform.rotation).transform;*/
-
                 Transform spawnedObject = Instantiate(prefab,
                     new Vector3(transform.position.x , transform.position.y + (x * gridSeparation), transform.position.z + (z * gridSeparation)),
                     transform.rotation).transform;
@@ -39,13 +33,11 @@ public class GridSpawner : MonoBehaviour
 
         if(ships[0].GetComponent<StarshipAI>().isPlayer)
         {
-            //EnemyAI.Instance.playerFormations.Add(ships.ToArray());
             SelectionManager.instance.playerFormations.Add(formationHelper);
         }
         else
         {
             SelectionManager.instance.enemyFormations.Add(ships.ToArray());
-            //EnemyAI.Instance.enemyFormations.Add(ships.ToArray());
         }
 
         foreach (Transform tr in ships)

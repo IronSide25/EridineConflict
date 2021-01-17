@@ -21,10 +21,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 678, y: 492}
+  m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 4277
+  controlID: 16744
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -138,10 +138,10 @@ MonoBehaviour:
     y: 0
     width: 1453
     height: 947
-  m_MinSize: {x: 402, y: 492}
+  m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 4233
+  controlID: 16745
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -163,10 +163,10 @@ MonoBehaviour:
     y: 0
     width: 1453
     height: 676
-  m_MinSize: {x: 402, y: 221}
-  m_MaxSize: {x: 8002, y: 4021}
+  m_MinSize: {x: 403, y: 221}
+  m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 4212
+  controlID: 16746
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -186,8 +186,8 @@ MonoBehaviour:
     y: 0
     width: 271
     height: 676
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -221,10 +221,10 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      scrollPos: {x: 0, y: 406}
+      m_SelectedIDs: 5c5d0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 5cf4ffff9cf8fffff2f8ffff6afbffff006c0000
+      m_ExpandedIDs: ae2affff50cdffff6ccfffff94d1ffffc2d3ffff06d6ffffacd7ffff50d9ffffe8daffff80dcffffd0ddffff26deffff86deffff2cfaffff6afbffff4ebf000074bf00005cc000006ec0000036c1000072c10000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -311,14 +311,14 @@ MonoBehaviour:
   m_Gizmos: 1
   m_SceneIsLit: 0
   m_SceneLighting: 1
-  m_2DMode: 1
+  m_2DMode: 0
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1242.7, y: 358.80002, z: 0}
+    m_Target: {x: 48.887, y: 9.59589, z: -43.494175}
     speed: 2
-    m_Value: {x: 1242.7, y: 358.80002, z: 0}
+    m_Value: {x: 48.887, y: 9.59589, z: -43.494175}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -346,7 +346,7 @@ MonoBehaviour:
       m_Size: {x: 1, y: 1}
     yGrid:
       m_Fade:
-        m_Target: 0
+        m_Target: 1
         speed: 2
         m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
@@ -354,7 +354,7 @@ MonoBehaviour:
       m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
-        m_Target: 1
+        m_Target: 0
         speed: 2
         m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
@@ -364,17 +364,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0
   m_Rotation:
-    m_Target: {x: 0, y: 0, z: 0, w: 1}
+    m_Target: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: 1}
+    m_Value: {x: 0.087172285, y: -0.8995905, z: 0.21045253, w: 0.37262273}
   m_Size:
-    m_Target: 427.6247
+    m_Target: 37.73591
     speed: 2
-    m_Value: 427.6247
+    m_Value: 39.51404
   m_Ortho:
-    m_Target: 1
+    m_Target: 0
     speed: 2
-    m_Value: 1
+    m_Value: 0
   m_CameraSettings:
     m_Speed: 1.1
     m_SpeedNormalized: 0.54773873
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 19268
+  m_LastSelectedObjectID: 48988
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1140,20 +1140,20 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/DataContainers/v2
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/DataContainers/v2
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "D:\\DATA\\Programming\\IN\u017BYNIERKA\\NewEridineConflict\\EridineConflict"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 202}
-    m_SelectedIDs: 70480000
-    m_LastClickedID: 18544
-    m_ExpandedIDs: 00000000f03a0000e4460000e6460000e8460000ea460000ec460000ee460000f0460000f2460000f4460000f6460000f8460000fa460000fc460000fe46000000ca9a3b
+    scrollPos: {x: 0, y: 143}
+    m_SelectedIDs: 203f0000
+    m_LastClickedID: 16160
+    m_ExpandedIDs: 00000000f03a0000f83e0000fa3e0000fc3e0000fe3e0000003f0000023f0000043f0000063f0000083f00000a3f00000c3f00000e3f0000103f0000123f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1181,7 +1181,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000e4460000e6460000e8460000ea460000ec460000ee460000f0460000f2460000f4460000f6460000f8460000fa460000fc460000fe46000000ca9a3b
+    m_ExpandedIDs: 00000000f83e0000fa3e0000fc3e0000fe3e0000003f0000023f0000043f0000063f0000083f00000a3f00000c3f00000e3f0000103f0000123f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1206,8 +1206,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 5c5d0000
+    m_LastClickedInstanceID: 23900
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000092f70000c254010066cb010022390100c6a301008255010006120200cc0d1200cad301004c3c1100587f01008a3a1100c88001004ebe6800aab4000032e20000609f010002e3000086d100001c260200b22a110076f201004e640100d6510100bab401007af20100da51010004780100669001001e380b00343a0b002e320200cca4010074f95a00603e87009ec30000f62201009226020016500100a8ed00005c9201004aa30000ca0a01005a32020010d701009c317500e6f20100c6c30000243c0b00eaf20100a23202000cf301003ccd0000ac9f00009a330100fe080200fa120200a0920100beed0000d045010004f80000a4920100c6c601003e5d0100ba9f0000b2330100e81d0b00a6f30100586d010018ba0100e09f0000b6050200c23602001e930100ac27020064ed090012a6000076110200445a00001a530100ec5600007257000048560000486c00001c5800000a5800002e58000006580000865a00001a560000245600001c56000000000000
     m_RenameOverlay:
@@ -1488,7 +1488,7 @@ MonoBehaviour:
     height: 926
   m_ViewDataDictionary: {fileID: 0}
   m_Spl:
-    ID: 867
+    ID: 458
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes: 82020000d6000000
@@ -1500,7 +1500,7 @@ MonoBehaviour:
     lastTotalSize: 856
     splitSize: 6
     xOffset: 0
-  m_TestTypeToolbarIndex: 0
+  m_TestTypeToolbarIndex: 1
   m_PlayModeTestListGUI:
     m_Window: {fileID: 23}
     newResultList:
@@ -1509,7 +1509,7 @@ MonoBehaviour:
       name: EridineConflict
       fullName: EridineConflict
       resultStatus: 1
-      duration: 7.157031
+      duration: 8.416394
       messages: 
       output: 
       stacktrace: 
@@ -1525,7 +1525,7 @@ MonoBehaviour:
       name: PlayModeTests.dll
       fullName: "D:/DATA/Programming/IN\u017BYNIERKA/NewEridineConflict/EridineConflict/Library/ScriptAssemblies/PlayModeTests.dll"
       resultStatus: 1
-      duration: 7.1082067
+      duration: 8.388039
       messages: 
       output: 
       stacktrace: 
@@ -1541,7 +1541,7 @@ MonoBehaviour:
       name: Tests
       fullName: Tests
       resultStatus: 1
-      duration: 7.0918455
+      duration: 8.37388
       messages: 
       output: 
       stacktrace: 
@@ -1557,7 +1557,7 @@ MonoBehaviour:
       name: PoolingTests
       fullName: Tests.PoolingTests
       resultStatus: 1
-      duration: 2.6776333
+      duration: 1.8447618
       messages: 
       output: 
       stacktrace: 
@@ -1573,7 +1573,7 @@ MonoBehaviour:
       name: TestAdditionalAllocation
       fullName: Tests.PoolingTests.TestAdditionalAllocation
       resultStatus: 1
-      duration: 1.3685416
+      duration: 0.5277812
       messages: 
       output: 
       stacktrace: 
@@ -1590,7 +1590,7 @@ MonoBehaviour:
       name: TestPooling
       fullName: Tests.PoolingTests.TestPooling
       resultStatus: 1
-      duration: 1.2773198
+      duration: 1.2369267
       messages: 
       output: 
       stacktrace: 
@@ -1607,7 +1607,7 @@ MonoBehaviour:
       name: SelectionManagerTests
       fullName: Tests.SelectionManagerTests
       resultStatus: 1
-      duration: 0.8831217
+      duration: 3.1092792
       messages: 
       output: 
       stacktrace: 
@@ -1623,7 +1623,7 @@ MonoBehaviour:
       name: TestBehaviorSetting
       fullName: Tests.SelectionManagerTests.TestBehaviorSetting
       resultStatus: 1
-      duration: 0.4540489
+      duration: 2.7184863
       messages: 
       output: 
       stacktrace: 
@@ -1640,7 +1640,7 @@ MonoBehaviour:
       name: TestSelectAll
       fullName: Tests.SelectionManagerTests.TestSelectAll
       resultStatus: 1
-      duration: 0.2069925
+      duration: 0.1887843
       messages: 
       output: 
       stacktrace: 
@@ -1657,7 +1657,7 @@ MonoBehaviour:
       name: TestTimeManagement
       fullName: Tests.SelectionManagerTests.TestTimeManagement
       resultStatus: 1
-      duration: 0.2002286
+      duration: 0.1916537
       messages: 
       output: 
       stacktrace: 
@@ -1674,7 +1674,7 @@ MonoBehaviour:
       name: StarshipAITests
       fullName: Tests.StarshipAITests
       resultStatus: 1
-      duration: 3.514343
+      duration: 3.4090333
       messages: 
       output: 
       stacktrace: 
@@ -1690,7 +1690,7 @@ MonoBehaviour:
       name: TestMoving
       fullName: Tests.StarshipAITests.TestMoving
       resultStatus: 1
-      duration: 1.3380178
+      duration: 1.2902018
       messages: 
       output: 
       stacktrace: 
@@ -1707,7 +1707,7 @@ MonoBehaviour:
       name: TestMovingAttack
       fullName: Tests.StarshipAITests.TestMovingAttack
       resultStatus: 1
-      duration: 1.2247972
+      duration: 1.2041241
       messages: 
       output: 
       stacktrace: 
@@ -1724,7 +1724,7 @@ MonoBehaviour:
       name: TestUnitBehavior
       fullName: Tests.StarshipAITests.TestUnitBehavior
       resultStatus: 1
-      duration: 0.9347162
+      duration: 0.9043174
       messages: 
       output: 
       stacktrace: 
@@ -1736,7 +1736,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1004
       parentUniqueId: PlayModeTests.dll/Tests/[PlayModeTests][Tests.StarshipAITests][suite]
-    m_ResultText: EridineConflict (7,157s)
+    m_ResultText: EridineConflict (8,416s)
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
@@ -1776,7 +1776,7 @@ MonoBehaviour:
       name: EridineConflict
       fullName: EridineConflict
       resultStatus: 1
-      duration: 0.2192257
+      duration: 0.1230119
       messages: 
       output: 
       stacktrace: 
@@ -1792,7 +1792,7 @@ MonoBehaviour:
       name: EditModeTests.dll
       fullName: "D:/DATA/Programming/IN\u017BYNIERKA/NewEridineConflict/EridineConflict/Library/ScriptAssemblies/EditModeTests.dll"
       resultStatus: 1
-      duration: 0.1522123
+      duration: 0.0829112
       messages: 
       output: 
       stacktrace: 
@@ -1808,7 +1808,7 @@ MonoBehaviour:
       name: Tests
       fullName: Tests
       resultStatus: 1
-      duration: 0.1465746
+      duration: 0.0779736
       messages: 
       output: 
       stacktrace: 
@@ -1824,7 +1824,7 @@ MonoBehaviour:
       name: ExtensionsTests
       fullName: Tests.ExtensionsTests
       resultStatus: 1
-      duration: 0.0487641
+      duration: 0.0096238
       messages: 
       output: 
       stacktrace: 
@@ -1840,7 +1840,7 @@ MonoBehaviour:
       name: TestCenterOfMass
       fullName: Tests.ExtensionsTests.TestCenterOfMass
       resultStatus: 1
-      duration: 0.0227902
+      duration: 0.0011851
       messages: 
       output: 
       stacktrace: 
@@ -1857,7 +1857,7 @@ MonoBehaviour:
       name: FormationHelperTests
       fullName: Tests.FormationHelperTests
       resultStatus: 1
-      duration: 0.053488
+      duration: 0.0356725
       messages: 
       output: 
       stacktrace: 
@@ -1873,7 +1873,7 @@ MonoBehaviour:
       name: TestAverageVelocity
       fullName: Tests.FormationHelperTests.TestAverageVelocity
       resultStatus: 1
-      duration: 0.0112127
+      duration: 0.0068269
       messages: 
       output: 
       stacktrace: 
@@ -1890,7 +1890,7 @@ MonoBehaviour:
       name: TestCenterOfMass
       fullName: Tests.FormationHelperTests.TestCenterOfMass
       resultStatus: 1
-      duration: 0.0013873
+      duration: 0.0012181
       messages: 
       output: 
       stacktrace: 
@@ -1907,7 +1907,7 @@ MonoBehaviour:
       name: HealthManagerTests
       fullName: Tests.HealthManagerTests
       resultStatus: 1
-      duration: 0.0367297
+      duration: 0.0240137
       messages: 
       output: 
       stacktrace: 
@@ -1923,7 +1923,7 @@ MonoBehaviour:
       name: TestHealthManager
       fullName: Tests.HealthManagerTests.TestHealthManager
       resultStatus: 1
-      duration: 0.0083441
+      duration: 0.0062342
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1940,7 +1940,7 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1019
       parentUniqueId: EditModeTests.dll/Tests/[EditModeTests][Tests.HealthManagerTests][suite]
-    m_ResultText: EridineConflict (0,219s)
+    m_ResultText: EridineConflict (0,123s)
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}

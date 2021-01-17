@@ -7,18 +7,7 @@ using UnityEngine;
 public class Outline : MonoBehaviour
 {
     private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
-
-    [Serializable]
-    private class ListVector3
-    {
-        public List<Vector3> vecList;
-
-        public ListVector3(List<Vector3> list)
-        {
-            vecList = list;
-        }
-    }
-
+    
     [SerializeField]
     private List<Mesh> bakedKeys = new List<Mesh>();
     [SerializeField]
@@ -113,5 +102,16 @@ public class Outline : MonoBehaviour
                 smoothedNormals[pair.Value] = smoothedNormal;
         }
         return smoothedNormals;
+    }
+
+    [Serializable]
+    private class ListVector3
+    {
+        public List<Vector3> vecList;
+
+        public ListVector3(List<Vector3> list)
+        {
+            vecList = list;
+        }
     }
 }

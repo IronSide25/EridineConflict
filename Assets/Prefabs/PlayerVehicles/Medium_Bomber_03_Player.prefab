@@ -12175,25 +12175,21 @@ MonoBehaviour:
   starshipClass: 1
   typeIndex: 2
   unitBehavior: 0
-  aMove: 0
   isAttacking: 0
-  isShooting: 0
   isPlayer: 1
   attackDistance: 120
-  target: {fileID: 0}
-  lastTargetPos: {x: 0, y: 0, z: 0}
   isInCloseProximity: 0
   maxEvadeTime: 5
   maxEvadeTimeDeviation: 0.5
   lineGreen: {fileID: 2100000, guid: 747ac54ffb6312e4dbba329bbb4e958b, type: 2}
   lineRed: {fileID: 2100000, guid: c8cd2dde19c4ae44aa51f635aa33de1c, type: 2}
   isSelected: 0
-  minSqrDistanceVsLight: 100
-  maxSqrDistanceVsLight: 4000
+  minSqrDistanceVsLight: 200
+  maxSqrDistanceVsLight: 6500
   minSqrDistanceVsMedium: 500
-  maxSqrDistanceVsMedium: 7000
+  maxSqrDistanceVsMedium: 7500
   minSqrDistanceVsHeavy: 250
-  maxSqrDistanceVsHeavy: 7000
+  maxSqrDistanceVsHeavy: 7500
 --- !u!114 &7907209744448910881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12206,7 +12202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcac584d1bb62fa4abb9ea77d6c2a67c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 35
   armor: 0.5
   currentHealth: 0
   explosionScale: 0.5
@@ -12522,6 +12518,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Laser_BulletBlue Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4381809987560072049, guid: ea98b3f6ab31af448920a1e5f695522d,
+        type: 3}
+      propertyPath: maxAngleToShot
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea98b3f6ab31af448920a1e5f695522d, type: 3}
 --- !u!4 &3988884469379180267 stripped
@@ -12596,6 +12597,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FX_Laser_BulletBlue Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381809987560072049, guid: ea98b3f6ab31af448920a1e5f695522d,
+        type: 3}
+      propertyPath: maxAngleToShot
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea98b3f6ab31af448920a1e5f695522d, type: 3}

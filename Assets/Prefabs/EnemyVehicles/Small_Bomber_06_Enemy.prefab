@@ -129,7 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 1
   bakedKeys:
   - {fileID: 4300000, guid: 562087eafc41f8b4b8b6e28118fec3a1, type: 3}
   bakedValues:
@@ -8037,24 +8036,20 @@ MonoBehaviour:
   starshipClass: 0
   typeIndex: 1
   unitBehavior: 0
-  aMove: 0
   isAttacking: 0
-  isShooting: 0
   isPlayer: 0
   attackDistance: 120
-  target: {fileID: 0}
-  lastTargetPos: {x: 0, y: 0, z: 0}
   isInCloseProximity: 0
   maxEvadeTime: 5
   maxEvadeTimeDeviation: 0.5
   lineGreen: {fileID: 0}
   lineRed: {fileID: 0}
   isSelected: 0
-  minSqrDistanceVsLight: 100
-  maxSqrDistanceVsLight: 4000
+  minSqrDistanceVsLight: 200
+  maxSqrDistanceVsLight: 5500
   minSqrDistanceVsMedium: 250
   maxSqrDistanceVsMedium: 7000
-  minSqrDistanceVsHeavy: 250
+  minSqrDistanceVsHeavy: 300
   maxSqrDistanceVsHeavy: 7000
 --- !u!114 &4094065355591478688
 MonoBehaviour:
@@ -8144,6 +8139,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FX_Laser_BulletBlue Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381809987560072049, guid: ea98b3f6ab31af448920a1e5f695522d,
+        type: 3}
+      propertyPath: maxAngleToShot
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea98b3f6ab31af448920a1e5f695522d, type: 3}

@@ -6,6 +6,7 @@ public class DisableScript : MonoBehaviour
 {
     private float startTime;
     public float awakeTime = 10;
+
     // Start is called before the first frame update
     void OnEnable()
     {

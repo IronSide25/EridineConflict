@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: damagePerShot
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1821711057732112092, guid: b8f2699b6ca03d84e85dcda3e5e716ea,
+        type: 3}
+      propertyPath: maxAngleToShot
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3880338244868754005, guid: b8f2699b6ca03d84e85dcda3e5e716ea,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

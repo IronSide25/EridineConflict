@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TurretWeapon : MonoBehaviour, IWeapon
 {
-    StarshipSteering starshipSteering;
+    private StarshipSteering starshipSteering;
     private Transform target;
 
     public ParticleSystem[] lasers;
@@ -15,8 +15,9 @@ public class TurretWeapon : MonoBehaviour, IWeapon
     public float damagePerShot = 2;
     public float range = 100f;
     public float projectileSpeed = 100f;
-    float lastShootTime;
+    public float maxAngleToShot = 5;
 
+    private float lastShootTime;
     private bool isActive;
     private bool isWeaponAlive;
 
@@ -32,12 +33,13 @@ public class TurretWeapon : MonoBehaviour, IWeapon
 
         isWeaponAlive = true;
     }
+
     // Update is called once per frame
     void Update()
     {
         if(isActive && isWeaponAlive)
         {
-            if (starshipSteering.distToTarget < range)//i think its working fine, but test if rot z is always zero
+            if (starshipSteering.distToTarget < range)
             {
                 float prediction = starshipSteering.distToTarget / projectileSpeed;
                 Vector3 attackPredictedTarget = starshipSteering.transformTarget.position + (starshipSteering.transformTarget.GetComponent<Rigidbody>().velocity * prediction);
@@ -58,7 +60,7 @@ public class TurretWeapon : MonoBehaviour, IWeapon
 
                 if (!(turretBase.localRotation.eulerAngles.x > maxRotationX && turretBase.localRotation.eulerAngles.x < 90))
                 {
-                    if (Time.time - lastShootTime > shootingSpeed && Quaternion.Angle(turretBase.rotation, lookRotation) < 5)//make variable out of this
+                    if (Time.time - lastShootTime > shootingSpeed && Quaternion.Angle(turretBase.rotation, lookRotation) < maxAngleToShot)//make variable out of this
                     {
                         lastShootTime = Time.time;
                         foreach (ParticleSystem laser in lasers)
@@ -97,7 +99,7 @@ public class TurretWeapon : MonoBehaviour, IWeapon
 
     public float GetRange()
     {
-        throw new System.NotImplementedException();
+        return range;
     }
 
     public float GetProjectileSpeed()

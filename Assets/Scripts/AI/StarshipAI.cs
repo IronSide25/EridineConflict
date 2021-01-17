@@ -8,23 +8,22 @@ public enum StarshipClass { Light, Medium, Heavy };
 public class StarshipAI : MonoBehaviour
 {
     private StarshipSteering starshipSteering;
-    public FormationHelper formationHelper;//not sure about that
+    public FormationHelper formationHelper;
     public StarshipClass starshipClass;
     public int typeIndex;
     public UnitBehavior unitBehavior = UnitBehavior.Aggresive;
-    public bool aMove;
     private StarshipClass currentEnemyClass;
 
     public bool isAttacking;
-    public bool isShooting;
     public bool isPlayer;
     public float attackDistance;
+    private bool ignoreFormationIsSet = false;
 
     private const float timeBetweenSphereCast = 0.5f;
     private float lastSphereCast;
 
-    public Transform target;
-    public Vector3 lastTargetPos;
+    private Transform target;
+    private Vector3 lastTargetPos;
 
     public bool isInCloseProximity = false;//is evading or stopped
     public float maxEvadeTime;
@@ -40,6 +39,7 @@ public class StarshipAI : MonoBehaviour
     private Vector3 fightPivot; //prevents starship from moving away during fight
     public FormationHelper targetFormationHelper;
 
+    [Header("Attack distances")]
     public float minSqrDistanceVsLight;
     public float maxSqrDistanceVsLight;
     public float minSqrDistanceVsMedium;
@@ -65,20 +65,24 @@ public class StarshipAI : MonoBehaviour
             isPlayer = true;
         else
             isPlayer = false;
-        /*starshipSteering.maxDesiredPursuitForce = 10;
-        starshipSteering.maxDesiredSeekForce = 10;*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (aMove && starshipSteering.isMoving)
-            aMove = false;
-
         if (isAttacking)
         {
             if (target != null)
             {
+                if(!ignoreFormationIsSet)
+                {
+                    if(Vector3.SqrMagnitude(transform.position - target.position) < attackDistance * attackDistance)
+                    {
+                        starshipSteering.SetMoveBehaviorIgnoreFormation();
+                        ignoreFormationIsSet = true;
+                    }
+                }                
+
                 if (starshipClass == StarshipClass.Heavy)
                     AttackStopTactics();
                 else
@@ -99,13 +103,13 @@ public class StarshipAI : MonoBehaviour
                 }
                 //try to find closest enemy
                 //set others target formation helpers for the same formation
-                if (!newTargetSet)//change this, maybe use formation helper to forward message to other ships in formation and do this only once
+                if (!newTargetSet)
                 {
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackDistance, isPlayer ? 1 << 10 : 1 << 8);
                     if (hitColliders.Length > 0)
                     {
                         Transform target = hitColliders[Random.Range(0, hitColliders.Length)].transform.root;
-                        formationHelper.SetFormationTarget(target.GetComponent<StarshipAI>().formationHelper);// new code, test this pls
+                        formationHelper.SetFormationTarget(target.GetComponent<StarshipAI>().formationHelper);
                         SetAttack(target, formationHelper, false);
                     }                  
                     else
@@ -117,10 +121,10 @@ public class StarshipAI : MonoBehaviour
         }
         else// not attacking
         {
-            if(Time.time - lastSphereCast > timeBetweenSphereCast && (unitBehavior == UnitBehavior.Aggresive || aMove))
+            if(Time.time - lastSphereCast > timeBetweenSphereCast && (unitBehavior == UnitBehavior.Aggresive))
             {
                 lastSphereCast = Time.time;
-                Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackDistance, isPlayer ? 1 << 10 : 1 << 8);//spikes in profiler
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackDistance, isPlayer ? 1 << 10 : 1 << 8);
                 if (hitColliders.Length > 0)
                 {
                     Transform enemyTransform = hitColliders[Random.Range(0, hitColliders.Length)].attachedRigidbody.transform;
@@ -129,14 +133,18 @@ public class StarshipAI : MonoBehaviour
                     {
                         List<Transform> enemyFormationList = enemyStarshipAI.formationHelper.GetShipsInFormationRemoveNull();
                         SetAttack(enemyFormationList[Random.Range(0, enemyFormationList.Count)].transform, formationHelper);
+                        formationHelper.SetFormationAttack(target.GetComponent<StarshipAI>().formationHelper);
                     }                       
                     else
+                    {
                         SetAttack(enemyTransform, formationHelper);
+                        formationHelper.SetFormationAttack(target.GetComponent<StarshipAI>().formationHelper);
+                    }                     
                 }
             }            
         }
 
-        if (lineRendererMoveHint)//zapytaj czy to powinno być tutaj czy gdzie indziej
+        if (lineRendererMoveHint)
         {
             if ((starshipSteering.isMoving || isAttacking) && isSelected)
             {
@@ -159,28 +167,21 @@ public class StarshipAI : MonoBehaviour
         }
     }
 
-    private void AttackEvadeTactics()//!!!!!!!!!!!!!!!!!!!!!!! zamiast ustawiać punkt jakiś można po prostu ustawić starshipSteering.evade = true;, na szybko przetestowane i dzieja sie rzeczy dziwne
+    private void AttackEvadeTactics()
     {
-        //lastTargetPos = target.position;
         if (!isInCloseProximity)
         {
-            if (Vector3.SqrMagnitude(transform.position - target.position) < currentMinSqrDistance /*&& !target.GetComponent<StarshipAI>().isInCloseProximity*/)
+            if (Vector3.SqrMagnitude(transform.position - target.position) < currentMinSqrDistance)
             {
                 //ESCAPE
                 Vector3 dir = transform.position - starshipSteering.target;
-                //dir = dir.normalized + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));//randomize
-                //dir = Quaternion.Euler(Random.Range(-90, 90), Random.Range(-90, 90), Random.Range(-90, 90)) * dir;
-                dir = Quaternion.AngleAxis(90f, Random.insideUnitCircle) * dir;
+                dir = Quaternion.AngleAxis(25f, Random.insideUnitCircle) * dir;
 
-                //Vector3 newpos = new Vector3(93, -1, 9.3f);   
-                //starshipSteering.SetDestinationFormation((transform.position + (dir.normalized * 150)), starshipSteering.shipsInFormation);
-                //ZMIANA NA fightPivot - (dir.normalized * 150) JEST CIEKAWA, PRZETESTOWAĆ
-                starshipSteering.SetDestinationFormation((fightPivot + (dir.normalized * 150)), starshipSteering.formationHelper);// i think thats not optimal, change only steering target
+                starshipSteering.SetDestinationFormation((fightPivot + (dir.normalized * 150)), starshipSteering.formationHelper);
                 isInCloseProximity = true;
                 lastEvadeTime = Time.time + Random.Range(-maxEvadeTimeDeviation, maxEvadeTimeDeviation);
                 starshipSteering.SetRotationBehaviorLookVelocity();
-                //starshipSteering.SetStop();
-                //starshipSteering.evade = true;
+
             }
         }
         else
@@ -197,16 +198,12 @@ public class StarshipAI : MonoBehaviour
 
     private void AttackStopTactics()
     {
-        //lastTargetPos = target.position;
         if (!isInCloseProximity)
         {
             if (Vector3.SqrMagnitude(transform.position - target.position) < currentMinSqrDistance)
             {
                 isInCloseProximity = true;
                 starshipSteering.SetStop();
-                //starshipSteering.rotateToTarget = false;
-                //starshipSteering.SetStop();
-                //starshipSteering.evade = true;
             }
         }
         else
@@ -223,6 +220,11 @@ public class StarshipAI : MonoBehaviour
 
     public void SetAttack(Transform _target, FormationHelper _formationHelper, bool setFightPivot = true)
     {
+        if(!isPlayer)
+        {
+            unitBehavior = UnitBehavior.Aggresive;
+        }
+
         isAttacking = true;
         isInCloseProximity = false;
         target = _target;
@@ -236,38 +238,38 @@ public class StarshipAI : MonoBehaviour
         starshipSteering.allowTransitiveBumping = false;
         starshipSteering.collideWithFormationUnits = true;
         formationHelper = _formationHelper;
-        if (setFightPivot)
-            fightPivot = target.position + (transform.position - target.position) / 2;
 
         StarshipAI targetStarshipAI = target.GetComponent<StarshipAI>();
         if (targetStarshipAI)
         {
             targetFormationHelper = targetStarshipAI.formationHelper;
             currentEnemyClass = targetStarshipAI.starshipClass;
-
+            Vector3 enemyCenterOfMass = targetFormationHelper.GetCenterOfMass();
+            if (setFightPivot)
+            {
+                fightPivot = enemyCenterOfMass + (formationHelper.GetCenterOfMass() - enemyCenterOfMass) / 2;
+            }
             if (currentEnemyClass == StarshipClass.Light)
             {
                 currentMinSqrDistance = minSqrDistanceVsLight;
                 currentMaxSqrDistance = maxSqrDistanceVsLight;
-                starshipSteering.SetMoveBehaviorIgnoreFormation();
             }
             else if (currentEnemyClass == StarshipClass.Medium)
             {
                 currentMinSqrDistance = minSqrDistanceVsMedium;
                 currentMaxSqrDistance = maxSqrDistanceVsMedium;
-                starshipSteering.SetMoveBehaviorIgnoreFormation();
             }
-            else if (currentEnemyClass == StarshipClass.Heavy)
+            else
             {
                 currentMinSqrDistance = minSqrDistanceVsHeavy;
                 currentMaxSqrDistance = maxSqrDistanceVsHeavy;
-                starshipSteering.SetMoveBehaviorIgnoreFormation();
             }
-            else//delete this after testing
+        }
+        else
+        {
+            if (setFightPivot)
             {
-                currentMinSqrDistance = minSqrDistanceVsMedium;
-                currentMaxSqrDistance = maxSqrDistanceVsMedium;
-                starshipSteering.SetMoveBehaviorIgnoreFormation();
+                fightPivot = target.position + (formationHelper.GetCenterOfMass() - target.position) / 2;
             }
         }
     }
@@ -293,11 +295,12 @@ public class StarshipAI : MonoBehaviour
         starshipSteering.SetDestinationFormation(_target, _formationHelper);
         lastTargetPos = _target;
         starshipSteering.SetMoveBehaviorInFormation();
+        ignoreFormationIsSet = false;
         isAttacking = false;        
         formationHelper = _formationHelper;
         starshipSteering.allowStopOnDistance = true;
         starshipSteering.allowTransitiveBumping = true;
-        starshipSteering.collideWithFormationUnits = false;
+        starshipSteering.collideWithFormationUnits = false;        
     }
 
     public void OnDamageReceived(Transform transform)

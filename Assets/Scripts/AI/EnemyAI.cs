@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimalizing player cost function
+public class EnemyAI : MonoBehaviour
 {
     public bool useExhaustive = true;
     public bool autoAttack;
@@ -41,7 +41,7 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
             enemyFormations = SelectionManager.instance.enemyFormations;
 
             UnifyPlayerFormations();
-            Debug.Log("Unified player formations count: " + playerFormations.Count);
+            //Debug.Log("Unified player formations count: " + playerFormations.Count);
 
             playerFormationsCountBefore = new float[playerFormations.Count];
             playerFormationsCountAfter = new float[playerFormations.Count];
@@ -50,8 +50,6 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
                 playerFormationsCountBefore[i] = playerFormations[i].GetLength();
             }
 
-            //int[] solution = ExhaustiveSearch();//ex. [0,1,2] first enemy formation attack player formation at playerFormations[0]
-            //int[] solution = WTAGreedyMMR();
             int[] solution;
             if (useExhaustive)
                 solution = ExhaustiveSearch();
@@ -60,10 +58,11 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
 
             for (int i = 0; i < enemyFormations.Count; i++)
             {
-                Debug.Log("Enemy Type: " + enemyFormations[i][0].GetComponent<StarshipAI>().typeIndex + " attacks player type: " + playerFormations[solution[i]].shipsInFormation[0].GetComponent<StarshipAI>().typeIndex + " Formation index: " + solution[i]);
+                //Debug.Log("Enemy Type: " + enemyFormations[i][0].GetComponent<StarshipAI>().typeIndex + " attacks player type: " + playerFormations[solution[i]].shipsInFormation[0].GetComponent<StarshipAI>().typeIndex + " Formation index: " + solution[i]);
                 for (int j = 0; j < enemyFormations[i].Length; j++)//each enemy ship in current formation attacks random player ship from attacked player formation
                 {
-                    enemyFormations[i][j].GetComponent<StarshipAI>().SetAttack(playerFormations[solution[i]].shipsInFormation[0], enemyFormations[i][j].GetComponent<StarshipAI>().formationHelper);
+                    FormationHelper targetHelper = playerFormations[solution[i]];
+                    enemyFormations[i][j].GetComponent<StarshipAI>().SetAttack(targetHelper.shipsInFormation[UnityEngine.Random.Range(0, targetHelper.shipsInFormation.Count)], enemyFormations[i][j].GetComponent<StarshipAI>().formationHelper);
                 }
             }
             targetsAssigned = true;
@@ -89,28 +88,28 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
             }
             iterationNo++;
         }
-        Debug.Log("EXHAUSTIVE SEARCH SOLUTION: " + solutionValue);
+        //Debug.Log("EXHAUSTIVE SEARCH SOLUTION: " + solutionValue);
         return solution;
     }
 
     private int[] GetPossibleAllocations(int iterationNo)
     {
-        List<int> feasibleAllocations = new List<int>();
+        List<int> possibleAllocations = new List<int>();
         while (iterationNo > 0)
         {
-            feasibleAllocations.Add(iterationNo % playerFormations.Count + 0);
+            possibleAllocations.Add(iterationNo % playerFormations.Count + 0);
             iterationNo = iterationNo / playerFormations.Count;
         }
-        while (feasibleAllocations.Count < enemyFormations.Count)
+        while (possibleAllocations.Count < enemyFormations.Count)
         {
-            feasibleAllocations.Add(0);
+            possibleAllocations.Add(0);
         }
-        return feasibleAllocations.ToArray();
+        return possibleAllocations.ToArray();
     }
 
     private float CalculateSolutionValue(int[] solution)
     {
-        float enemySurvivorsSum = 0;//rename
+        float enemySurvSum = 0;//rename
         for (int it = 0; it < playerFormations.Count; it++)
         {
             playerFormationsCountAfter[it] = playerFormations[it].GetLength();
@@ -120,7 +119,7 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
         while (i < playerFormations.Count)//player formations (targets)
         {
             int k = 0;
-            float effectivenessSum = 0;// cause many enemy formations can attack one player formation
+            float effectivenessSum = 0;
             float costSum = 0;
             int noUnits = 0;
             while (k < enemyFormations.Count)//enemy formations (weapons)
@@ -128,7 +127,7 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
                 if (solution[k] == i)
                 {
                     int enemyTypeIndex = enemyFormations[k][0].GetComponent<StarshipAI>().typeIndex;
-                    int playerTypeIndex = playerFormations[i].shipsInFormation[0].GetComponent<StarshipAI>().typeIndex;//TO NIE UWZGLĘDNIA RÓŻNYCH TYPOW W JEDNEJ FORMACJI
+                    int playerTypeIndex = playerFormations[i].shipsInFormation[0].GetComponent<StarshipAI>().typeIndex;
 
                     effectivenessSum += starshipTypesEffectiveness[enemyTypeIndex, playerTypeIndex] * enemyFormations[k].Length;
                     costSum += starshipTypesValues[enemyTypeIndex] * enemyFormations[k].Length;
@@ -137,27 +136,27 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
                 k++;
             }
             
-            if (noUnits > 0)// cause many enemy formations can attack one player formation
+            if (noUnits > 0)
             {
                 float averageEffectiveness = effectivenessSum / noUnits;
                 float averageSum = costSum / noUnits;
-                float predictedSurvivors = GetExpectedRemainingUnits(noUnits, playerFormations[i].GetLength(), averageEffectiveness);
-                if (predictedSurvivors > 0) //player wins, we are counting player survivors, they are highering
+                float predictedSurvivors = GetExpectedSurvivorsValue(noUnits, playerFormations[i].GetLength(), averageEffectiveness);
+                if (predictedSurvivors > 0) //player wins, we are counting player survivors, they are making score higher
                 {
                     float loss = playerFormationsCountBefore[i] - predictedSurvivors;
                     if (loss > 0)
                         playerFormationsCountAfter[i] -= loss;
                 }
-                else//enemy wins we are counting enemy survivors, they are lowering 
+                else//enemy wins we are counting enemy survivors, they are lowering the score
                 {
                     playerFormationsCountAfter[i] = 0;
-                    enemySurvivorsSum += predictedSurvivors * averageSum;
+                    enemySurvSum += predictedSurvivors * averageSum;
                 }
             }
             i++;
         }
         float solutionValue = 0;
-        solutionValue = enemySurvivorsSum;
+        solutionValue = enemySurvSum;
         for (int it = 0; it < playerFormationsCountAfter.Length; it++)
         {          
             if (playerFormationsCountAfter[it] > 0)
@@ -191,22 +190,20 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
                 if(playerFormationCounts[i] > 0)
                 {
                     int enemyTypeIndex = enemyFormations[k][0].GetComponent<StarshipAI>().typeIndex;
-                    int playerTypeIndex = playerFormations[i].shipsInFormation[0].GetComponent<StarshipAI>().typeIndex;//TO NIE UWZGLĘDNIA RÓŻNYCH TYPOW W JEDNEJ FORMACJI
-                    float predictedSurvivors = GetExpectedRemainingUnits((int)enemyFormationCounts[k], (int)playerFormationCounts[i], starshipTypesEffectiveness[enemyTypeIndex, playerTypeIndex]);//maybe change ints to floats
+                    int playerTypeIndex = playerFormations[i].shipsInFormation[0].GetComponent<StarshipAI>().typeIndex;
+                    float predictedSurvivors = GetExpectedSurvivorsValue((int)enemyFormationCounts[k], (int)playerFormationCounts[i], starshipTypesEffectiveness[enemyTypeIndex, playerTypeIndex]);
 
                     float decrease = 0;//decrease of player army value
-                    if (predictedSurvivors > 0) //player wins, we are counting player survivors, they are highering
+                    if (predictedSurvivors > 0) //player wins, we are counting player survivors, they are making score higher
                     {
                         decrease += (playerFormationCounts[i] - Mathf.Abs(predictedSurvivors)) * starshipTypesValues[playerTypeIndex];
                         decrease -= enemyFormationCounts[k] * starshipTypesValues[enemyTypeIndex];
                     }
                     else//enemy wins we are counting enemy survivors, they are lowering 
                     {
-                        decrease -= (enemyFormationCounts[k] - Mathf.Abs(predictedSurvivors)) * starshipTypesValues[enemyTypeIndex];//how many ship cost enemy lost
+                        decrease -= (enemyFormationCounts[k] - Mathf.Abs(predictedSurvivors)) * starshipTypesValues[enemyTypeIndex];//how many cost enemy lost
                         decrease += playerFormationCounts[i] * starshipTypesValues[playerTypeIndex];
                     }
-                    //float decrease = predictedSurvivors * starshipTypesValues[predictedSurvivors > 0 ? playerTypeIndex : enemyTypeIndex];
-
                     if (decrease > maxDecrease)
                     {
                         maxDecrease = decrease;
@@ -231,11 +228,11 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
             k++;          
         }
         solutionValue = CalculateSolutionValue(solution);
-        Debug.Log("GREEDY MMR SOLUTION: " + solutionValue);
+        //Debug.Log("GREEDY MMR SOLUTION: " + solutionValue);
         return solution;
     }
 
-    private float GetExpectedRemainingUnits(int enemyCount, int playerCount, float playerAttritionCoef)//GetExpectedSurvivedValue
+    private float GetExpectedSurvivorsValue(int enemyCount, int playerCount, float playerAttritionCoef)
     {
         float enemyAttritionCoef = 1 - playerAttritionCoef;
         float relativeEffectivenessEnemy = Mathf.Sqrt(enemyAttritionCoef / playerAttritionCoef);
@@ -261,16 +258,20 @@ public class EnemyAI : MonoBehaviour//lower - better for enemy!!! we are minimal
         foreach(FormationHelper helper in playerFormations)
         {
             var groups = helper.shipsInFormation.GroupBy(ship => ship.GetComponent<StarshipAI>().typeIndex);
-            tempList.Add(helper);
             if (groups.Count() > 1)
             {
-                for(int i = 1; i < groups.Count(); i++)
+                for(int i = 0; i < groups.Count(); i++)
                 {
                     FormationHelper newFormationHelper = new FormationHelper();
                     newFormationHelper.shipsInFormation.AddRange(groups.ElementAt(i));
                     newFormationHelper.RefreshHashSet();
                     tempList.Add(newFormationHelper);
+                    //Debug.Log(newFormationHelper.shipsInFormation.Count);
                 }
+            }
+            else
+            {
+                tempList.Add(helper);
             }
         }
         playerFormations = tempList;

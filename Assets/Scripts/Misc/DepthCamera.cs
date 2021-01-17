@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DepthCamera : MonoBehaviour
 {
-    Transform mainCamera;
-    Vector3 mainCameraLastPos;
+    private Transform mainCamera;
+    private Vector3 mainCameraLastPos;
     public float movementCoef = 10;
 
     void Start()

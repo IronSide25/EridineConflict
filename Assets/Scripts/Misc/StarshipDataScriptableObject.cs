@@ -22,12 +22,12 @@ public class StarshipDataScriptableObject : ScriptableObject
     public float maxPrediction = 100;
     public float maxPursuitForce;
     public float pursuitMult = 1;
-    public float projectileSpeed;//not SO
     public bool limitPursuitRotation = false;
     public float allowedPursuitRotation = 1.5708f;//90 degr
 
     [Header("Look behavior")]
     public float maxAngularAcc = 1;
+    public float maxLookRotationAngle = 5;
 
     [Header("Collision avoidance behavior")]
     public float maxAvoidForce;
