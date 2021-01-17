@@ -177,7 +177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Eridene Conflict
+  m_text: Eridani Conflict
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 01e6b4c98c666d74aa9c5ecee81e3fd8, type: 2}
   m_sharedMaterial: {fileID: -5018882213789948910, guid: 01e6b4c98c666d74aa9c5ecee81e3fd8,
