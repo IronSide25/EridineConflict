@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2653,16 +2653,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b481cbd6392374e4d98d275e13b6ffa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStarships: []
-  enemyStarships: []
+  levelIndex: 0
   sqrMaxOrderDistance: 250000
   selectionBoxRect: {fileID: 1592708055}
   selectionGO: {fileID: 1592708054}
-  currentSelectionHeight: 0
   selectionPlaneFloor: {fileID: 1648941772}
   selectionPlaneHeight: {fileID: 1667700267}
+  selectionPlaneScrollSpeed: 10
+  maxSelectionPlaneHeight: 50
   HUDGameobject: {fileID: 1547805363}
-  selectedCountByTypeIndex: []
   textCounts:
   - {fileID: 1630610490}
   - {fileID: 1910583088}
@@ -2676,6 +2675,8 @@ MonoBehaviour:
   setPassiveImage: {fileID: 367651930}
   enableHUDButtonImage: {fileID: 707435352}
   tooFarTextGO: {fileID: 1211109793}
+  winPanel: {fileID: 0}
+  defeatPanel: {fileID: 0}
   timeSpeedText: {fileID: 817307241}
   timeScaleStep: 0.05
 --- !u!114 &747360042
@@ -2804,11 +2805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0, g: 1, b: 0.16342616, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 1
-  bakeKeys:
+  bakedKeys:
   - {fileID: 4300000, guid: f55e6d99649ccff4383a155253a9a573, type: 3}
   - {fileID: 4300006, guid: f55e6d99649ccff4383a155253a9a573, type: 3}
   - {fileID: 4300008, guid: f55e6d99649ccff4383a155253a9a573, type: 3}
@@ -2830,8 +2827,8 @@ MonoBehaviour:
   - {fileID: 4300032, guid: f55e6d99649ccff4383a155253a9a573, type: 3}
   - {fileID: 4300036, guid: f55e6d99649ccff4383a155253a9a573, type: 3}
   - {fileID: 4300034, guid: f55e6d99649ccff4383a155253a9a573, type: 3}
-  bakeValues:
-  - data:
+  bakedValues:
+  - vecList:
     - {x: 0.41524717, y: -0.4485117, z: 0.79145885}
     - {x: 0.4152472, y: -0.4485117, z: -0.79145885}
     - {x: 0.72937363, y: -0.64099145, z: -0.23904808}
@@ -15469,7 +15466,7 @@ MonoBehaviour:
     - {x: 0.7064409, y: 0.030680507, z: -0.70710677}
     - {x: 0.5825081, y: -0.5666662, z: 0.5827295}
     - {x: 0.7064409, y: 0.030680507, z: 0.70710677}
-  - data:
+  - vecList:
     - {x: 0.51105237, y: 0.6991626, z: -0.49999702}
     - {x: -0.31085697, y: 0.8146869, z: -0.48954386}
     - {x: -0.8482151, y: 0.14696543, z: -0.50885385}
@@ -16562,7 +16559,7 @@ MonoBehaviour:
     - {x: 0.44212893, y: -0.8969515, z: -0.0000037781222}
     - {x: -0.81408405, y: -0.5157503, z: 0.26696217}
     - {x: 0.44212973, y: -0.89695114, z: -0.0000034985264}
-  - data:
+  - vecList:
     - {x: 0.49999622, y: 0.8660276, z: 0}
     - {x: -0.5000048, y: 0.8660226, z: 0}
     - {x: -1, y: 0.00000027530024, z: 0}
@@ -17163,7 +17160,7 @@ MonoBehaviour:
     - {x: 0.46513772, y: -0.88523835, z: 0}
     - {x: -0.7941131, y: -0.5249813, z: 0.30623358}
     - {x: 0.46513376, y: -0.88524044, z: 0}
-  - data:
+  - vecList:
     - {x: -0.51105255, y: 0.69916207, z: -0.49999774}
     - {x: 0.31087348, y: 0.81467855, z: -0.4895474}
     - {x: 0.8482207, y: 0.1469535, z: -0.50884795}
@@ -18256,7 +18253,7 @@ MonoBehaviour:
     - {x: 0.5089915, y: -0.4868097, z: 0.7098902}
     - {x: -0.44213152, y: -0.89695024, z: -0.000004273883}
     - {x: 0.8140855, y: -0.51575005, z: 0.2669581}
-  - data:
+  - vecList:
     - {x: -0.4999987, y: 0.86602616, z: 0}
     - {x: 0.5000099, y: 0.8660197, z: 0}
     - {x: 1, y: 0.0000002408861, z: 0}
@@ -18857,7 +18854,7 @@ MonoBehaviour:
     - {x: 0.396396, y: -0.48581168, z: 0.7790104}
     - {x: -0.465145, y: -0.88523453, z: -0.0000075263792}
     - {x: 0.79410464, y: -0.52499974, z: 0.30622405}
-  - data:
+  - vecList:
     - {x: 0.61917967, y: -0.49810266, z: 0.6070504}
     - {x: -0.61917967, y: -0.49810266, z: 0.6070504}
     - {x: 0.46419322, y: 0.84383583, z: 0.26919487}
@@ -19291,7 +19288,7 @@ MonoBehaviour:
     - {x: 0.26217395, y: 0.96502066, z: 0.000001936358}
     - {x: 0.21210736, y: 0.9650218, z: 0.1540889}
     - {x: -0.1669433, y: 0.9784762, z: -0.12130196}
-  - data:
+  - vecList:
     - {x: 0.6899905, y: 0.21857694, z: 0.69002694}
     - {x: 0.000013982751, y: 0.21861374, z: 0.9758114}
     - {x: -0.68999714, y: 0.21855582, z: 0.690027}
@@ -19757,7 +19754,7 @@ MonoBehaviour:
     - {x: 0.43074527, y: 0.8348174, z: 0.34283862}
     - {x: 0.86161894, y: 0.10439329, z: 0.49670395}
     - {x: 0.9802568, y: 0.040747985, z: 0.1934845}
-  - data:
+  - vecList:
     - {x: -0.68999296, y: 0.21857922, z: 0.69002384}
     - {x: 0.00000070717437, y: 0.21861482, z: 0.97581124}
     - {x: 0.68999445, y: 0.21857452, z: 0.69002384}
@@ -20224,7 +20221,7 @@ MonoBehaviour:
     - {x: -0.98025227, y: 0.040752586, z: 0.19350627}
     - {x: -0.8616546, y: 0.104380906, z: 0.49664485}
     - {x: -0.43084002, y: 0.83475006, z: 0.3428837}
-  - data:
+  - vecList:
     - {x: -0.84448266, y: -0.33973327, z: 0.4140416}
     - {x: 0.61917967, y: -0.49810266, z: 0.6070504}
     - {x: -0.46419322, y: 0.84383583, z: 0.26919487}
@@ -20659,7 +20656,7 @@ MonoBehaviour:
     - {x: 0.1669433, y: 0.9784762, z: -0.12130196}
     - {x: -0.21210736, y: 0.9650218, z: 0.1540889}
     - {x: -0.26217395, y: 0.96502066, z: 0.000001936358}
-  - data:
+  - vecList:
     - {x: 0.61916226, y: -0.49811107, z: 0.6070613}
     - {x: -0.6191622, y: -0.49811107, z: 0.6070613}
     - {x: 0.46415415, y: 0.8438269, z: 0.26929012}
@@ -21093,7 +21090,7 @@ MonoBehaviour:
     - {x: 0.26216584, y: 0.9650228, z: 0.00000027698533}
     - {x: 0.21209636, y: 0.96502244, z: 0.15409979}
     - {x: -0.16693835, y: 0.9784791, z: -0.12128615}
-  - data:
+  - vecList:
     - {x: -0.8444771, y: -0.3397385, z: 0.41404843}
     - {x: 0.6191622, y: -0.49811107, z: 0.6070613}
     - {x: -0.46415424, y: 0.8438268, z: 0.2692901}
@@ -21528,7 +21525,7 @@ MonoBehaviour:
     - {x: 0.16692969, y: 0.9784814, z: -0.121279396}
     - {x: -0.21210077, y: 0.96502185, z: 0.15409787}
     - {x: -0.26217127, y: 0.9650214, z: 0.00000027444443}
-  - data:
+  - vecList:
     - {x: 0.61917406, y: -0.4981106, z: 0.6070497}
     - {x: -0.61917406, y: -0.4981106, z: 0.6070497}
     - {x: 0.4641565, y: 0.8438244, z: 0.2692937}
@@ -21962,7 +21959,7 @@ MonoBehaviour:
     - {x: 0.26216507, y: 0.96502304, z: -0.00000045232463}
     - {x: 0.2120953, y: 0.96502316, z: 0.1540973}
     - {x: -0.16694093, y: 0.97847825, z: -0.12128912}
-  - data:
+  - vecList:
     - {x: -0.84447956, y: -0.33973977, z: 0.41404244}
     - {x: 0.61917406, y: -0.4981106, z: 0.6070497}
     - {x: -0.46415666, y: 0.8438244, z: 0.2692937}
@@ -22397,7 +22394,7 @@ MonoBehaviour:
     - {x: 0.16693234, y: 0.9784806, z: -0.121282384}
     - {x: -0.2120997, y: 0.9650225, z: 0.15409541}
     - {x: -0.26217046, y: 0.96502155, z: -0.00000045232503}
-  - data:
+  - vecList:
     - {x: -0.6900204, y: 0.21852453, z: -0.6900137}
     - {x: 0.0000051109882, y: 0.218503, z: -0.9758363}
     - {x: 0.6900155, y: 0.21852298, z: -0.6900191}
@@ -22863,7 +22860,7 @@ MonoBehaviour:
     - {x: -0.43080127, y: 0.83489454, z: -0.34258056}
     - {x: -0.86171395, y: 0.10459872, z: -0.49649602}
     - {x: -0.9802408, y: 0.040816877, z: -0.19355084}
-  - data:
+  - vecList:
     - {x: -0.6900158, y: 0.21852897, z: -0.6900169}
     - {x: -0.00000033751834, y: 0.21850646, z: -0.9758355}
     - {x: 0.6900147, y: 0.21852486, z: -0.69001925}
@@ -23329,7 +23326,7 @@ MonoBehaviour:
     - {x: -0.43077174, y: 0.8349151, z: -0.3425673}
     - {x: -0.8617021, y: 0.10460281, z: -0.4965155}
     - {x: -0.9802447, y: 0.040812906, z: -0.19353208}
-  - data:
+  - vecList:
     - {x: 0.6900158, y: 0.21852897, z: -0.6900169}
     - {x: 0.00000033751834, y: 0.21850646, z: -0.9758355}
     - {x: -0.6900147, y: 0.21852486, z: -0.69001925}
@@ -23796,7 +23793,7 @@ MonoBehaviour:
     - {x: 0.9802447, y: 0.040812906, z: -0.19353208}
     - {x: 0.8617021, y: 0.10460281, z: -0.4965155}
     - {x: 0.43077174, y: 0.8349151, z: -0.3425673}
-  - data:
+  - vecList:
     - {x: 0.6900204, y: 0.21852453, z: -0.6900137}
     - {x: -0.0000051109882, y: 0.218503, z: -0.9758363}
     - {x: -0.6900155, y: 0.21852298, z: -0.6900191}
@@ -24263,7 +24260,7 @@ MonoBehaviour:
     - {x: 0.9802408, y: 0.040816877, z: -0.19355084}
     - {x: 0.86171395, y: 0.10459872, z: -0.49649602}
     - {x: 0.43080127, y: 0.83489454, z: -0.34258056}
-  - data:
+  - vecList:
     - {x: 0.6191917, y: 0.49810082, z: 0.60703975}
     - {x: -0.61919177, y: 0.4981008, z: 0.60703963}
     - {x: 0.46416712, y: -0.8438187, z: 0.2692934}
@@ -24697,7 +24694,7 @@ MonoBehaviour:
     - {x: -0.16694681, y: -0.978477, z: -0.12129128}
     - {x: 0.21209507, y: -0.9650236, z: 0.1540948}
     - {x: 0.26216602, y: -0.9650228, z: -0.000004243723}
-  - data:
+  - vecList:
     - {x: -0.6191917, y: 0.49810082, z: 0.60703975}
     - {x: 0.61919177, y: 0.4981008, z: 0.60703963}
     - {x: -0.46416712, y: -0.8438187, z: 0.2692934}
@@ -25131,7 +25128,7 @@ MonoBehaviour:
     - {x: -0.26216602, y: -0.9650228, z: -0.000004243723}
     - {x: -0.21209507, y: -0.9650236, z: 0.1540948}
     - {x: 0.16694681, y: -0.978477, z: -0.12129128}
-  - data:
+  - vecList:
     - {x: 0.6191753, y: 0.49810675, z: 0.60705155}
     - {x: -0.6191754, y: 0.49810675, z: 0.60705155}
     - {x: 0.4641681, y: -0.84382045, z: 0.26928613}
@@ -25565,7 +25562,7 @@ MonoBehaviour:
     - {x: -0.16693754, y: -0.978479, z: -0.12128766}
     - {x: 0.21209852, y: -0.9650219, z: 0.15410036}
     - {x: 0.26216608, y: -0.9650228, z: 0.00000013213989}
-  - data:
+  - vecList:
     - {x: -0.6191753, y: 0.49810675, z: 0.60705155}
     - {x: 0.6191754, y: 0.49810675, z: 0.60705155}
     - {x: -0.4641681, y: -0.84382045, z: 0.26928613}
@@ -26000,8 +25997,8 @@ MonoBehaviour:
     - {x: -0.21209852, y: -0.9650219, z: 0.15410036}
     - {x: 0.16693754, y: -0.978479, z: -0.12128766}
   renderers: []
-  outlineMaskMaterial: {fileID: 2100000, guid: 219ed2b21f09b0e439c677d6efa64074, type: 2}
-  outlineFillMaterial: {fileID: 2100000, guid: 7812adc21a1e0f94e9f854acf41321d4, type: 2}
+  maskMaterial: {fileID: 0}
+  fillMaterial: {fileID: 0}
 --- !u!54 &775906223
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27083,14 +27080,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0, g: 1, b: 0.16342616, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 1
-  bakeKeys:
+  bakedKeys:
   - {fileID: 4300000, guid: a24ae6f7ed6cf0846bca2cff12669441, type: 3}
-  bakeValues:
-  - data:
+  bakedValues:
+  - vecList:
     - {x: 0.8703309, y: 0.33870536, z: 0.35749513}
     - {x: 0.357497, y: 0.3387016, z: 0.8703316}
     - {x: 0.6772022, y: 0.6811908, z: 0.27816606}
@@ -45632,8 +45625,8 @@ MonoBehaviour:
     - {x: -0.9941808, y: 0.06997395, z: 0.08190307}
     - {x: -0.8307901, y: 0.55641335, z: 0.01385919}
   renderers: []
-  outlineMaskMaterial: {fileID: 2100000, guid: 219ed2b21f09b0e439c677d6efa64074, type: 2}
-  outlineFillMaterial: {fileID: 2100000, guid: 7812adc21a1e0f94e9f854acf41321d4, type: 2}
+  maskMaterial: {fileID: 0}
+  fillMaterial: {fileID: 0}
 --- !u!4 &1012984681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4159309185370774, guid: 59c52aad69955654794f62765f1da656,
@@ -47436,63 +47429,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477996402}
   m_CullTransparentMesh: 0
---- !u!1001 &1528787023
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1813224598300294, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_Name
-      value: LiteFPSCounter
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4679105028047868, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 95354847711d363408aebd57a0dc92ae, type: 3}
 --- !u!1 &1547805363
 GameObject:
   m_ObjectHideFlags: 0
@@ -49888,6 +49824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 534fdda8ef2bc3843992343736887c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementCoef: 10
 --- !u!114 &1951926337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50915,14 +50852,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0, g: 1, b: 0.16342616, a: 1}
-  outlineWidth: 2
-  precomputeOutline: 1
-  bakeKeys:
+  bakedKeys:
   - {fileID: 4300000, guid: 741dffc83fddc7b49b9769ffbab665c7, type: 3}
-  bakeValues:
-  - data:
+  bakedValues:
+  - vecList:
     - {x: -0.6523783, y: -0.7336237, z: 0.19025965}
     - {x: -0.30202597, y: -0.9229049, z: 0.23880279}
     - {x: -0.64671725, y: 0.7386219, z: 0.19024856}
@@ -80000,8 +79933,8 @@ MonoBehaviour:
     - {x: 0.4266319, y: 0.58796513, z: 0.68722785}
     - {x: 0.60496795, y: -0.39267358, z: 0.6926913}
   renderers: []
-  outlineMaskMaterial: {fileID: 2100000, guid: 219ed2b21f09b0e439c677d6efa64074, type: 2}
-  outlineFillMaterial: {fileID: 2100000, guid: 7812adc21a1e0f94e9f854acf41321d4, type: 2}
+  maskMaterial: {fileID: 0}
+  fillMaterial: {fileID: 0}
 --- !u!54 &2134916910
 Rigidbody:
   m_ObjectHideFlags: 0
